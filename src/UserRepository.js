@@ -159,7 +159,7 @@ class UserRepository {
     and return array */
   }
 
-  identifyBestSleeper(date) {
+  identifyBestSleeper() {
     let sleeper = this.sleepData[0];
     this.sleepData.forEach(entry => {
       if (entry.hoursSlept > sleeper.hoursSlept) {
@@ -169,13 +169,7 @@ class UserRepository {
     const bestSleepers = this.sleepData.filter(entry =>
       entry.hoursSlept === sleeper.hoursSlept);
 
-    // let sleeperDate = sleeper.date;
-    // let sleeperName = this.userData[sleeper.id].name;
-    // let bestSleeper = { id: sleeper.id, name: sleeperName, date: sleeperDate };
-    // console.log(bestSleeper);
-
-    console.log(bestSleepers);
-    // return bestSleepers;
+    return bestSleepers;
   }
 
   // activityData (REFACTOR/MOVE TO `UserRepository.js`)
