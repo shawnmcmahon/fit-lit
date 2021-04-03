@@ -78,14 +78,43 @@ class UserRepository {
 
 // sleepData (REFACTOR/MOVE TO `UserRepository.js`)
 
-  calculateAvgDailyHrsSlept() {
-    console.log("hi");
-  }
+calculateAvgDailyHrsSlept(id) {
+  /* FOR A USER,for each this.sleepLog element, accumulate
+  hoursSlept, divide by this.sleepdata.length, and return */
+  console.log("logged");
+  const userLog = this.sleepData.filter(entry => entry.id === id);
+  //console.log(userLog);
+  const dailyHrsSlept = userLog.map(entry => entry.hoursSlept);
+  //console.log(dailyHrsSlept);
+  const totalHrsSlept = dailyHrsSlept.reduce((sum, hrs) => {
+    return sum + hrs;
+  });
+  const avgHrs =  Math.round(totalHrsSlept / this.userLog.length);
 
-  calculateAvgWeeklyHrsSlept(startDate) {
-    /* for each this.sleepLog element between startDate
-    and startDate + 7, accumulate hoursSlept,
-    divide by this.sleepLog.length, and return */
+  return avgHrs;
+
+  const dailyOunces = this.hydrationData.map(entry => entry.numOunces);
+  const totalOunces = dailyOunces.reduce((sumOz, numOz) => {
+    return sumOz + numOz;
+  });
+  const avgOunces = Math.round(totalOunces / this.hydrationData.length);
+
+  return avgOunces;
+}
+
+  calculateAvgSleepQuality(id) {
+  /* FOR A USER, iterate through sleep.js dataset,
+  accumulate all sleepQuality values,
+  and divide by length of the array */
+  const userLog = this.sleepData.filter(entry => entry.id === id);
+  const dailySleepQuality = this.userLog.map(entry => entry.sleepQuality);
+  const totalSleepQuality = dailySleepQuality.reduce((sum, hrs) => {
+    return sum + hrs;
+  });
+  const avgSleepQuality =  totalSleepQuality / userLog.length ;
+
+  return avgSleepQuality.toFixed(1);
+
   }
 
   calculateAvgDailySleepQuality() {
