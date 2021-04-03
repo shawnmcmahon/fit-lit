@@ -76,17 +76,22 @@ class UserRepository {
     return avgOunces;
   }
 
-  calculateAvgDailyHrsSlept(id) {
+  // sleepData methods
+
+  // single user
+
+  calculateAvgHrsSleptByUser(id) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const dailyHrsSlept = userLog.map(entry => entry.hoursSlept);
     const totalHrsSlept = dailyHrsSlept.reduce((sum, hrs) => {
       return sum + hrs;
     });
     const avgHrs = totalHrsSlept / dailyHrsSlept.length;
+
     return parseFloat(avgHrs.toFixed(1));
   }
 
-  calculateAvgSleepQuality(id) {
+  calculateAvgSleepQualityByUser(id) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const dailySleepQuality = userLog.map(entry => entry.sleepQuality);
     const totalSleepQuality = dailySleepQuality.reduce((sum, hrs) => {
@@ -94,20 +99,7 @@ class UserRepository {
     });
     const avgSleepQuality = totalSleepQuality / dailySleepQuality.length;
     
-    // return parseFloat(avgSleepQuality.toFixed(1));
-  }
-
-  // sleepData (REFACTOR/MOVE TO `UserRepository.js`)
-
-  calculateAvgDailySleepQuality() {
-    /* for each this.sleepLog element, accumulate
-    sleepQuality, divide by this.sleepData.length, and return */
-  }
-
-  calculateAvgWeeklySleepQuality(startDate) {
-    /* for each this.sleepLog element between
-    startDate and startDate + 7, accumulate sleepQuality,
-    divide by this.sleepLog.length, and return */
+    return parseFloat(avgSleepQuality.toFixed(1));
   }
 
   calculateHrsSleptByDate(id, date) {
@@ -121,49 +113,40 @@ class UserRepository {
     const entry = userLog.find(entry => entry.date === date)
     return entry.sleepQuality;
   }
+  
+  retrieveWeekOfHoursSlept(id, startDate) {
+    const userLog = this.sleepData.filter(entry => entry.id === id);
+    const index = userLog.findIndex(entry => entry.date === startDate);
+    const weekLog = userLog.slice(index, index + 7);
+    const hoursSleptLog = weekLog.map(entry => entry.hoursSlept);
 
-  // activityData (REFACTOR/MOVE TO `UserRepository.js`)
+    console.log(avgSleepQuality);
 
-  calculateDailyMilesWalked(date) {
-    /* identify element in this.activityLog by date,
-    multiply numSteps by strideLength for distance in feet,
-    convert to miles + remainder feet, and return */
+    return hoursSleptLog;
+  }
+  
+  retrieveWeekOfSleepQuality(id, startDate) {
+    const userLog = this.sleepData.filter(entry => entry.id === id);
+    const index = userLog.findIndex(entry => entry.date === startDate);
+    const weekLog = userLog.slice(index, index + 7);
+    const sleepQualityLog = weekLog.map(entry => entry.sleepQuality);
+
+    return sleepQualityLog;
+  }
+  
+// all users
+
+  calculateAvgSleepQualityAllUsers() {
+    const sleepQualityData = this.sleepData.map(entry => entry.sleepQuality);    
+    const total = sleepQualityData.reduce((sum, sleepQuality) => {
+      return sum + sleepQuality;
+    });
+    const avgSleepQuality = Math.round(total / sleepQualityData.length);
+
+    return avgSleepQuality;
   }
 
-  retrieveAvgWeeklyMinutesActive(startDate) {
-    /* for each this.activityLog element between
-    startDate and startDate + 7, accumulate minutesActive,
-    divide by this.activityLog.length, and return */
-  }
-
-  evaluateStepGoalSuccess(date) {
-    /* identify element in this.activityLog by date,
-    evaluate whether numSteps is >= dailyStepGoal,
-    return Boolean */
-  }
-
-  identifyDatesExceedingStepGoal() {
-    /* filter() through activityLog array and evaluate/identify
-    dates where numSteps > this.dailyStepGoal */
-  }
-
-  retrieveMostFlightsClimbed() {
-    /* declare let maxFlights variable and assign value of
-    this.activityLog[0].flightsOfStairs, iterate through array and if
-    this.activityLog[i].flightsOfStairs > maxFlights,
-    maxFlights = this.ActivityArray[i].flightsOfStairs,
-    then return maxFlights */
-  }
-
-  // sleepData methods
-
-  calculateAvgSleepQuality() {
-    /* iterate through sleep.js dataset,
-    accumulate all sleepQuality values,
-    and divide by length of the array */
-  }
-
-  retrieveBestWeeklySleepers(startDate) {
+  retrieveQualitySleepers(startDate) {
     /* map data, and count the number of users. 
     identify starting index by date match, then
     slice out entries starting with index and 
@@ -172,7 +155,7 @@ class UserRepository {
     sleep quality for each user and store.
     for any users with avg  > 3,
     store name in new array and return */
-
+    
     // const index = sleeperLog.findIndex(entry => entry.date === startDate);
   }
 
