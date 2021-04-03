@@ -17,4 +17,8 @@ describe('Sleep', function() {
     });
 
 
+    it('should be a function', function() {
+      expect(SleepEntry).to.be.a('function');
+    });
+    
 });
