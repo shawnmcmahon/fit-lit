@@ -1,9 +1,20 @@
 const chai = require('chai');
-  const expect = chai.expect;
+const expect = chai.expect;
 
-  const UserRepository = require('../src/UserRepository');
-  const userData = require('./test-data/user-data');
-  //const hydrationData = require('./test-data/hydration-data');
-  const SleepEntry = require('../src/SleepEntry');
-  const sleepData = require('./test-data/sleep-data');
-  //const activityData = require('./test-data/activity-data');
+const UserRepository = require('../src/UserRepository');
+const userData = require('./test-data/user-data');
+//const hydrationData = require('./test-data/hydration-data');
+const SleepEntry = require('../src/SleepEntry');
+const sleepData = require('./test-data/sleep-data');
+//const activityData = require('./test-data/activity-data');
+
+describe('Sleep', function() {
+
+    beforeEach(() => {
+      user1 = new SleepEntry(sleepData[0]);
+      user2 = new SleepEntry(sleepData[4]);
+      user3 = new SleepEntry(sleepData[8]);
+    });
+
+
+});
