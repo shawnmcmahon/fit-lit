@@ -9,5 +9,3 @@ class HydrationEntry {
 if (typeof module !== 'undefined') {
   module.exports = HydrationEntry;
 }
-
-// NEW CODE
