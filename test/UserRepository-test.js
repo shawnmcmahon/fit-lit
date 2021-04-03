@@ -3,7 +3,6 @@ const expect = chai.expect;
 
 const UserRepository = require('../src/UserRepository');
 const userData = require('./test-data/user-data');
-const hydrationData = require('./test-data/hydration-data');
 const sleepData = require('./test-data/sleep-data');
 const activityData = require('./test-data/activity-data');
 
@@ -38,14 +37,7 @@ describe('UserRepository', function() {
     expect(userRepo.retrieveUserData(1)).to.deep.equal({ id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', stride: 4.3, dailyStepGoal: 10000, friends: [ 16, 4, 8 ] });
   });
 
-  it("should store a hydrationData array", function() {
-    expect(userRepo.hydrationData).to.be.a('array');
-  });
-
-  it("should be able to store a HydrationEntry instance", function() {
-    expect(userRepo.hydrationData[0]).to.deep.equal({ id: 1, date: '2019/06/15', numOunces: 37 });
-  });
-
+  
   it("should store a sleepData array", function() {
     expect(userRepo.sleepData).to.be.a('array');
   });
@@ -72,34 +64,18 @@ describe('UserRepository', function() {
     expect(avgStepGoal).to.equal(6667);
   });
 
-  it("should calculate the average daily water intake for all users", function() {
-    const avgDailyWater = userRepo.calculateAvgDailyWater();
-
-    expect(avgDailyWater).to.equal(61);
-  });
-
-  it("should be able to retrieve the ounces drank by a user on a specific date", function() {
-    const numOunces1 = userRepo.retrieveNumOuncesByDate(1, '2019/06/18');
-    const numOunces2 = userRepo.retrieveNumOuncesByDate(2, '2019/06/16');
-    const numOunces3 = userRepo.retrieveNumOuncesByDate(3, '2019/06/20');
-
-    expect(numOunces1).to.equal(61);
-    expect(numOunces2).to.equal(91);
-    expect(numOunces3).to.equal(51);
-  });
-
-  it("should calculate the average daily water intake for a user over the course of a week", function() {
-    const avgWeeklyWater1 = userRepo.calculateAvgWeeklyWater(1, '2019/06/15');
-    const avgWeeklyWater2 = userRepo.calculateAvgWeeklyWater(2, '2019/06/16');
-    const avgWeeklyWater3 = userRepo.calculateAvgWeeklyWater(3, '2019/06/17');
-
-    expect(avgWeeklyWater1).to.equal(65);
-    expect(avgWeeklyWater2).to.equal(70);
-    expect(avgWeeklyWater3).to.equal(51);
-  });
+  // sleepData
 
   it("should calculate the average daily hours slept by a user", function() {
-    const avgDailyHrsSlept = userRepo.calculateAvgDailyHrsSlept();
+    const avgDailyHrsSlept = userRepo.calculateAvgHrsSleptByUser(1);
+
+    expect(avgDailyHrsSlept).to.equal(7.7);
+  });
+
+  it("should calculate a user's average daily sleep quality", function() {
+    const avgSleepQuality = userRepo.calculateAvgSleepQualityByUser(2);
+
+    expect(avgSleepQuality).to.equal(3.8);
   });
 
   it("should be able to retrieve the hours slept by a user on a specific date", function() {
@@ -122,9 +98,47 @@ describe('UserRepository', function() {
     expect(sleepQuality3).to.equal(2.1);
   });
 
-  it("should be able to find the user entry with the highest number of hours slept", function() {
-    const bestSleeper = userRepo.identifyBestSleeper();
+  it("should be able to retrieve the hours slept data for a user throughout a given week", function() {
+    const hoursSleptWeek1 = userRepo.retrieveWeekOfSleepQuality(1, "2019/06/15");
+    const hoursSleptWeek2 = userRepo.retrieveWeekOfSleepQuality(2, "2019/06/16");
+    const hoursSleptWeek3 = userRepo.retrieveWeekOfSleepQuality(3, "2019/06/16");
 
-    // expect(bestSleeper.name).to.equal();
+    expect(hoursSleptWeek1).to.eql([ 2.2, 3.8, 2.6, 3.1, 1.2, 4.2, 3 ]);
+    expect(hoursSleptWeek2).to.eql([ 3.8, 3, 3.2, 2.5, 4.8, 3.3, 4.9 ]);
+    expect(hoursSleptWeek3).to.eql([ 3.4, 4.9, 2.6, 3.4, 3.7, 2.1, 3.9 ]);
+  });
+
+  it("should be able to retrieve the sleep quality data for a user throughout a given week", function() {
+    const sleepQualityWeek1 = userRepo.retrieveWeekOfSleepQuality(1, "2019/06/15");
+    const sleepQualityWeek2 = userRepo.retrieveWeekOfSleepQuality(2, "2019/06/15");
+    const sleepQualityWeek3 = userRepo.retrieveWeekOfSleepQuality(3, "2019/06/16");
+
+    expect(sleepQualityWeek1).to.eql([ 2.2, 3.8, 2.6, 3.1, 1.2, 4.2, 3 ]);
+    expect(sleepQualityWeek2).to.eql([ 4.7, 3.8, 3, 3.2, 2.5, 4.8, 3.3 ]);
+    expect(sleepQualityWeek3).to.eql([ 3.4, 4.9, 2.6, 3.4, 3.7, 2.1, 3.9 ]);
+  });
+
+  it("should calculate the average sleep quality among all users", function() {
+    const avgSleepQuality = userRepo.calculateAvgSleepQualityAllUsers();
+
+    expect(avgSleepQuality).to.equal(3);
+  });
+
+  it.skip("should be able to identify all users with a sleep quality score greater than 3 during a given week", function() {
+    const bestSleepers = userRepo.retrieveQualitySleepers("2019/06/17");
+
+    // expect(bestSleepers[0]).to.equal(n);
+  });
+
+  it("should be able to find the user entry with the highest number of hours slept", function() {
+    const bestSleepers = userRepo.identifyBestSleeper();
+
+    expect(bestSleepers[0].name).to.equal("Herminia Witting");
+    expect(bestSleepers[0].date).to.equal("2019/06/15");
+    expect(bestSleepers[0].hoursSlept).to.equal(10.8);
+
+    expect(bestSleepers[1].name).to.equal("Jarvis Considine");
+    expect(bestSleepers[1].date).to.equal("2019/06/18");
+    expect(bestSleepers[1].hoursSlept).to.equal(10.8);
   });
 });

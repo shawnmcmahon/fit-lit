@@ -1,12 +1,10 @@
 const User = require('../src/User');
-const HydrationEntry = require('../src/HydrationEntry');
 const SleepEntry = require('../src/SleepEntry');
 const ActivityEntry = require('../src/ActivityEntry');
 
 class UserRepository {
   constructor() {
     this.userData = [];
-    this.hydrationData = [];
     this.sleepData = [];
     this.activityData = [];
     this.avgStepGoal = null;
@@ -16,10 +14,6 @@ class UserRepository {
 
   populateUserData(dataset) {
     this.userData = dataset.map(user => new User(user));
-  }
-
-  populateHydrationData(dataset) {
-    this.hydrationData = dataset.map(entry => new HydrationEntry(entry));
   }
 
   populateSleepData(dataset) {
@@ -45,37 +39,7 @@ class UserRepository {
     return this.avgStepGoal;
   }
 
-  // hydrationData methods
-
-   calculateAvgDailyWater() {
-    const dailyOunces = this.hydrationData.map(entry => entry.numOunces);
-    const totalOunces = dailyOunces.reduce((sumOz, numOz) => {
-      return sumOz + numOz;
-    });
-    const avgOunces = Math.round(totalOunces / this.hydrationData.length);
-
-    return avgOunces;
-  }
-
-  retrieveNumOuncesByDate(id, date) {
-    const userLog = this.hydrationData.filter(entry => entry.id === id);
-    const entry = userLog.find(entry => entry.date === date)
-    return entry.numOunces;
-  }
-
-  calculateAvgWeeklyWater(id, startDate) {
-    const userLog = this.hydrationData.filter(entry => entry.id === id);
-    const index = userLog.findIndex(entry => entry.date === startDate);
-    const weekLog = userLog.slice(index, index + 7);
-    const waterLog = weekLog.map(entry => entry.numOunces);
-    const totalOunces = waterLog.reduce((sumOz, numOz) => {
-      return sumOz + numOz;
-    });
-    const avgOunces = Math.round(totalOunces / 7);
-
-    return avgOunces;
-  }
-
+  
   // sleepData methods
 
   // single user
