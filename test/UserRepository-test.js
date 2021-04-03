@@ -100,7 +100,6 @@ describe('UserRepository', function() {
 
   it("should calculate the average daily hours slept by a user", function() {
     const avgDailyHrsSlept = userRepo.calculateAvgDailyHrsSlept();
-
   });
 
   it("should be able to retrieve the hours slept by a user on a specific date", function() {

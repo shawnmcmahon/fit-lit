@@ -264,3 +264,5 @@ calculateAvgDailyHrsSlept(id) {
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;
 }
+
+// NEW CODE
