@@ -1,5 +1,4 @@
 const HydrationEntry = require('../src/HydrationEntry')
-const UserRepository = require('../src/UserRepository');
 
 class HydrationRepository {
   constructor() {
