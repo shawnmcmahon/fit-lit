@@ -76,20 +76,17 @@ class UserRepository {
     return avgOunces;
   }
 
-calculateAvgDailyHrsSlept(id) {
-  const userLog = this.sleepData.filter(entry => entry.id === id);
-  const dailyHrsSlept = userLog.map(entry => entry.hoursSlept);
-  const totalHrsSlept = dailyHrsSlept.reduce((sum, hrs) => {
-    return sum + hrs;
-  });
-  const avgHrs = totalHrsSlept / dailyHrsSlept.length;
-  
-  return parseFloat(avgHrs.toFixed(1));
-}
+  calculateAvgDailyHrsSlept(id) {
+    const userLog = this.sleepData.filter(entry => entry.id === id);
+    const dailyHrsSlept = userLog.map(entry => entry.hoursSlept);
+    const totalHrsSlept = dailyHrsSlept.reduce((sum, hrs) => {
+      return sum + hrs;
+    });
+    const avgHrs = totalHrsSlept / dailyHrsSlept.length;
+    return parseFloat(avgHrs.toFixed(1));
+  }
 
   calculateAvgSleepQuality(id) {
-    console.log("HELLO");
-
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const dailySleepQuality = userLog.map(entry => entry.sleepQuality);
     const totalSleepQuality = dailySleepQuality.reduce((sum, hrs) => {
@@ -97,9 +94,7 @@ calculateAvgDailyHrsSlept(id) {
     });
     const avgSleepQuality = totalSleepQuality / dailySleepQuality.length;
     
-    console.log(parseFloat(avgSleepQuality.toFixed(1)));
-
-    return parseFloat(avgSleepQuality.toFixed(1));
+    // return parseFloat(avgSleepQuality.toFixed(1));
   }
 
   // sleepData (REFACTOR/MOVE TO `UserRepository.js`)
@@ -168,11 +163,17 @@ calculateAvgDailyHrsSlept(id) {
     and divide by length of the array */
   }
 
-  retrieveBestWeeklySleepers(dataset) {
-    /* filter through the sleepData array
-    for any elements with sleepQuality value  > 3,
-    store element's 'name' value in new array,
-    and return array */
+  retrieveBestWeeklySleepers(startDate) {
+    /* map data, and count the number of users. 
+    identify starting index by date match, then
+    slice out entries starting with index and 
+    spanning the index + the number of users * 7.
+    use reduce() on new array to figure out average
+    sleep quality for each user and store.
+    for any users with avg  > 3,
+    store name in new array and return */
+
+    // const index = sleeperLog.findIndex(entry => entry.date === startDate);
   }
 
   identifyBestSleeper() {
@@ -184,6 +185,11 @@ calculateAvgDailyHrsSlept(id) {
     });
     const bestSleepers = this.sleepData.filter(entry =>
       entry.hoursSlept === sleeper.hoursSlept);
+    
+    bestSleepers.forEach(entry => {
+      let id = entry.id;
+      entry.name = this.userData[id-1].name;
+    })
 
     return bestSleepers;
   }
