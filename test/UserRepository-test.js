@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const UserRepository = require('../src/UserRepo2');
+const UserRepository = require('../src/UserRepository');
 const userData = require('./test-data/user-data');
 const hydrationData = require('./test-data/hydration-data');
 const sleepData = require('./test-data/sleep-data');
@@ -21,7 +21,7 @@ describe('UserRepository', function() {
   it("should be a function", function() {
     expect(UserRepository).to.be.a('function');
   });
-  
+
   it("should be an instance of UserRepository", function() {
     expect(userRepo).to.be.an.instanceof(UserRepository);
   });
@@ -50,7 +50,7 @@ describe('UserRepository', function() {
     expect(userRepo.sleepData).to.be.a('array');
   });
 
-  it("should be able to store a sleepEntry instance", function() {    
+  it("should be able to store a sleepEntry instance", function() {
     expect(userRepo.sleepData[0]).to.deep.equal({ id: 1, date: '2019/06/15', hoursSlept: 6.1, sleepQuality: 2.2 });
   });
 

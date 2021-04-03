@@ -79,7 +79,7 @@ class UserRepository {
 // sleepData (REFACTOR/MOVE TO `UserRepository.js`)
 
   calculateAvgDailyHrsSlept() {
-    console.log("LOGGGED");
+    console.log("hi");
   }
 
   calculateAvgWeeklyHrsSlept(startDate) {
@@ -166,7 +166,7 @@ class UserRepository {
         sleeper = entry;
       }
     });
-    const bestSleepers = this.sleepData.filter(entry => 
+    const bestSleepers = this.sleepData.filter(entry =>
       entry.hoursSlept === sleeper.hoursSlept);
 
     // let sleeperDate = sleeper.date;
