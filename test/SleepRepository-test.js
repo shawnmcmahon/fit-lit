@@ -5,7 +5,7 @@ const SleepRepository = require('../src/SleepRepository');
 const userData = require('./test-data/user-data');
 const sleepData = require('./test-data/sleep-data');
 
-describe('UserRepository', function() {
+describe('SleepRepository', function() {
   let sleepRepo;
 
   beforeEach(() => {
@@ -22,10 +22,10 @@ describe('UserRepository', function() {
   });
 
   it("should store a sleepData array", function() {
-    expect(sleepRepo.sleepData).to.be.a('array');
+    expect(sleepRepo.sleepData).to.be.an('array');
   });
 
-  it("should be able to store a sleepEntry instance", function() {
+  it("should be able to store a SleepEntry instance", function() {
     expect(sleepRepo.sleepData[0]).to.deep.equal({ id: 1, date: '2019/06/15', hoursSlept: 6.1, sleepQuality: 2.2 });
   });
 

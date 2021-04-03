@@ -4,7 +4,7 @@ const expect = chai.expect;
 const HydrationRepository = require('../src/HydrationRepository');
 const hydrationData = require('./test-data/hydration-data');
 
-describe('UserRepository', function() {
+describe('HydrationRepository', function() {
   let hydrationRepo;
 
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('UserRepository', function() {
   });
 
   it("should store a hydrationData array", function() {
-    expect(hydrationRepo.hydrationData).to.be.a('array');
+    expect(hydrationRepo.hydrationData).to.be.an('array');
   });
 
   it("should be able to store a HydrationEntry instance", function() {
