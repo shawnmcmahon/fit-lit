@@ -1,6 +1,9 @@
 // global variables
 
 let userRepository;
+let hydrationRepository;
+let sleepRepository;
+let activityRepository;
 let currentUser;
 let dateToday = "2019/09/22";
 
@@ -51,12 +54,17 @@ window.addEventListener('load', loadPage);
 // data model functions
 function loadPage() {
   userRepository = new UserRepository;
+  hydrationRepository = new HydrationRepository;
+  sleepRepository = new SleepRepository(userData);
+  activityRepository = new ActivityRepository(userData);
+
   userRepository.populateUserData(userData);
-  userRepository.populateHydrationData(hydrationData);
-  userRepository.populateSleepData(sleepData);
-  userRepository.populateActivityData(activityData);
+  hydrationRepository.populateHydrationData(hydrationData);
+  sleepRepository.populateSleepData(sleepData);
+  activityRepository.populateActivityData(activityData);
+
   currentUser = userRepository.userData[0];
-  console.log(currentUser.name);
+
   userName.innerText = currentUser.name;
   address.innerText = currentUser.address;
   email.innerText = currentUser.email;
@@ -75,10 +83,10 @@ function homeUserDisplay() {
 }
 
 function displayUserHydration() {
-  const dailyOz = userRepository.retrieveNumOuncesByDate(currentUser.id, dateToday);
+  const dailyOz = hydrationRepository.retrieveNumOuncesByDate(currentUser.id, dateToday);
   dailyWater.innerText = `You've had ${dailyOz} ounces of water today!`;
   let startDate = "2019/06/15";
-  const weeklyOz = userRepository.calculateAvgWeeklyWater(currentUser.id, startDate);
+  const weeklyOz = hydrationRepository.calculateAvgWeeklyWater(currentUser.id, startDate);
   weeklyWater.innerText = `You've had ${weeklyOz} ounces of water on average during the week of ${startDate}`;
 }
 
