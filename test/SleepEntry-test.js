@@ -27,4 +27,10 @@ describe('Sleep', function() {
       expect(user3).to.be.an.instanceof(SleepEntry);
     });
 
+    it("should store a User's id", function() {
+      expect(user1.id).to.equal(1);
+      expect(user2.id).to.equal(2);
+      expect(user3.id).to.equal(3);
+    });
+
 });
