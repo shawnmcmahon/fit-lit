@@ -96,6 +96,36 @@ describe('ActivityEntry', function() {
     expect(flightsWeek3).to.eql([ 8, 5, 26, 17, 46, 13, 17 ]);
   });
 
+  it("should calculate a user's average daily steps", function() {
+    const avgNumSteps1 = userActivity1.calculatePropAvg('numSteps');
+    const avgNumSteps2 = userActivity2.calculatePropAvg('numSteps');
+    const avgNumSteps3 = userActivity3.calculatePropAvg('numSteps');
+
+    expect(avgNumSteps1).to.equal(9205);
+    expect(avgNumSteps2).to.equal(6979);
+    expect(avgNumSteps3).to.equal(7404);
+  });
+
+  it("should calculate a user's average daily minutes active", function() {
+    const avgMinutes1 = userActivity1.calculatePropAvg('minutesActive');
+    const avgMinutes2 = userActivity2.calculatePropAvg('minutesActive');
+    const avgMinutes3 = userActivity3.calculatePropAvg('minutesActive');
+
+    expect(avgMinutes1).to.equal(171);
+    expect(avgMinutes2).to.equal(151);
+    expect(avgMinutes3).to.equal(159);
+  });
+
+  it("should calculate a user's average daily flights of stairs", function() {
+    const avgFlights1 = userActivity1.calculatePropAvg('flightsOfStairs');
+    const avgFlights2 = userActivity2.calculatePropAvg('flightsOfStairs');
+    const avgFlights3 = userActivity3.calculatePropAvg('flightsOfStairs');
+
+    expect(avgFlights1).to.equal(17);
+    expect(avgFlights2).to.equal(21);
+    expect(avgFlights3).to.equal(19);
+  });  
+
   it("should calculate the average steps taken by a user during a given week", function() {
     const avgSteps1 = userActivity1.calculatePropAvgByWeek("2019/06/16", "numSteps");
     const avgSteps2 = userActivity2.calculatePropAvgByWeek("2019/06/15", "numSteps");

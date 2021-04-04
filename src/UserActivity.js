@@ -20,6 +20,15 @@ class UserActivity {
     return propertyLog;
   }
 
+  calculatePropAvg(property) {
+    const dailySum = this.data.map(entry => entry[property]);
+    const totalSum = dailySum.reduce((sum, num) => {
+      return sum + num;
+    });
+
+    return Math.round(totalSum / dailySum.length);
+  }
+
   calculatePropAvgByWeek(startDate, property) {
     const index = this.data.findIndex(entry => entry.date === startDate);
     const weekLog = this.data.slice(index, index + 7);

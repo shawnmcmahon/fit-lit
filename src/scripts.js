@@ -60,7 +60,9 @@ function loadPage() {
   currentUser = new User(userRepo.retrieveUserData(getRandomIndex(userData)));
   userHydration = new UserHydration(currentUser, hydrationData);
   userSleep = new UserSleep(currentUser, sleepData);
-  userActivity = new UserActivity(currentUser, activityData);
+  userActivity = new UserActivity(currentUser, activityData, userData);
+  sleepRepo = new SleepRepository(sleepData, userData);
+  activityRepo = new ActivityRepository(activityData);
   
   viewHome();
 }
@@ -171,26 +173,26 @@ function displayUserActivityData() {
 }
 
 function displayDailySteps() {
-  const userDailySteps = userActivity.retrieveUserPropertyByDate(currentDate, "numSteps");
+  const userDailySteps = userActivity.retrievePropByDate(currentDate, "numSteps");
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
   dailySteps.innerHTML = `
     <h4 class="user-daily-steps" id="userDailySteps">
-      ${userDailySteps} steps</h4>
+      ${userDailySteps} avg daily steps</h4>
     <h4 class="user-daily-distance" id="userDailyDistance">
-      ${userDistance} distance</h4>`
+      ${userDistance} avg daily miles walked</h4>`
 }
 
 function displayMinutesActive() {
-  const userMinActive = userActivity.retrieveUserPropertyByDate(currentDate, "minutesActive");
+  const userMinActive = userActivity.retrievePropByDate(currentDate, "minutesActive");
   dailyActivity.innerHTML = `
     <h4 class="user-daily-activity" id="userDailyActivity">
       ${userMinActive} min active</h4>`;
 }
 
 function displayWeeklyActivityStats() {
-    const userWeeklySteps = userActivity.retrieveUserPropertyByWeek(weekStartDate, "numSteps" )
-    const userMinActive = userActivity.retrieveUserPropertyByWeek(weekStartDate, "minutesActive")
-    const userStairsClimbed = userActivity.retrieveUserPropertyByWeek(weekStartDate, "flightsOfStairs")
+    const userWeeklySteps = userActivity.retrievePropLogByWeek(weekStartDate, "numSteps" )
+    const userMinActive = userActivity.retrievePropLogByWeek(weekStartDate, "minutesActive")
+    const userStairsClimbed = userActivity.retrievePropLogByWeek(weekStartDate, "flightsOfStairs")
   weeklyActivity.innerHTML = `
     <h4 class="user-weekly-activity" id="userWeeklyActivity">
     Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,

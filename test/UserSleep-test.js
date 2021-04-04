@@ -36,10 +36,14 @@ describe('UserSleep', function() {
     expect(userSleep3.data).to.be.an('array');
   });
 
-  it("should calculate the average daily hours slept by a user", function() {
-    const avgHrsSlept = userSleep1.calculatePropAvg('hoursSlept');
+  it("should calculate a user's average daily hours slept", function() {
+    const avgHrsSlept1 = userSleep1.calculatePropAvg('hoursSlept');
+    const avgHrsSlept2 = userSleep2.calculatePropAvg('hoursSlept');
+    const avgHrsSlept3 = userSleep3.calculatePropAvg('hoursSlept');
 
-    expect(avgHrsSlept).to.equal(7.7);
+    expect(avgHrsSlept1).to.equal(7.7);
+    expect(avgHrsSlept2).to.equal(7.2);
+    expect(avgHrsSlept3).to.equal(8.4);
   });
 
   it("should calculate a user's average daily sleep quality", function() {
