@@ -54,22 +54,23 @@ activityButton.addEventListener('click', viewActivity);
 // FUNCTIONS
 
 function loadPage() {
-  populateRepositories();
+  // populateRepositories();
+  userRepo = new UserRepository(userData);
+
   currentUser = userRepo.userData[0];
   viewHome();
 }
 
-function populateRepositories() {
-  userRepo = new UserRepository;
-  hydrationRepo = new HydrationRepository;
-  sleepRepo = new SleepRepository(userData);
-  activityRepo = new ActivityRepository(userData);
+// function populateRepositories() {
+  // hydrationRepo = new HydrationRepository;
+  // sleepRepo = new SleepRepository(userData);
+  // activityRepo = new ActivityRepository(userData);
 
-  userRepo.populateUserData(userData);
-  hydrationRepo.populateHydrationData(hydrationData);
-  sleepRepo.populateSleepData(sleepData);
-  activityRepo.populateActivityData(activityData);
-}
+  // userRepo.populateUserData(userData);
+  // hydrationRepo.populateHydrationData(hydrationData);
+  // sleepRepo.populateSleepData(sleepData);
+  // activityRepo.populateActivityData(activityData);
+// }
 
 // DOM MANIPULATION
 

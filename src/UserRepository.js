@@ -1,21 +1,15 @@
-// const User = require('./User');
-
 class UserRepository {
-  constructor() {
-    this.userData = [];
+  constructor(userData) {
+    this.data = userData;
     this.avgStepGoal = null;
   }
 
-  populateUserData(dataset) {
-    this.userData = dataset.map(user => new User(user));
-  }
-
   retrieveUserData(id) {
-    return this.userData[id - 1];
+    return this.data[id - 1];
   }
 
   retrieveAvgStepGoal() {
-    const stepGoalLog= this.userData.map(user => user.dailyStepGoal);
+    const stepGoalLog= this.data.map(user => user.dailyStepGoal);
     const stepGoalSum = stepGoalLog.reduce((sum, goal) => {
       return sum + goal;
     });
