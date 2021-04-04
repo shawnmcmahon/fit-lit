@@ -80,8 +80,19 @@ describe('ActivityRepository', function() {
   expect(userFlightRecord1).to.equal(36);
   expect(userFlightRecord2).to.equal(44);
   expect(userFlightRecord3).to.equal(46);
-  
+
   });
+
+  it("should retrieve the average flights climbed on a given date for all users", function () {
+    const avgStairsForAllUsers1 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/15");
+    const avgStairsForAllUsers2 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/18");
+    const avgStairsForAllUsers3 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/20");
+
+    expect(avgStairsForAllUsers1).to.equal(20);
+    expect(avgStairsForAllUsers2).to.equal(30);
+    expect(avgStairsForAllUsers3).to.equal(23);
+
+  })
 
 
 

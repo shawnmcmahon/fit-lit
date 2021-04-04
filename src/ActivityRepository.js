@@ -94,6 +94,14 @@ class ActivityRepository {
 
   //All users
   calculateAvgStairsClimbedByDate(date) {
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserStairs = allUserLogs.map(entry => entry.flightsOfStairs);
+    const totalStairsClimbed = allUserStairs.reduce((sum, stairs) => {
+        return sum + stairs;
+    });
+    const avgStairsClimbed = Math.round(totalStairsClimbed / allUserStairs.length);
+
+    return avgStairsClimbed;
 
   }
 
