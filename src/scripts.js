@@ -1,5 +1,4 @@
 // global variables
-
 let userRepo;
 let hydrationRepo;
 let sleepRepo;
@@ -167,6 +166,7 @@ function displayUserActivityData() {
   displayDailySteps(id);
   displayMinutesActive(id);
   displayWeeklyActivityStats(id);
+  displayDailyStatComparison(id);
 }
 
 function displayDailySteps(id) {
@@ -189,8 +189,9 @@ function displayMinutesActive(id) {
 
 function displayWeeklyActivityStats(id) {
     const userWeeklySteps = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "numSteps" )
-    const userMinActive = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "minutesActive")
-    const userStairsClimbed = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "flightsOfStairs")
+    const userMinActive = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "minutesActive");
+    const userStairsClimbed = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "flightsOfStairs");
+
   weeklyActivity.innerHTML = `
     <h4 class="user-weekly-activity" id="userWeeklyActivity">
     Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
@@ -202,6 +203,28 @@ function displayWeeklyActivityStats(id) {
     Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
      </h4> `;
 
+
+}
+
+function displayDailyStatComparison(id) {
+  const userDailySteps = activityRepo.retrieveUserPropertyByDate(id, currentDate, "numSteps");
+  const userDailyMinActive = activityRepo.retrieveUserPropertyByDate(id, currentDate, "minutesActive");
+  const userDailyStairs = activityRepo.retrieveUserPropertyByDate(id, currentDate, "flightsOfStairs");
+
+  const allUserDailySteps = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "numSteps");
+  const allUserDailyMinActive = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "minutesActive");
+  const allUserDailyStairs = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "flightsOfStairs");
+
+  const stepComparison = Math.round((userDailySteps / allUserDailySteps) * 100);
+  const minComparison = Math.round((userDailyMinActive / allUserDailyMinActive) * 100);
+  const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
+
+  compareUsers.innerHTML = `
+
+  <h4 class="compare-user-activity" id="compareUserActivity">
+  Steps: ${stepComparison}%,
+  Min: ${minComparison}%,
+  Stairs: ${stairComparison}% </h4>`;
 
 }
 
