@@ -71,6 +71,13 @@ class ActivityRepository {
   }
 
   identifyDatesExceedingStepGoal(id) {
+    const userInfo = this.userData.filter(enter => entry.id === id);
+    const dailyStepGoal = userInfo.dailyStepGoal;
+    const userLog = this.activityData.filter(enter => entry.id === id);
+    const stepGoalExceededDays = userLog.filter(entry => entry.numSteps > dailyStepGoal);
+    const days = stepGoalExceededDays.map(entry => entry.date) ;
+
+    return days;
 
 
   }
