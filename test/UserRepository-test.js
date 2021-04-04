@@ -12,6 +12,7 @@ describe('UserRepository', function() {
   });
 
   it("should be a function", function() {
+    console.log(UserRepository);
     expect(UserRepository).to.be.a('function');
   });
 

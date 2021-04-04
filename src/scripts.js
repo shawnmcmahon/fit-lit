@@ -1,12 +1,17 @@
 // GLOBAL VARIABLES
 
+const UserHydration = require("./UserHydration");
+
 let currentDate = "2019/09/22";
 let weekStartDate = "2019/09/15";
 
 // CLASS INSTANTIATIONS
 
-let userRepo;
 let currentUser;
+let userRepo;
+let userHydration;
+let userSleep;
+let userActivity;
 let hydrationRepo;
 let sleepRepo;
 let activityRepo;
@@ -56,6 +61,11 @@ activityButton.addEventListener('click', viewActivity);
 function loadPage() {
   userRepo = new UserRepository(userData);
   currentUser = new User(userRepo.retrieveUserData(getRandomIndex(userData)));
+  userHydration = new UserHydration(currentUser, hydrationData);
+  userSleep = new UserSleep(currentUser, sleepData);
+  userActivity = new UserActivity(currentUser, activityData);
+  hydrationRepo = new UserHydration(hydrationData);
+  
   console.log(currentUser);
   viewHome();
 }
