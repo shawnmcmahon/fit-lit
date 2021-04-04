@@ -11,63 +11,123 @@ class ActivityRepository {
   }
 
   // single user
+  calculateDailyMilesWalked(id, date) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dailyStats = userLog.find(entry => entry.date === date);
+    dailyStats.stride = this.userData[id-1].strideLength;
+    const feetWalked = dailyStats.numSteps * dailyStats.stride;
+    const milesWalked = feetWalked / 5280;
 
-  calculateDailyMilesWalked(date) {
-    /* identify element in this.activityLog by date,
-    multiply numSteps by strideLength for distance in feet,
-    convert to miles + remainder feet, and return */
+
+    return parseFloat(milesWalked.toFixed(1));
+
   }
-
-  retrieveAvgWeeklyMinutesActive(startDate) {
-    /* for each this.activityLog element between
-    startDate and startDate + 7, accumulate minutesActive,
-    divide by this.activityLog.length, and return */
-  }
-
-  evaluateStepGoalSuccess(date) {
-    /* identify element in this.activityLog by date,
-    evaluate whether numSteps is >= dailyStepGoal,
-    return Boolean */
-  }
-
-  identifyDatesExceedingStepGoal() {
-    /* filter() through activityLog array and evaluate/identify
-    dates where numSteps > this.dailyStepGoal */
-  }
-
-  retrieveMostFlightsClimbed() {
-    /* declare let maxFlights variable and assign value of
-    this.activityLog[0].flightsOfStairs, iterate through array and if
-    this.activityLog[i].flightsOfStairs > maxFlights,
-    maxFlights = this.ActivityArray[i].flightsOfStairs,
-    then return maxFlights */
-  }
-
-  // all users
 
   retrieveMinutesActive(id, date) {
-    /* retrieve minuteActive property by provided user ID and date */
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dateRequested = userLog.find(entry => entry.date === date);
+    const minutesActive = dateRequested.minutesActive;
+    return minutesActive;
+
   }
 
+  retrieveAvgWeeklyActivity(id, startDate) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const index = userLog.findIndex(entry => entry.date === startDate);
+    const weekLog = userLog.slice(index, index + 7);
+    const weeklyMinutesActive = weekLog.map(entry => entry.minutesActive);
+    const weeklyStairsClimbed = weekLog.map(entry => entry.flightsOfStairs);
+    const weeklyStepsTaken = weekLog.map(entry => entry.numSteps);
+    const totalMinutesActive = weeklyMinutesActive.reduce((sumMin, minActive) => {
+      return sumMin + minActive
+    });
+    const avgMinutesActive = Math.round(totalMinutesActive / 7);
+    const totalStairsClimbed = weeklyStairsClimbed.reduce((sumStairs, stairs) => {
+      return sumStairs + stairs
+    });
+    const avgStairsClimbed = Math.round(totalStairsClimbed / 7);
+    const totalStepsTaken = weeklyStepsTaken.reduce((sumSteps, steps) => {
+      return sumSteps + steps
+    });
+    const avgStepsTaken = Math.round(totalStepsTaken / 7);
+    const avgActivity = {avgMinutes: avgMinutesActive, avgStairs: avgStairsClimbed, avgSteps: avgStepsTaken};
+    return avgActivity;
+
+  }
+
+  evaluateStepGoalSuccess(id, date) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dailyInfo = userLog.find(entry => entry.date === date);
+    const numSteps = dailyInfo.numSteps;
+    const userInfo = this.userData.find(entry => entry.id === id);
+    const dailyStepGoal = userInfo.dailyStepGoal;
+
+    if(numSteps >= dailyStepGoal) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  identifyDatesExceedingStepGoal(id) {
+    const dailyStepGoal = this.userData[id-1].dailyStepGoal;
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const stepGoalExceededDays = userLog.filter(entry => entry.numSteps > dailyStepGoal);
+    const days = stepGoalExceededDays.map(entry => entry.date) ;
+    
+    return days;
+
+
+  }
+
+  retrieveMostFlightsClimbed(id) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    let maxFlights;
+    const newFlightBests = userLog.map(entry => entry.flightsOfStairs);
+    maxFlights = Math.max(...newFlightBests);
+
+    return maxFlights;
+
+  }
+
+  //All users
   calculateAvgStairsClimbedByDate(date) {
-    /* filter through activity.js dataset to identify
-    all elements with provided date, accumulate value of
-    flightsOfStairs for each, divide by number of elements
-    within that date, return value */
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserStairs = allUserLogs.map(entry => entry.flightsOfStairs);
+    const totalStairsClimbed = allUserStairs.reduce((sum, stairs) => {
+        return sum + stairs;
+    });
+    const avgStairsClimbed = Math.round(totalStairsClimbed / allUserStairs.length);
+
+    return avgStairsClimbed;
+
   }
 
   calculateAvgStepsByDate(date) {
-    /* filter through the activity.js dataset to identify
-    all elements with provided date, accumulate value of
-    numSteps for each, divide by the number of elements
-    within that date, return value */
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserSteps = allUserLogs.map(entry => entry.numSteps);
+    const totalStepsTaken = allUserSteps.reduce((sum, steps) => {
+        return sum + steps;
+    });
+    const avgStepsTaken = Math.round(totalStepsTaken / allUserSteps.length);
+
+    return avgStepsTaken;
+
   }
 
   calculateAvgMinutesActiveByDate(date) {
-    /* iterate through the activity.js dataset,
-    and add minutes active from all users on a specific day,
-    and divide by the number of users */
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserMinutes = allUserLogs.map(entry => entry.minutesActive);
+    const totalMinutesActive = allUserMinutes.reduce((sum, min) => {
+        return sum + min;
+    });
+    const avgMinutesActive = Math.round(totalMinutesActive / allUserMinutes.length);
+
+    return avgMinutesActive;
+
   }
+
 }
 
 if (typeof module !== 'undefined') {
