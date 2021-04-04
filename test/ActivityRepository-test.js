@@ -64,7 +64,7 @@ describe('ActivityRepository', function() {
   it("should identify whether the provided date reached the user's step goal", function() {
     const userStepGoal1 = activityRepo.evaluateStepGoalSuccess(1, "2019/06/16");
     const userStepGoal2 = activityRepo.evaluateStepGoalSuccess(2, "2019/06/17");
-    const userStepGoal3 = activityRepo.evaluateStepGoalSuccess(2, "2019/06/18");
+    const userStepGoal3 = activityRepo.evaluateStepGoalSuccess(3, "2019/06/18");
 
     expect(userStepGoal1).to.equal(false); // 6637 / 10000
     expect(userStepGoal2).to.equal(true); // 13750 / 5000
@@ -73,6 +73,13 @@ describe('ActivityRepository', function() {
   });
 
   //Need identifyDatesExceedingStepGoal(id) test here
+  it.only("should identify dates exceeding step goal", function() {
+    const userStepGoalExceeded1 = activityRepo.identifyDatesExceedingStepGoal(1);
+
+    expect(userStepGoalExceeded1).to.eql(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23']);
+
+  });
+
 
   it("should retrieve the most flights climbed record for a user", function () {
   const userFlightRecord1 = activityRepo.retrieveMostFlightsClimbed(1);
