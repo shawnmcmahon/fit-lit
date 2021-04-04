@@ -1,4 +1,4 @@
-// const SleepEntry = require('../src/SleepEntry');
+// const SleepEntry = require('./SleepEntry');
 
 class SleepRepository {
   constructor(dataset) {
@@ -57,6 +57,8 @@ class SleepRepository {
     sleep quality for each user and store.
     for any users with avg  > 3,
     store name in new array and return */
+
+    let userIDs = Object.keys(this.sleepData);
     
     // const index = sleeperLog.findIndex(entry => entry.date === startDate);
   }

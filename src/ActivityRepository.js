@@ -1,4 +1,4 @@
-// const ActivityEntry = require('../src/ActivityEntry');
+// const ActivityEntry = require('./ActivityEntry');
 
 class ActivityRepository {
   constructor(dataset) {

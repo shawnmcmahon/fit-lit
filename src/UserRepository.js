@@ -1,4 +1,4 @@
-// const User = require('../src/User');
+// const User = require('./User');
 
 class UserRepository {
   constructor() {
@@ -15,12 +15,12 @@ class UserRepository {
   }
 
   retrieveAvgStepGoal() {
-    const stepGoalArray = this.userData.map(user => user.dailyStepGoal);
-    const stepGoalSum = stepGoalArray.reduce((sum, goal) => {
+    const stepGoalLog= this.userData.map(user => user.dailyStepGoal);
+    const stepGoalSum = stepGoalLog.reduce((sum, goal) => {
       return sum + goal;
     });
 
-    this.avgStepGoal = Math.round(stepGoalSum / this.userData.length);
+    this.avgStepGoal = Math.round(stepGoalSum / stepGoalLog.length);
 
     return this.avgStepGoal;
   }
