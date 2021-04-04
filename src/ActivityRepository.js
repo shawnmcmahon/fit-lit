@@ -12,19 +12,22 @@ class ActivityRepository {
 
   // single user
   calculateDailyMilesWalked(id, date) {
-      const userLog = this.activityData.filter(entry => entry.id === id);
-      const dailyStats = userLog.find(entry => entry.date === date);
-      dailyStats.stride = this.userData[id-1].strideLength;
-      const feetWalked = dailyStats.numSteps * dailyStats.stride;
-      const milesWalked = feetWalked / 5280;
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dailyStats = userLog.find(entry => entry.date === date);
+    dailyStats.stride = this.userData[id-1].strideLength;
+    const feetWalked = dailyStats.numSteps * dailyStats.stride;
+    const milesWalked = feetWalked / 5280;
 
 
-      return parseFloat(milesWalked.toFixed(1));
+    return parseFloat(milesWalked.toFixed(1));
 
-    }
+  }
 
   retrieveMinutesActive(id, date) {
-  
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dateRequested = userLog.find(entry => entry.date === date);
+    const minutesActive = dateRequested.minutesActive;
+    return minutesActive;
 
   }
 

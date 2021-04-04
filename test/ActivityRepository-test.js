@@ -39,6 +39,17 @@ describe('ActivityRepository', function() {
     expect(userMiles3).to.equal(9.5);
   });
 
+  it("should retrieve minutes active for a given day for a user", function() {
+    const minActive1 = activityRepo.retrieveMinutesActive(1, "2019/06/15");
+    const minActive2 = activityRepo.retrieveMinutesActive(2, "2019/06/17");
+    const minActive3 = activityRepo.retrieveMinutesActive(3, "2019/06/22");
+
+    expect(minActive1).to.equal(140);
+    expect(minActive2).to.equal(65);
+    expect(minActive3).to.equal(53);
+
+  })
+
 
 
 });
