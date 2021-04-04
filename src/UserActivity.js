@@ -1,4 +1,4 @@
-class ActivityEntry {
+class UserActivity {
     constructor(entry) {
         this.id = entry.userID;
         this.date = entry.date;
@@ -9,7 +9,5 @@ class ActivityEntry {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = ActivityEntry;
+  module.exports = UserActivity;
 }
-
-// NEW CODE

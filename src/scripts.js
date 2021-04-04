@@ -1,7 +1,5 @@
 // GLOBAL VARIABLES
 
-const UserHydration = require("./UserHydration");
-
 let currentDate = "2019/09/22";
 let weekStartDate = "2019/09/15";
 
@@ -12,7 +10,6 @@ let userRepo;
 let userHydration;
 let userSleep;
 let userActivity;
-let hydrationRepo;
 let sleepRepo;
 let activityRepo;
 
@@ -64,9 +61,7 @@ function loadPage() {
   userHydration = new UserHydration(currentUser, hydrationData);
   userSleep = new UserSleep(currentUser, sleepData);
   userActivity = new UserActivity(currentUser, activityData);
-  hydrationRepo = new UserHydration(hydrationData);
   
-  console.log(currentUser);
   viewHome();
 }
 
@@ -74,17 +69,6 @@ function getRandomIndex(array) {
   const index = Math.floor(Math.random() * array.length);
   return index;
 }
-
-// function populateRepositories() {
-  // hydrationRepo = new HydrationRepository;
-  // sleepRepo = new SleepRepository(userData);
-  // activityRepo = new ActivityRepository(userData);
-
-  // userRepo.populateUserData(userData);
-  // hydrationRepo.populateHydrationData(hydrationData);
-  // sleepRepo.populateSleepData(sleepData);
-  // activityRepo.populateActivityData(activityData);
-// }
 
 // DOM MANIPULATION
 
@@ -109,7 +93,7 @@ function displayUserHomeData() {
       The average user's goal is ${avgStepGoal}</h2>`;
 
   picture.innerHTML = `
-    <p>Today's Date: </p> 
+    <p>Today's Date: ${currentDate}</p> 
   `;
 }
 
@@ -121,9 +105,8 @@ function displayUserHydrationData() {
 
   headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;
 
-  const id = currentUser.id
-  const dailyOz = hydrationRepo.retrieveNumOuncesByDate(id, currentDate);
-  const weeklyOz = hydrationRepo.calculateAvgWeeklyWater(id, startDate);
+  const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
+  const weeklyOz = userHydration.calculateAvgWeeklyWater(startDate);
 
   dailyWater.innerText = `You've had ${dailyOz} ounces of water today!`;
   weeklyWater.innerText = `You've had ${weeklyOz} ounces of water on average during the week of ${startDate}`;
@@ -132,18 +115,16 @@ function displayUserHydrationData() {
 // sleep
 
 function displayUserSleepData() {
-  const id = currentUser.id;
-
   headerMessage.innerText = `${currentUser.firstName}'s Sleep Data`;
 
-  displayLastDaySleepData(id);
-  displayLastWeekSleepData(id);
-  displayAvgSleepData(id);
+  displayLastDaySleepData();
+  displayLastWeekSleepData();
+  displayAvgSleepData();
 }
 
-function displayLastDaySleepData(id) {
-  const hoursSlept = sleepRepo.retrieveUserPropertyByDate(id, currentDate, 'hoursSlept');
-  const sleepQuality = sleepRepo.retrieveUserPropertyByDate(id, currentDate, 'sleepQuality');
+function displayLastDaySleepData() {
+  const hoursSlept = userSleep.retrievePropByDate(currentDate, 'hoursSlept');
+  const sleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
 
   dailySleep.innerHTML = `
     <h4 class="user-daily-sleep-time" id="userDailySleepTime">
@@ -152,9 +133,9 @@ function displayLastDaySleepData(id) {
       Your sleep quality was ${sleepQuality}/5<h4>`;
 }
 
-function displayLastWeekSleepData(id) {
-  const userHoursSlept = sleepRepo.retrieveUserPropertyByWeek(id, weekStartDate, "hoursSlept" )
-  const userAvgSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, weekStartDate, "sleepQuality")
+function displayLastWeekSleepData() {
+  const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, "hoursSlept" )
+  const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, "sleepQuality")
 
   weeklySleep.innerHTML = `
     <h2 class="user-weekly-sleep">
@@ -168,9 +149,9 @@ function displayLastWeekSleepData(id) {
     </h2>`;
 }
 
-function displayAvgSleepData(id) {
-  const avgHoursSlept = sleepRepo.calculateUserAvg(id, 'hoursSlept');
-  const avgSleepQuality = sleepRepo.calculateUserAvg(id, 'sleepQuality');
+function displayAvgSleepData() {
+  const avgHoursSlept = userSleep.calculatePropAvg('hoursSlept');
+  const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
 
   avgSleep.innerHTML = `
     <h4 class="user-avg-sleep-hours" id="userAvgSleepHours">
@@ -182,18 +163,16 @@ function displayAvgSleepData(id) {
 // activity
 
 function displayUserActivityData() {
-  const id = currentUser.id;
-
   headerMessage.innerText = `${currentUser.firstName}'s Activity Data`;
 
-  displayDailySteps(id);
-  displayMinutesActive(id);
-  displayWeeklyActivityStats(id);
+  displayDailySteps();
+  displayMinutesActive();
+  displayWeeklyActivityStats();
 }
 
-function displayDailySteps(id) {
-  const userDailySteps = activityRepo.retrieveUserPropertyByDate(id, currentDate, "numSteps");
-  const userDistance = activityRepo.calculateDailyMilesWalked(id, currentDate);
+function displayDailySteps() {
+  const userDailySteps = userActivity.retrieveUserPropertyByDate(currentDate, "numSteps");
+  const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
   dailySteps.innerHTML = `
     <h4 class="user-daily-steps" id="userDailySteps">
       ${userDailySteps} steps</h4>
@@ -201,17 +180,17 @@ function displayDailySteps(id) {
       ${userDistance} distance</h4>`
 }
 
-function displayMinutesActive(id) {
-  const userMinActive = activityRepo.retrieveUserPropertyByDate(id, currentDate, "minutesActive");
+function displayMinutesActive() {
+  const userMinActive = userActivity.retrieveUserPropertyByDate(currentDate, "minutesActive");
   dailyActivity.innerHTML = `
     <h4 class="user-daily-activity" id="userDailyActivity">
       ${userMinActive} min active</h4>`;
 }
 
-function displayWeeklyActivityStats(id) {
-    const userWeeklySteps = activityRepo.retrieveUserPropertyByWeek(id, weekStartDate, "numSteps" )
-    const userMinActive = activityRepo.retrieveUserPropertyByWeek(id, weekStartDate, "minutesActive")
-    const userStairsClimbed = activityRepo.retrieveUserPropertyByWeek(id, weekStartDate, "flightsOfStairs")
+function displayWeeklyActivityStats() {
+    const userWeeklySteps = userActivity.retrieveUserPropertyByWeek(weekStartDate, "numSteps" )
+    const userMinActive = userActivity.retrieveUserPropertyByWeek(weekStartDate, "minutesActive")
+    const userStairsClimbed = userActivity.retrieveUserPropertyByWeek(weekStartDate, "flightsOfStairs")
   weeklyActivity.innerHTML = `
     <h4 class="user-weekly-activity" id="userWeeklyActivity">
     Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,

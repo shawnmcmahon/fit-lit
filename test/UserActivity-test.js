@@ -1,58 +1,39 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const ActivityEntry = require('../src/ActivityEntry');
+const UserRepository = require('../src/UserRepository');
+const User = require('../src/User');
+const UserActivity = require('../src/UserActivity');
+const userData = require('./test-data/user-data');
 const activityData = require('./test-data/activity-data');
 
-
 describe('ActivityEntry', function() {
-  let entry1, entry2, entry3;
+  let userRepo, user1, user2, user3, userActivity1, userActivity2, userActivity3;
 
   beforeEach(() => {
-    entry1 = new ActivityEntry(activityData[0]);
-    entry2 = new ActivityEntry(activityData[4]);
-    entry3 = new ActivityEntry(activityData[8]);
+    userRepo = new UserRepository(userData);
+    user1 = new User(userRepo.data[0]);
+    user2 = new User(userRepo.data[1]);
+    user3 = new User(userRepo.data[2]);
+    userActivity1 = new UserActivity(user1, activityData);
+    userActivity2 = new UserActivity(user2, activityData);
+    userActivity3 = new UserActivity(user3, activityData);
   });
 
-  it("should be a function", function() {
-    expect(ActivityEntry).to.be.a('function');
+  it('should be a function', function() {
+    expect(UserActivity).to.be.a('function');
   });
 
-  it("should be an instance of ActivityEntry", function() {
-    expect(entry1).to.be.an.instanceof(ActivityEntry);
-    expect(entry2).to.be.an.instanceof(ActivityEntry);
-    expect(entry3).to.be.an.instanceof(ActivityEntry);
+  it("should be an instance of UserActivity", function() {
+    expect(userActivity1).to.be.an.instanceof(UserActivity);
+    expect(userActivity2).to.be.an.instanceof(UserActivity);
+    expect(userActivity3).to.be.an.instanceof(UserActivity);
   });
 
-  it("should store a user's id", function() {
-    expect(entry1.id).to.equal(1);
-    expect(entry2.id).to.equal(2);
-    expect(entry3.id).to.equal(3);
+  it("should store an activity data array", function() {
+    expect(userActivity1.data).to.be.an('array');
+    expect(userActivity2.data).to.be.an('array');
+    expect(userActivity3.data).to.be.an('array');
   });
 
-  it("should store an entry date", function() {
-    expect(entry1.date).to.equal("2019/06/15");
-    expect(entry2.date).to.equal("2019/06/16");
-    expect(entry3.date).to.equal("2019/06/17");
-  });
-
-  it("should store the user's number of steps", function() {
-    expect(entry1.numSteps).to.equal(3577);
-    expect(entry2.numSteps).to.equal(4112);
-    expect(entry3.numSteps).to.equal(4547);
-  });
-
-  it("should store the user's minutes of activity", function() {    
-    expect(entry1.minutesActive).to.equal(140);
-    expect(entry2.minutesActive).to.equal(220);
-    expect(entry3.minutesActive).to.equal(97);
-  });
-
-  it("should store the user's flights of stairs climbed", function() {
-    expect(entry1.flightsOfStairs).to.equal(16);
-    expect(entry2.flightsOfStairs).to.equal(37);
-    expect(entry3.flightsOfStairs).to.equal(5);
-  });
 });
-
-// NEW CODE

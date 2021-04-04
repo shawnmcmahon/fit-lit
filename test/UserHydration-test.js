@@ -7,7 +7,7 @@ const UserHydration = require('../src/UserHydration');
 const userData = require('./test-data/user-data');
 const hydrationData = require('./test-data/hydration-data');
 
-describe('HydrationEntry', function() {
+describe('UserHydration', function() {
   let userRepo, user1, user2, user3, userHydration1, userHydration2, userHydration3;
 
   beforeEach(() => {
