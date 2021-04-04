@@ -72,6 +72,8 @@ describe('ActivityRepository', function() {
 
   });
 
+  //Need identifyDatesExceedingStepGoal(id) test here
+
   it("should retrieve the most flights climbed record for a user", function () {
   const userFlightRecord1 = activityRepo.retrieveMostFlightsClimbed(1);
   const userFlightRecord2 = activityRepo.retrieveMostFlightsClimbed(2);
