@@ -1,4 +1,4 @@
-const SleepEntry = require('../src/SleepEntry');
+// const SleepEntry = require('../src/SleepEntry');
 
 class SleepRepository {
   constructor(dataset) {
@@ -9,8 +9,6 @@ class SleepRepository {
   populateSleepData(dataset) {
     this.sleepData = dataset.map(entry => new SleepEntry(entry));
   }
-
-  // single user
 
   calculateUserAvg(id, property) {
     const userLog = this.sleepData.filter(entry => entry.id === id);

@@ -98,25 +98,46 @@ describe('ActivityRepository', function() {
     expect(flightsWeek2).to.eql([ 37, 4, 31, 44, 10, 26, 31 ]);
     expect(flightsWeek3).to.eql([ 8, 5, 26, 17, 46, 13, 17 ]);
   });
-
-  it("should retrieve the average weekly minutes active", function() {
+  
+  it("should calculate the average steps taken by a user during a given week", function() {
     const userAvg1 = activityRepo.retrieveAvgWeeklyActivity(1, "2019/06/16");
+    const userAvg2 = activityRepo.retrieveAvgWeeklyActivity(2, "2019/06/15");
+    const userAvg3 = activityRepo.retrieveAvgWeeklyActivity(3, "2019/06/16");
+
+    expect(userAvg1.avgSteps).to.equal(9334);
+    expect(userAvg2.avgSteps).to.equal(7865);
+    expect(userAvg3.avgSteps).to.equal(7795);
+  });
+
+  
+  it("should calculate the average minutes active for a user during a given week", function() {
+    const userAvg1 = activityRepo.retrieveAvgWeeklyActivity(1, "2019/06/15");
+    const userAvg2 = activityRepo.retrieveAvgWeeklyActivity(2, "2019/06/16");
+    const userAvg3 = activityRepo.retrieveAvgWeeklyActivity(3, "2019/06/15");
+    
+    expect(userAvg1.avgMinutesActive).to.equal(171);
+    expect(userAvg2.avgMinutesActive).to.equal(154);
+    expect(userAvg3.avgMinutesActive).to.equal(165);
+  });
+  
+  it("should calculate the average flights climbed by a user during a given week", function() {
+    const userAvg1 = activityRepo.retrieveAvgWeeklyActivity(1, "2019/06/15");
     const userAvg2 = activityRepo.retrieveAvgWeeklyActivity(2, "2019/06/16");
     const userAvg3 = activityRepo.retrieveAvgWeeklyActivity(3, "2019/06/16");
 
-    expect(userAvg1.avgMinutesActive).to.equal(168);
-    expect(userAvg2.avgMinutesActive).to.equal(154);
-    expect(userAvg3.avgMinutesActive).to.equal(156);
+    expect(userAvg1.avgFlightsClimbed).to.equal(18);
+    expect(userAvg2.avgFlightsClimbed).to.equal(26);
+    expect(userAvg3.avgFlightsClimbed).to.equal(19);
   });
-
+  
   it("should determine whether a user reached their step goal on a given date", function() {
     const userStepGoal1 = activityRepo.evaluateStepGoalSuccess(1, "2019/06/16");
     const userStepGoal2 = activityRepo.evaluateStepGoalSuccess(2, "2019/06/17");
     const userStepGoal3 = activityRepo.evaluateStepGoalSuccess(3, "2019/06/18");
 
-    expect(userStepGoal1).to.equal(false); // 6637 / 10000
-    expect(userStepGoal2).to.equal(true); // 13750 / 5000
-    expect(userStepGoal3).to.equal(false); // 2546 / 5000
+    expect(userStepGoal1).to.equal(false);
+    expect(userStepGoal2).to.equal(true);
+    expect(userStepGoal3).to.equal(false);
   });
 
   it("should identify dates when user exceeded step goal", function() {
@@ -135,20 +156,10 @@ describe('ActivityRepository', function() {
     expect(userFlights3).to.equal(46);
   });
 
-  it("should retrieve the average flights climbed by all users on a given date", function () {
-    const avgStairsForAllUsers1 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/15");
-    const avgStairsForAllUsers2 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/18");
-    const avgStairsForAllUsers3 = activityRepo.calculateAvgStairsClimbedByDate("2019/06/20");
-
-    expect(avgStairsForAllUsers1).to.equal(20);
-    expect(avgStairsForAllUsers2).to.equal(30);
-    expect(avgStairsForAllUsers3).to.equal(23);
-  })
-
   it("should retrieve the average steps taken by all users on a given date", function () {
-    const avgStepsForAllUsers1 = activityRepo.calculateAvgStepsByDate("2019/06/15");
-    const avgStepsForAllUsers2 = activityRepo.calculateAvgStepsByDate("2019/06/17");
-    const avgStepsForAllUsers3 = activityRepo.calculateAvgStepsByDate("2019/06/22");
+    const avgStepsForAllUsers1 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/15", "numSteps");
+    const avgStepsForAllUsers2 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/17", "numSteps");
+    const avgStepsForAllUsers3 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/22", "numSteps");
 
     expect(avgStepsForAllUsers1).to.equal(5091);
     expect(avgStepsForAllUsers2).to.equal(10875);
@@ -156,12 +167,22 @@ describe('ActivityRepository', function() {
   })
 
   it("should retrieve the average minutes active for all users on a given date", function () {
-    const avgMinForAllUsers1 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/19");
-    const avgMinForAllUsers2 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/21");
-    const avgMinForAllUsers3 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/23");
+    const avgMinForAllUsers1 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/19", "minutesActive");
+    const avgMinForAllUsers2 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/21", "minutesActive");
+    const avgMinForAllUsers3 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/23", "minutesActive");
 
     expect(avgMinForAllUsers1).to.equal(235);
     expect(avgMinForAllUsers2).to.equal(169);
     expect(avgMinForAllUsers3).to.equal(193);
   });
+
+  it("should retrieve the average flights climbed by all users on a given date", function () {
+    const avgStairsForAllUsers1 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/15", "flightsOfStairs");
+    const avgStairsForAllUsers2 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/18", "flightsOfStairs");
+    const avgStairsForAllUsers3 = activityRepo.calculateAllUserPropertyAvgByDate("2019/06/20", "flightsOfStairs");
+
+    expect(avgStairsForAllUsers1).to.equal(20);
+    expect(avgStairsForAllUsers2).to.equal(30);
+    expect(avgStairsForAllUsers3).to.equal(23);
+  })
 });

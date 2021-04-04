@@ -96,13 +96,12 @@ describe('SleepRepository', function() {
   it("should be able to find the user entry with the highest number of hours slept", function() {
     const bestSleepers = sleepRepo.identifyBestSleeper();
 
+    expect(bestSleepers[0].name).to.equal("Herminia Witting");
+    expect(bestSleepers[0].date).to.equal("2019/06/15");
+    expect(bestSleepers[0].hoursSlept).to.equal(10.8);
 
-    // expect(bestSleepers[0].name).to.equal("Herminia Witting");
-    // expect(bestSleepers[0].date).to.equal("2019/06/15");
-    // expect(bestSleepers[0].hoursSlept).to.equal(10.8);
-
-    // expect(bestSleepers[1].name).to.equal("Jarvis Considine");
-    // expect(bestSleepers[1].date).to.equal("2019/06/18");
-    // expect(bestSleepers[1].hoursSlept).to.equal(10.8);
+    expect(bestSleepers[1].name).to.equal("Jarvis Considine");
+    expect(bestSleepers[1].date).to.equal("2019/06/18");
+    expect(bestSleepers[1].hoursSlept).to.equal(10.8);
   });
 });

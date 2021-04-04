@@ -1,4 +1,4 @@
-const ActivityEntry = require('../src/ActivityEntry');
+// const ActivityEntry = require('../src/ActivityEntry');
 
 class ActivityRepository {
   constructor(dataset) {
@@ -9,8 +9,6 @@ class ActivityRepository {
   populateActivityData(dataset) {
     this.activityData = dataset.map(entry => new ActivityEntry(entry));
   }
-
-  // single user
 
   retrieveUserPropertyByDate(id, date, property) {
     const userLog = this.activityData.filter(entry => entry.id === id);
@@ -38,7 +36,7 @@ class ActivityRepository {
     const avgFlightsClimbed = this.calculateUserWeeklyAvg('flightsOfStairs', weekLog);
     const avgSteps = this.calculateUserWeeklyAvg('numSteps', weekLog);
 
-    const avgActivity = { avgMinutesActive: avgMinutesActive, avgFlightsClimbed: avgFlightsClimbed, avgSteps: avgSteps };
+    const avgActivity = { avgSteps: avgSteps, avgMinutesActive: avgMinutesActive, avgFlightsClimbed: avgFlightsClimbed };
     return avgActivity;
   }
 
@@ -87,38 +85,15 @@ class ActivityRepository {
     return maxFlights;
   }
 
-  //All users
-  calculateAvgStairsClimbedByDate(date) {
-    const allUserLogs = this.activityData.filter(entry => entry.date === date);
-    const allUserStairs = allUserLogs.map(entry => entry.flightsOfStairs);
-    const totalStairsClimbed = allUserStairs.reduce((sum, stairs) => {
-        return sum + stairs;
+  calculateAllUserPropertyAvgByDate(date, property) {
+    const dataLog = this.activityData.filter(entry => entry.date === date);
+    const propertyLog = dataLog.map(entry => entry[property]);
+    const total = propertyLog.reduce((sum, num) => {
+        return sum + num;
     });
-    const avgStairsClimbed = Math.round(totalStairsClimbed / allUserStairs.length);
+    const propertyAvg = Math.round(total / dataLog.length);
 
-    return avgStairsClimbed;
-  }
-
-  calculateAvgStepsByDate(date) {
-    const allUserLogs = this.activityData.filter(entry => entry.date === date);
-    const allUserSteps = allUserLogs.map(entry => entry.numSteps);
-    const totalStepsTaken = allUserSteps.reduce((sum, steps) => {
-      return sum + steps;
-    });
-    const avgStepsTaken = Math.round(totalStepsTaken / allUserSteps.length);
-
-    return avgStepsTaken;
-  }
-
-  calculateAvgMinutesActiveByDate(date) {
-    const allUserLogs = this.activityData.filter(entry => entry.date === date);
-    const allUserMinutes = allUserLogs.map(entry => entry.minutesActive);
-    const totalMinutesActive = allUserMinutes.reduce((sum, min) => {
-        return sum + min;
-    });
-    const avgMinutesActive = Math.round(totalMinutesActive / allUserMinutes.length);
-
-    return avgMinutesActive;
+    return propertyAvg;
   }
 }
 
