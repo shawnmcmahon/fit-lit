@@ -4,6 +4,7 @@ class SleepRepository {
     this.userData = userData;
   }
 
+
   calculateAvgSleepQualityAllUsers() {
     const sleepQualityData = this.data.map(entry => entry.sleepQuality);    
     const total = sleepQualityData.reduce((sum, sleepQuality) => {
