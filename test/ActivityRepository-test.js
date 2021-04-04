@@ -29,7 +29,7 @@ describe('ActivityRepository', function() {
     expect(activityRepo.activityData[0]).to.deep.equal({ id: 1, date: '2019/06/15', numSteps: 3577, minutesActive: 140, flightsOfStairs: 16 });
   });
 
-  it.only("should be able to calculate the miles walked of a user on a specific date", function() {
+  it("should be able to calculate the miles walked of a user on a specific date", function() {
     const userMiles1 = activityRepo.calculateDailyMilesWalked(1, "2019/06/16");
     const userMiles2 = activityRepo.calculateDailyMilesWalked(2, "2019/06/21");
     const userMiles3 = activityRepo.calculateDailyMilesWalked(3, "2019/06/22");
@@ -38,4 +38,7 @@ describe('ActivityRepository', function() {
     expect(userMiles2).to.equal(8.7);
     expect(userMiles3).to.equal(9.5);
   });
+
+
+
 });
