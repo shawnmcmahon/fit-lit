@@ -1,5 +1,3 @@
-// GLOBAL VARIABLES
-
 let currentDate = "2019/09/22";
 let weekStartDate = "2019/09/15";
 
@@ -167,9 +165,12 @@ function displayAvgSleepData() {
 function displayUserActivityData() {
   headerMessage.innerText = `${currentUser.firstName}'s Activity Data`;
 
-  displayDailySteps();
-  displayMinutesActive();
-  displayWeeklyActivityStats();
+
+  // helper functions
+  displayDailySteps(id);
+  displayMinutesActive(id);
+  displayWeeklyActivityStats(id);
+  displayDailyStatComparison(id);
 }
 
 function displayDailySteps() {
@@ -189,10 +190,11 @@ function displayMinutesActive() {
       ${userMinActive} min active</h4>`;
 }
 
-function displayWeeklyActivityStats() {
-    const userWeeklySteps = userActivity.retrievePropLogByWeek(weekStartDate, "numSteps" )
-    const userMinActive = userActivity.retrievePropLogByWeek(weekStartDate, "minutesActive")
-    const userStairsClimbed = userActivity.retrievePropLogByWeek(weekStartDate, "flightsOfStairs")
+function displayWeeklyActivityStats(id) {
+    const userWeeklySteps = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "numSteps" )
+    const userMinActive = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "minutesActive");
+    const userStairsClimbed = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "flightsOfStairs");
+
   weeklyActivity.innerHTML = `
     <h4 class="user-weekly-activity" id="userWeeklyActivity">
     Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
@@ -205,7 +207,30 @@ function displayWeeklyActivityStats() {
      </h4> `;
 }
 
+
 // HTML TOGGLING
+function displayDailyStatComparison(id) {
+  const userDailySteps = activityRepo.retrieveUserPropertyByDate(id, currentDate, "numSteps");
+  const userDailyMinActive = activityRepo.retrieveUserPropertyByDate(id, currentDate, "minutesActive");
+  const userDailyStairs = activityRepo.retrieveUserPropertyByDate(id, currentDate, "flightsOfStairs");
+
+  const allUserDailySteps = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "numSteps");
+  const allUserDailyMinActive = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "minutesActive");
+  const allUserDailyStairs = activityRepo.calculateAllUserPropertyAvgByDate(currentDate, "flightsOfStairs");
+
+  const stepComparison = Math.round((userDailySteps / allUserDailySteps) * 100);
+  const minComparison = Math.round((userDailyMinActive / allUserDailyMinActive) * 100);
+  const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
+
+  compareUsers.innerHTML = `
+
+  <h4 class="compare-user-activity" id="compareUserActivity">
+  Steps: ${stepComparison}%,
+  Min: ${minComparison}%,
+  Stairs: ${stairComparison}% </h4>`;
+
+}
+
 
 function viewHome() {
   displayUserHomeData()
