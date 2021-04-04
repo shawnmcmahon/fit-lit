@@ -83,6 +83,12 @@ class ActivityRepository {
   }
 
   retrieveMostFlightsClimbed(id) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    let maxFlights;
+    const newFlightBests = userLog.map(entry => entry.flightsOfStairs);
+    maxFlights = Math.max(...newFlightBests);
+
+    return maxFlights;
 
   }
 

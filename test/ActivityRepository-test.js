@@ -72,6 +72,19 @@ describe('ActivityRepository', function() {
 
   });
 
+  it("should retrieve the most flights climbed record for a user", function () {
+  const userFlightRecord1 = activityRepo.retrieveMostFlightsClimbed(1);
+  const userFlightRecord2 = activityRepo.retrieveMostFlightsClimbed(2);
+  const userFlightRecord3 = activityRepo.retrieveMostFlightsClimbed(3);
+
+  expect(userFlightRecord1).to.equal(36);
+  expect(userFlightRecord2).to.equal(44);
+  expect(userFlightRecord3).to.equal(46);
+  
+  });
+
+
+
 
 
 
