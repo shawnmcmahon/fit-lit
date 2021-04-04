@@ -1,4 +1,4 @@
-const SleepEntry = require('../src/SleepEntry');
+// const SleepEntry = require('../src/SleepEntry');
 
 class SleepRepository {
   constructor(dataset) {
@@ -12,56 +12,30 @@ class SleepRepository {
 
   // single user
 
-  calculateAvgHrsSleptByUser(id) {
+  calculateUserAvg(id, property) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
-    const dailyHrsSlept = userLog.map(entry => entry.hoursSlept);
-    const totalHrsSlept = dailyHrsSlept.reduce((sum, hrs) => {
-      return sum + hrs;
+    const dailySum = userLog.map(entry => entry[property]);
+    const totalSum = dailySum.reduce((sum, num) => {
+      return sum + num;
     });
-    const avgHrs = totalHrsSlept / dailyHrsSlept.length;
+    const avgAmount = totalSum / dailySum.length;
 
-    return parseFloat(avgHrs.toFixed(1));
+    return parseFloat(avgAmount.toFixed(1));
   }
 
-  calculateAvgSleepQualityByUser(id) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const dailySleepQuality = userLog.map(entry => entry.sleepQuality);
-    const totalSleepQuality = dailySleepQuality.reduce((sum, hrs) => {
-      return sum + hrs;
-    });
-    const avgSleepQuality = totalSleepQuality / dailySleepQuality.length;
-    
-    return parseFloat(avgSleepQuality.toFixed(1));
-  }
-
-  calculateHrsSleptByDate(id, date) {
+  retrieveUserPropertyByDate(id, date, property) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const entry = userLog.find(entry => entry.date === date)
-    return entry.hoursSlept;
+    return entry[property];
   }
 
-  calculateSleepQualityByDate(id, date) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const entry = userLog.find(entry => entry.date === date)
-    return entry.sleepQuality;
-  }
-  
-  retrieveWeekOfHoursSlept(id, startDate) {
+  retrieveUserPropertyByWeek(id, startDate, property) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const index = userLog.findIndex(entry => entry.date === startDate);
     const weekLog = userLog.slice(index, index + 7);
-    const hoursSleptLog = weekLog.map(entry => entry.hoursSlept);
+    const propertyLog = weekLog.map(entry => entry[property]);
 
-    return hoursSleptLog;
-  }
-  
-  retrieveWeekOfSleepQuality(id, startDate) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const index = userLog.findIndex(entry => entry.date === startDate);
-    const weekLog = userLog.slice(index, index + 7);
-    const sleepQualityLog = weekLog.map(entry => entry.sleepQuality);
-
-    return sleepQualityLog;
+    return propertyLog;
   }
   
 // all users

@@ -10,5 +10,3 @@ class SleepEntry {
 if (typeof module !== 'undefined') {
   module.exports = SleepEntry;
 }
-
-// NEW CODE
