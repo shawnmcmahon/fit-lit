@@ -94,6 +94,17 @@ describe('ActivityRepository', function() {
 
   })
 
+  it("should retrieve the average steps taken on a given date for all users", function () {
+  const avgStepsForAllUsers1 = activityRepo.calculateAvgStepsByDate("2019/06/15");
+  const avgStepsForAllUsers2 = activityRepo.calculateAvgStepsByDate("2019/06/17");
+  const avgStepsForAllUsers3 = activityRepo.calculateAvgStepsByDate("2019/06/22");
+
+  expect(avgStepsForAllUsers1).to.equal(5091);
+  expect(avgStepsForAllUsers2).to.equal(10875);
+  expect(avgStepsForAllUsers3).to.equal(8412);
+
+})
+
 
 
 

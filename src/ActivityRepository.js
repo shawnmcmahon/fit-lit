@@ -106,6 +106,14 @@ class ActivityRepository {
   }
 
   calculateAvgStepsByDate(date) {
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserSteps = allUserLogs.map(entry => entry.numSteps);
+    const totalStepsTaken = allUserSteps.reduce((sum, steps) => {
+        return sum + steps;
+    });
+    const avgStepsTaken = Math.round(totalStepsTaken / allUserSteps.length);
+
+    return avgStepsTaken;
 
   }
 
