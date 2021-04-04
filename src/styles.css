@@ -15,14 +15,11 @@ article {
   display: flex;
   justify-content: center;
   padding-left: 30px;
-
-
 }
 
 body {
   display: flex;
   justify-content: center;
-
 }
 
 button {
@@ -33,12 +30,10 @@ button {
   align-items: center;
   background-color: #282828;
   outline: none;
-
 }
 
 h1 {
   color: #E0E0E0;
-
 }
 
 header {
@@ -66,8 +61,6 @@ section {
   height: 70vh;
   width: 80vw;
   justify-content: center;
-
-
 }
 
 .grid-wrapper {
@@ -86,7 +79,6 @@ section {
   grid-row-gap: 3vh;
   width: 80vw;
   height: 65vh;
-
 }
 
 .user-info {
@@ -94,15 +86,12 @@ section {
   background-color: #383838;
   border-radius: 20px;
   flex-direction: column;
-
 }
 
 .picture {
   grid-area: 1 / 4 / 4 / 7;
   background-color: #383838;
   border-radius: 20px;
-
-
 }
 
 .step-goal {
@@ -119,7 +108,6 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
-
 }
 
 .daily-water {
@@ -132,7 +120,6 @@ section {
   grid-area: 4 / 1 / 7 / 7;
   background-color: #FFED3B;
   border-radius: 20px;
-
 }
 
 /*Sleep Page*/
@@ -143,22 +130,18 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
-
 }
 
 .weekly-sleep {
   grid-area: 1 / 1 / 4 / 7;
   background-color: #383838;
   border-radius: 20px;
-
 }
 
 .daily-sleep {
   grid-area: 4 / 1 / 7 / 4;
   background-color: #383838;
   border-radius: 20px;
-
-
 }
 
 
@@ -166,8 +149,6 @@ section {
   grid-area: 4 / 4 / 7 / 7;
   background-color: #FFED3B;
   border-radius: 20px;
-
-
 }
 
 /*Activity Page*/
@@ -197,23 +178,18 @@ section {
   grid-area: 5 / 1 / 7 / 4;
   background-color: #383838;
   border-radius: 20px;
-
-
 }
 
 .compare-users {
   grid-area: 3 / 4 / 7 / 7;
   background-color: #383838;
   border-radius: 20px;
-
-
 }
 
 /*Nav Bar*/
 .nav-bar {
   color: #E0E0E0;
   outline: none;
-
 }
 
 .home-button {
@@ -235,12 +211,9 @@ section {
 .activity-button {
   color: #E0E0E0;
   outline: none;
-
 }
 
 /*Hidden*/
 .hidden {
   display: none!important;
 }
-
-/* NEW CODE */

@@ -1,45 +1,11 @@
-// const SleepEntry = require('../src/SleepEntry');
-
 class SleepRepository {
-  constructor(dataset) {
-    this.sleepData = [];
-    this.userData = dataset;
+  constructor(sleepData, userData) {
+    this.data = sleepData;
+    this.userData = userData;
   }
-
-  populateSleepData(dataset) {
-    this.sleepData = dataset.map(entry => new SleepEntry(entry));
-  }
-
-  calculateUserAvg(id, property) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const dailySum = userLog.map(entry => entry[property]);
-    const totalSum = dailySum.reduce((sum, num) => {
-      return sum + num;
-    });
-    const avgAmount = totalSum / dailySum.length;
-
-    return parseFloat(avgAmount.toFixed(1));
-  }
-
-  retrieveUserPropertyByDate(id, date, property) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const entry = userLog.find(entry => entry.date === date)
-    return entry[property];
-  }
-
-  retrieveUserPropertyByWeek(id, startDate, property) {
-    const userLog = this.sleepData.filter(entry => entry.id === id);
-    const index = userLog.findIndex(entry => entry.date === startDate);
-    const weekLog = userLog.slice(index, index + 7);
-    const propertyLog = weekLog.map(entry => entry[property]);
-
-    return propertyLog;
-  }
-  
-// all users
 
   calculateAvgSleepQualityAllUsers() {
-    const sleepQualityData = this.sleepData.map(entry => entry.sleepQuality);    
+    const sleepQualityData = this.data.map(entry => entry.sleepQuality);    
     const total = sleepQualityData.reduce((sum, sleepQuality) => {
       return sum + sleepQuality;
     });
@@ -57,22 +23,25 @@ class SleepRepository {
     sleep quality for each user and store.
     for any users with avg  > 3,
     store name in new array and return */
+
+    let userIDs = Object.keys(this.sleepData);
     
     // const index = sleeperLog.findIndex(entry => entry.date === startDate);
   }
 
   identifyBestSleeper() {
-    let sleeper = this.sleepData[0];
-    this.sleepData.forEach(entry => {
+    let sleeper = this.data[0];
+    this.data.forEach(entry => {
       if (entry.hoursSlept > sleeper.hoursSlept) {
         sleeper = entry;
       }
     });
-    const bestSleepers = this.sleepData.filter(entry =>
+
+    const bestSleepers = this.data.filter(entry =>
       entry.hoursSlept === sleeper.hoursSlept);
     
     bestSleepers.forEach(entry => {
-      let id = entry.id;
+      let id = entry.userID;
       entry.name = this.userData[id-1].name;
     })
 

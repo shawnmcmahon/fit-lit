@@ -8,11 +8,11 @@ describe('UserRepository', function() {
   let userRepo;
 
   beforeEach(() => {
-    userRepo = new UserRepository();
-    userRepo.populateUserData(userData);
+    userRepo = new UserRepository(userData);
   });
 
   it("should be a function", function() {
+    console.log(UserRepository);
     expect(UserRepository).to.be.a('function');
   });
 
@@ -21,15 +21,15 @@ describe('UserRepository', function() {
   });
 
   it("should store a userData array", function() {
-    expect(userRepo.userData).to.be.an('array');
+    expect(userRepo.data).to.be.an('array');
   });
 
   it("should be able to store a User object", function() {
-    expect(userRepo.userData[0]).to.deep.equal({ id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', stride: 4.3, dailyStepGoal: 10000, friends: [ 16, 4, 8 ] });
+    expect(userRepo.data[0]).to.deep.equal({ id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', strideLength: 4.3, dailyStepGoal: 10000, numOunces: 96, friends: [ 16, 4, 8 ] });
   });
 
   it("should be able to retrieve a User object", function() {
-    expect(userRepo.retrieveUserData(1)).to.deep.equal({ id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', stride: 4.3, dailyStepGoal: 10000, friends: [ 16, 4, 8 ] });
+    expect(userRepo.retrieveUserData(1)).to.deep.equal({ id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', strideLength: 4.3, dailyStepGoal: 10000, numOunces: 96, friends: [ 16, 4, 8 ] });
   });
 
   it("should have an average step goal property", function() {
