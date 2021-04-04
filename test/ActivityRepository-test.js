@@ -50,6 +50,17 @@ describe('ActivityRepository', function() {
 
   })
 
+  it("should retrieve the average weekly minutes active", function() {
+    const userAvgMin1 = activityRepo.retrieveAvgWeeklyActivity(1, "2019/06/16");
+    const userAvgMin2 = activityRepo.retrieveAvgWeeklyActivity(2, "2019/06/16");
+    const userAvgMin3 = activityRepo.retrieveAvgWeeklyActivity(3, "2019/06/16");
+
+    expect(userAvgMin1.avgMinutes).to.equal(168);
+    expect(userAvgMin2.avgMinutes).to.equal(154);
+    expect(userAvgMin3.avgMinutes).to.equal(156);
+
+  });
+
 
 
 });
