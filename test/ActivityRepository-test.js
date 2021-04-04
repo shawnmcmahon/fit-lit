@@ -103,7 +103,18 @@ describe('ActivityRepository', function() {
   expect(avgStepsForAllUsers2).to.equal(10875);
   expect(avgStepsForAllUsers3).to.equal(8412);
 
-})
+  })
+
+  it("should retrieve the average minutes active on a given date for all users", function () {
+    const avgMinForAllUsers1 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/19");
+    const avgMinForAllUsers2 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/21");
+    const avgMinForAllUsers3 = activityRepo.calculateAvgMinutesActiveByDate("2019/06/23");
+
+    expect(avgMinForAllUsers1).to.equal(235);
+    expect(avgMinForAllUsers2).to.equal(169);
+    expect(avgMinForAllUsers3).to.equal(193);
+
+  })
 
 
 

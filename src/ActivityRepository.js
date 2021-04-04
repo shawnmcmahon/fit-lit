@@ -118,6 +118,14 @@ class ActivityRepository {
   }
 
   calculateAvgMinutesActiveByDate(date) {
+    const allUserLogs = this.activityData.filter(entry => entry.date === date);
+    const allUserMinutes = allUserLogs.map(entry => entry.minutesActive);
+    const totalMinutesActive = allUserMinutes.reduce((sum, min) => {
+        return sum + min;
+    });
+    const avgMinutesActive = Math.round(totalMinutesActive / allUserMinutes.length);
+
+    return avgMinutesActive;
 
   }
 
