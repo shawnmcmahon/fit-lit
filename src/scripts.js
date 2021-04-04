@@ -27,7 +27,7 @@ const avgSleep = document.querySelector('#avgSleep');
 
 const activityGrid  = document.querySelector('#activityGrid');
 const dailySteps = document.querySelector('#dailySteps');
-const dailyActivity = document.querySelector('#dailyActivity');
+const weeklyActivity = document.querySelector('#weeklyActivity');
 const weeklySteps = document.querySelector('#weeklySteps');
 const compareUsers = document.querySelector('#compareUsers');
 
@@ -128,15 +128,20 @@ function displayLastDaySleepData(id) {
 
 function displayLastWeekSleepData(id) {
   // may need functionality to determine startDate of latest week
-  const startDate = "2019/09/15";
-  const weekHrsSlept = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'hoursSlept');
-  const weekSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'sleepQuality');
+  const userHoursSlept = sleepRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "hoursSlept" )
+  const userAvgSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "sleepQuality")
+  //const weekHrsSlept = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'hoursSlept');
+  //const weekSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'sleepQuality');
 
   weeklySleep.innerHTML = `
     <h2 class="user-weekly-sleep">
-      LATEST WEEK SLEEP DATA:
-      Hours Slept Per Day: ${weekHrsSlept}
-      Sleep Quality Per Day${weekSleepQuality}
+    Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
+    Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
+    Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
+    Steps_D4: ${userHoursSlept[3]} hours slept, ${userAvgSleepQuality[3]} sleep quality rating;
+    Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
+    Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
+    Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
     </h2>`;
 }
 
@@ -159,7 +164,49 @@ function displayUserActivityData() {
   headerMessage.innerText = `${currentUser.firstName}'s Activity Data`;
 
   // helper functions
+  displayDailySteps(id);
+  displayMinutesActive(id);
+  displayWeeklyActivityStats(id);
 }
+
+function displayDailySteps(id) {
+  const userDailySteps = activityRepo.retrieveUserPropertyByDate(id, currentDate, "numSteps");
+  const userDistance = activityRepo.calculateDailyMilesWalked(id, currentDate);
+  dailySteps.innerHTML = `
+    <h4 class="user-daily-steps" id="userDailySteps">
+      ${userDailySteps} steps</h4>
+    <h4 class="user-daily-distance" id="userDailyDistance">
+      ${userDistance} distance</h4>`
+
+}
+
+function displayMinutesActive(id) {
+  const userMinActive = activityRepo.retrieveUserPropertyByDate(id, currentDate, "minutesActive");
+  dailyActivity.innerHTML = `
+    <h4 class="user-daily-activity" id="userDailyActivity">${userMinActive} min active</h4>`;
+
+}
+
+function displayWeeklyActivityStats(id) {
+    const userWeeklySteps = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "numSteps" )
+    const userMinActive = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "minutesActive")
+    const userStairsClimbed = activityRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "flightsOfStairs")
+  weeklyActivity.innerHTML = `
+    <h4 class="user-weekly-activity" id="userWeeklyActivity">
+    Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
+    Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
+    Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
+    Steps_D4: ${userWeeklySteps[3]} steps, ${userMinActive[3]} min active, ${userStairsClimbed[3]} flights climbed,
+    Steps_D5: ${userWeeklySteps[4]} steps, ${userMinActive[4]} min active, ${userStairsClimbed[4]} flights climbed,
+    Steps_D6: ${userWeeklySteps[5]} steps, ${userMinActive[5]} min active, ${userStairsClimbed[5]} flights climbed,
+    Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
+     </h4> `;
+
+
+}
+
+
+
 
 
 // HTML view togglers

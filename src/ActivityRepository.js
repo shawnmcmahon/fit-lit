@@ -18,6 +18,14 @@ class ActivityRepository {
     return userStat;
   }
 
+  retrieveUserPropertyByDate(id, date, property) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dateRequested = userLog.find(entry => entry.date === date);
+    const userStat = dateRequested[property];
+
+    return userStat;
+  }
+
   retrieveUserPropertyByWeek(id, startDate, property) {
     const userLog = this.activityData.filter(entry => entry.id === id);
     const index = userLog.findIndex(entry => entry.date === startDate);
@@ -72,7 +80,7 @@ class ActivityRepository {
     const userLog = this.activityData.filter(entry => entry.id === id);
     const stepGoalExceededDays = userLog.filter(entry => entry.numSteps > dailyStepGoal);
     const days = stepGoalExceededDays.map(entry => entry.date) ;
-    
+
     return days;
   }
 
