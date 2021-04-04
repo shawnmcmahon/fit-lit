@@ -30,21 +30,21 @@ describe('SleepRepository', function() {
   });
 
   it("should calculate the average daily hours slept by a user", function() {
-    const avgDailyHrsSlept = sleepRepo.calculateAvgHrsSleptByUser(1);
+    const avgHrsSlept = sleepRepo.calculateUserAvg(1, 'hoursSlept');
 
-    expect(avgDailyHrsSlept).to.equal(7.7);
+    expect(avgHrsSlept).to.equal(7.7);
   });
 
   it("should calculate a user's average daily sleep quality", function() {
-    const avgSleepQuality = sleepRepo.calculateAvgSleepQualityByUser(2);
+    const avgSleepQuality = sleepRepo.calculateUserAvg(2, 'sleepQuality');
 
     expect(avgSleepQuality).to.equal(3.8);
   });
 
   it("should be able to retrieve the hours slept by a user on a specific date", function() {
-    const hoursSlept1 = sleepRepo.calculateHrsSleptByDate(1, "2019/06/17");
-    const hoursSlept2 = sleepRepo.calculateHrsSleptByDate(2, "2019/06/19");
-    const hoursSlept3 = sleepRepo.calculateHrsSleptByDate(3, "2019/06/21");
+    const hoursSlept1 = sleepRepo.retrieveUserPropertyByDate(1, "2019/06/17", 'hoursSlept');
+    const hoursSlept2 = sleepRepo.retrieveUserPropertyByDate(2, "2019/06/19", 'hoursSlept');
+    const hoursSlept3 = sleepRepo.retrieveUserPropertyByDate(3, "2019/06/21", 'hoursSlept');
 
     expect(hoursSlept1).to.equal(8);
     expect(hoursSlept2).to.equal(9.6);
@@ -52,9 +52,9 @@ describe('SleepRepository', function() {
   });
 
   it("should be able to retrieve the sleep quality of a user on a specific date", function() {
-    const sleepQuality1 = sleepRepo.calculateSleepQualityByDate(1, "2019/06/16");
-    const sleepQuality2 = sleepRepo.calculateSleepQualityByDate(2, "2019/06/21");
-    const sleepQuality3 = sleepRepo.calculateSleepQualityByDate(3, "2019/06/22");
+    const sleepQuality1 = sleepRepo.retrieveUserPropertyByDate(1, "2019/06/16", 'sleepQuality');
+    const sleepQuality2 = sleepRepo.retrieveUserPropertyByDate(2, "2019/06/21", 'sleepQuality');
+    const sleepQuality3 = sleepRepo.retrieveUserPropertyByDate(3, "2019/06/22", 'sleepQuality');
 
     expect(sleepQuality1).to.equal(3.8);
     expect(sleepQuality2).to.equal(4.8);
@@ -62,19 +62,19 @@ describe('SleepRepository', function() {
   });
 
   it("should be able to retrieve the hours slept data for a user throughout a given week", function() {
-    const hoursSleptWeek1 = sleepRepo.retrieveWeekOfSleepQuality(1, "2019/06/15");
-    const hoursSleptWeek2 = sleepRepo.retrieveWeekOfSleepQuality(2, "2019/06/16");
-    const hoursSleptWeek3 = sleepRepo.retrieveWeekOfSleepQuality(3, "2019/06/16");
-
-    expect(hoursSleptWeek1).to.eql([ 2.2, 3.8, 2.6, 3.1, 1.2, 4.2, 3 ]);
-    expect(hoursSleptWeek2).to.eql([ 3.8, 3, 3.2, 2.5, 4.8, 3.3, 4.9 ]);
-    expect(hoursSleptWeek3).to.eql([ 3.4, 4.9, 2.6, 3.4, 3.7, 2.1, 3.9 ]);
+    const hoursSleptWeek1 = sleepRepo.retrieveUserPropertyByWeek(1, "2019/06/15", 'hoursSlept');
+    const hoursSleptWeek2 = sleepRepo.retrieveUserPropertyByWeek(2, "2019/06/16", 'hoursSlept');
+    const hoursSleptWeek3 = sleepRepo.retrieveUserPropertyByWeek(3, "2019/06/16", 'hoursSlept');
+    
+    expect(hoursSleptWeek1).to.eql([ 6.1,  4.1, 8, 10.4, 10.7, 7.8, 7 ]);
+    expect(hoursSleptWeek2).to.eql([ 7.5, 5.7, 10.8, 9.6, 4.3, 4.8, 8 ]);
+    expect(hoursSleptWeek3).to.eql([ 10.7, 5.3, 9.8, 7.2, 8.9, 9.8, 4.7 ]);
   });
 
   it("should be able to retrieve the sleep quality data for a user throughout a given week", function() {
-    const sleepQualityWeek1 = sleepRepo.retrieveWeekOfSleepQuality(1, "2019/06/15");
-    const sleepQualityWeek2 = sleepRepo.retrieveWeekOfSleepQuality(2, "2019/06/15");
-    const sleepQualityWeek3 = sleepRepo.retrieveWeekOfSleepQuality(3, "2019/06/16");
+    const sleepQualityWeek1 = sleepRepo.retrieveUserPropertyByWeek(1, "2019/06/15", 'sleepQuality');
+    const sleepQualityWeek2 = sleepRepo.retrieveUserPropertyByWeek(2, "2019/06/15", 'sleepQuality');
+    const sleepQualityWeek3 = sleepRepo.retrieveUserPropertyByWeek(3, "2019/06/16", 'sleepQuality');
 
     expect(sleepQualityWeek1).to.eql([ 2.2, 3.8, 2.6, 3.1, 1.2, 4.2, 3 ]);
     expect(sleepQualityWeek2).to.eql([ 4.7, 3.8, 3, 3.2, 2.5, 4.8, 3.3 ]);
