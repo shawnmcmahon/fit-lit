@@ -3,8 +3,6 @@ class SleepRepository {
     this.data = sleepData;
     this.userData = userData;
   }
-  
-// all users
 
   calculateAvgSleepQualityAllUsers() {
     const sleepQualityData = this.data.map(entry => entry.sleepQuality);    
