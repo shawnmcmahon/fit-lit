@@ -10,8 +10,6 @@ class SleepRepository {
     this.sleepData = dataset.map(entry => new SleepEntry(entry));
   }
 
-  // single user
-
   calculateUserAvg(id, property) {
     const userLog = this.sleepData.filter(entry => entry.id === id);
     const dailySum = userLog.map(entry => entry[property]);
