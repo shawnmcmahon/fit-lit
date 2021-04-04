@@ -128,15 +128,20 @@ function displayLastDaySleepData(id) {
 
 function displayLastWeekSleepData(id) {
   // may need functionality to determine startDate of latest week
-  const startDate = "2019/09/15";
-  const weekHrsSlept = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'hoursSlept');
-  const weekSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'sleepQuality');
+  const userHoursSlept = sleepRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "hoursSlept" )
+  const userAvgSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, "2019/09/15", "sleepQuality")
+  //const weekHrsSlept = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'hoursSlept');
+  //const weekSleepQuality = sleepRepo.retrieveUserPropertyByWeek(id, startDate, 'sleepQuality');
 
   weeklySleep.innerHTML = `
     <h2 class="user-weekly-sleep">
-      LATEST WEEK SLEEP DATA:
-      Hours Slept Per Day: ${weekHrsSlept}
-      Sleep Quality Per Day${weekSleepQuality}
+    Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
+    Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
+    Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
+    Steps_D4: ${userHoursSlept[3]} hours slept, ${userAvgSleepQuality[3]} sleep quality rating;
+    Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
+    Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
+    Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
     </h2>`;
 }
 
