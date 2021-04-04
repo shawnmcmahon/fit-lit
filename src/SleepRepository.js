@@ -1,4 +1,4 @@
-// const SleepEntry = require('../src/SleepEntry');
+const SleepEntry = require('../src/SleepEntry');
 
 class SleepRepository {
   constructor(dataset) {
