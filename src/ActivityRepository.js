@@ -56,8 +56,17 @@ class ActivityRepository {
   }
 
   evaluateStepGoalSuccess(id, date) {
+    const userLog = this.activityData.filter(entry => entry.id === id);
+    const dailyInfo = userLog.find(entry => entry.date === date);
+    const numSteps = dailyInfo.numSteps;
+    const userInfo = this.userData.find(entry => entry.id === id);
+    const dailyStepGoal = userInfo.dailyStepGoal;
 
-
+    if(numSteps >= dailyStepGoal) {
+      return true;
+    } else {
+      return false;
+    }
 
   }
 
