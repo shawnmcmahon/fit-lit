@@ -1,8 +1,12 @@
 // const HydrationEntry = require('./HydrationEntry');
 
+if (typeof require !== 'undefined') {
+  const HydrationEntry = require('./HydrationEntry');
+}
+
 class HydrationRepository {
-  constructor() {
-    this.hydrationData = [];
+  constructor(hydrationData) {
+    this.data = hydrationData;
   }
 
   populateHydrationData(dataset) {

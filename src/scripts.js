@@ -6,10 +6,10 @@ let weekStartDate = "2019/09/15";
 // CLASS INSTANTIATIONS
 
 let userRepo;
+let currentUser;
 let hydrationRepo;
 let sleepRepo;
 let activityRepo;
-let currentUser;
 
 // QUERY SELECTORS
 
@@ -54,11 +54,15 @@ activityButton.addEventListener('click', viewActivity);
 // FUNCTIONS
 
 function loadPage() {
-  // populateRepositories();
   userRepo = new UserRepository(userData);
-
-  currentUser = userRepo.userData[0];
+  currentUser = new User(userRepo.retrieveUserData(getRandomIndex(userData)));
+  console.log(currentUser);
   viewHome();
+}
+
+function getRandomIndex(array) {
+  const index = Math.floor(Math.random() * array.length);
+  return index;
 }
 
 // function populateRepositories() {

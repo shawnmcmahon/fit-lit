@@ -1,18 +1,17 @@
 class User {
-  constructor(dataElem) {
-    this.id = dataElem.id;
-    this.name = dataElem.name;
-    this.address = dataElem.address;
-    this.email = dataElem.email;
-    this.stride = dataElem.strideLength;
-    this.dailyStepGoal = dataElem.dailyStepGoal;
-    this.friends = dataElem.friends;
+  constructor(user) {
+    this.id = user.id;
+    this.name = user.name;
+    this.address = user.address;
+    this.email = user.email;
+    this.stride = user.strideLength;
+    this.dailyStepGoal = user.dailyStepGoal;
+    this.friends = user.friends;
   }
 
   returnFirstName() {
     const splitName = this.name.split(' ');
-    const firstName = splitName[0];
-    return firstName;
+    return splitName[0];
   }
 }
 
