@@ -38,10 +38,20 @@ describe('SleepRepository', function() {
     expect(avgSleepQuality).to.equal(3);
   });
 
-  it.skip("should be able to identify all users with a sleep quality score greater than 3 during a given week", function() {
-    const bestSleepers = sleepRepo.retrieveQualitySleepers("2019/06/17");
+  it("should be able to identify all users with an average sleep quality over 3 during a given week", function() {
+    const bestQualitySleepers = sleepRepo.retrieveBestWeeklySleepers("2019/06/17", "sleepQuality", 3);
 
-    // expect(bestSleepers[0]).to.equal(n);
+    expect(bestQualitySleepers[0].id).to.equal(2);
+    expect(bestQualitySleepers[0].name).to.equal("Jarvis Considine");
+    expect(bestQualitySleepers[0].weeklyAvg).to.equal(3.1);
+  });
+
+  it("should be able to identify all users with at least 6 average hours of sleep during a given week", function() {
+    const longestSleepers = sleepRepo.retrieveBestWeeklySleepers("2019/06/17", "hoursSlept", 6);
+
+    expect(longestSleepers[0].id).to.equal(1);
+    expect(longestSleepers[1].name).to.equal("Jarvis Considine");
+    expect(longestSleepers[2].weeklyAvg).to.equal(6.5);
   });
 
   it("should be able to find the user entry with the highest number of hours slept", function() {

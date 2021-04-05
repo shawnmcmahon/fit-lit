@@ -4,7 +4,6 @@ class SleepRepository {
     this.userData = userData;
   }
 
-
   calculateAvgSleepQualityAllUsers() {
     const sleepQualityData = this.data.map(entry => entry.sleepQuality);    
     const total = sleepQualityData.reduce((sum, sleepQuality) => {
@@ -15,19 +14,42 @@ class SleepRepository {
     return avgSleepQuality;
   }
 
-  retrieveQualitySleepers(startDate) {
-    /* map data, and count the number of users. 
-    identify starting index by date match, then
-    slice out entries starting with index and 
-    spanning the index + the number of users * 7.
-    use reduce() on new array to figure out average
-    sleep quality for each user and store.
-    for any users with avg  > 3,
-    store name in new array and return */
+  calculatePropAvgByWeek(startDate, property) {
+    const userIDs = this.data.map(user => user.userID);
+    const numUsers = Math.max(...userIDs);
+    const index = this.data.findIndex(entry => entry.date === startDate);
+    const weekLog = this.data.slice(index, index + (7 * numUsers));
 
-    let userIDs = Object.keys(this.sleepData);
+    const userAvgs = weekLog.reduce((avgAcc, entry) => {
+      if (!avgAcc[entry.userID]) {
+        avgAcc[entry.userID] = entry[property] / 7;
+      } else {
+        avgAcc[entry.userID] += entry[property] / 7;
+      }
+      return avgAcc;
+    }, {});
+
+    return userAvgs;
+  }
+
+  retrieveBestWeeklySleepers(startDate, property, minAmt) {
+    const userAvgs = this.calculatePropAvgByWeek(startDate, property);
+    const userKeys = Object.keys(userAvgs);
+    const bestSleeperIDs = userKeys.filter(key => userAvgs[key] > minAmt);
+    const bestSleepers = [];
     
-    // const index = sleeperLog.findIndex(entry => entry.date === startDate);
+    bestSleeperIDs.forEach(id => {
+      let userID = parseInt(id);
+      let avg = parseFloat(userAvgs[id].toFixed(1));
+      let User = { 
+        id: userID, 
+        name: this.userData[id - 1].name, 
+        weeklyAvg: avg,
+      };
+      bestSleepers.push(User);
+    });
+
+    return bestSleepers;
   }
 
   identifyBestSleeper() {
@@ -43,7 +65,7 @@ class SleepRepository {
     
     bestSleepers.forEach(entry => {
       let id = entry.userID;
-      entry.name = this.userData[id-1].name;
+      entry.name = this.userData[id - 1].name;
     })
 
     return bestSleepers;
