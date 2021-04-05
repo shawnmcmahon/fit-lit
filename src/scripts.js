@@ -1,5 +1,5 @@
-let currentDate = "2019/09/22";
-let weekStartDate = "2019/09/15";
+const currentDate = "2019/09/22";
+const weekStartDate = "2019/09/15";
 
 // CLASS INSTANTIATIONS
 
@@ -134,8 +134,8 @@ function displayLastDaySleepData() {
 }
 
 function displayLastWeekSleepData() {
-  const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, "hoursSlept" )
-  const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, "sleepQuality")
+  const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, "hoursSlept");
+  const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, "sleepQuality");
 
   weeklySleep.innerHTML = `
     <h2 class="user-weekly-sleep">
@@ -178,7 +178,7 @@ function displayDailySteps() {
     <h4 class="user-daily-steps" id="userDailySteps">
       ${userDailySteps} avg daily steps</h4>
     <h4 class="user-daily-distance" id="userDailyDistance">
-      ${userDistance} avg daily miles walked</h4>`
+      ${userDistance} avg daily miles walked</h4>`;
 }
 
 function displayMinutesActive() {
@@ -195,14 +195,14 @@ function displayWeeklyActivityStats() {
 
   weeklyActivity.innerHTML = `
     <h4 class="user-weekly-activity" id="userWeeklyActivity">
-    Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
-    Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
-    Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
-    Steps_D4: ${userWeeklySteps[3]} steps, ${userMinActive[3]} min active, ${userStairsClimbed[3]} flights climbed,
-    Steps_D5: ${userWeeklySteps[4]} steps, ${userMinActive[4]} min active, ${userStairsClimbed[4]} flights climbed,
-    Steps_D6: ${userWeeklySteps[5]} steps, ${userMinActive[5]} min active, ${userStairsClimbed[5]} flights climbed,
-    Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
-     </h4> `;
+      Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
+      Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
+      Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
+      Steps_D4: ${userWeeklySteps[3]} steps, ${userMinActive[3]} min active, ${userStairsClimbed[3]} flights climbed,
+      Steps_D5: ${userWeeklySteps[4]} steps, ${userMinActive[4]} min active, ${userStairsClimbed[4]} flights climbed,
+      Steps_D6: ${userWeeklySteps[5]} steps, ${userMinActive[5]} min active, ${userStairsClimbed[5]} flights climbed,
+      Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
+    </h4> `;
 }
 
 function displayDailyStatComparison() {
@@ -222,8 +222,7 @@ function displayDailyStatComparison() {
     <h4 class="compare-user-activity" id="compareUserActivity">
       Steps: ${stepComparison}%,
       Min: ${minComparison}%,
-      Stairs: ${stairComparison}% </h4>`
-    ;
+      Stairs: ${stairComparison}%</h4>`;
 }
 
 // HTML TOGGLING
