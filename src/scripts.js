@@ -81,16 +81,16 @@ function displayUserHomeData() {
   headerMessage.innerText = `Welcome ${currentUser.firstName}`;
 
   userInfo.innerHTML = `
-    <h4 class="name" id="name">${currentUser.name}</h4>
-    <h4 class="address" id="address">${currentUser.address}</h4>
-    <h4 class="email" id="email">${currentUser.email}</h4>
-    <h4 class="stride" id="stride">stride length: ${currentUser.stride}</h4>`;
+    <p class="name" id="name">${currentUser.name}</p>
+    <p class="address" id="address">${currentUser.address}</p>
+    <p class="email" id="email">${currentUser.email}</p>
+    <p class="stride" id="stride">stride length: ${currentUser.stride}</p>`;
 
   stepGoal.innerHTML = `
-    <h2 class="user-step-goal" id="userStepGoal">
-      Your goal is ${currentUser.dailyStepGoal} steps</h2>
-    <h2 class="avg-step-goal" id="avgStepGoal">
-      The average user's goal is ${avgStepGoal}</h2>`;
+    <p class="user-step-goal" id="userStepGoal">
+      Your goal is ${currentUser.dailyStepGoal} steps</p>
+    <p class="avg-step-goal" id="avgStepGoal">
+      The average user's goal is ${avgStepGoal}</p>`;
 
   picture.innerHTML = `
     <p>Today's Date: ${currentDate}</p> 
@@ -127,10 +127,10 @@ function displayLastDaySleepData() {
   const sleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
 
   dailySleep.innerHTML = `
-    <h4 class="user-daily-sleep-time" id="userDailySleepTime">
-      You last slept for ${hoursSlept} hours</h4>
-    <h4 class="user-daily-sleep-quality" class="userDailySleepQuality">
-      Your sleep quality was ${sleepQuality}/5<h4>`;
+    <p class="user-daily-sleep-time" id="userDailySleepTime">
+      You last slept for ${hoursSlept} hours</p>
+    <p class="user-daily-sleep-quality" class="userDailySleepQuality">
+      Your sleep quality was ${sleepQuality}/5<p>`;
 }
 
 function displayLastWeekSleepData() {
@@ -138,7 +138,7 @@ function displayLastWeekSleepData() {
   const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, "sleepQuality");
 
   weeklySleep.innerHTML = `
-    <h2 class="user-weekly-sleep">
+    <p class="user-weekly-sleep">
     Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
     Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
     Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
@@ -146,7 +146,7 @@ function displayLastWeekSleepData() {
     Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
     Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
     Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
-    </h2>`;
+    </p>`;
 }
 
 function displayAvgSleepData() {
@@ -154,10 +154,10 @@ function displayAvgSleepData() {
   const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
 
   avgSleep.innerHTML = `
-    <h4 class="user-avg-sleep-hours" id="userAvgSleepHours">
-      AVERAGE HOURS SLEPT: ${avgHoursSlept}</h4>
-    <h4 class="user-avg-sleep-quality" id="userAvgSleepQuality">
-      AVERAGE SLEEP QUALITY: ${avgSleepQuality}</h4>`;
+    <p class="user-avg-sleep-hours" id="userAvgSleepHours">
+      AVERAGE HOURS SLEPT: ${avgHoursSlept}</p>
+    <p class="user-avg-sleep-quality" id="userAvgSleepQuality">
+      AVERAGE SLEEP QUALITY: ${avgSleepQuality}</p>`;
 }
 
 // activity
@@ -175,17 +175,17 @@ function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, "numSteps");
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
   dailySteps.innerHTML = `
-    <h4 class="user-daily-steps" id="userDailySteps">
-      ${userDailySteps} avg daily steps</h4>
-    <h4 class="user-daily-distance" id="userDailyDistance">
-      ${userDistance} avg daily miles walked</h4>`;
+    <p class="user-daily-steps" id="userDailySteps">
+      ${userDailySteps} avg daily steps</p>
+    <p class="user-daily-distance" id="userDailyDistance">
+      ${userDistance} avg daily miles walked</p>`;
 }
 
 function displayMinutesActive() {
   const userMinActive = userActivity.retrievePropByDate(currentDate, "minutesActive");
   dailyActivity.innerHTML = `
-    <h4 class="user-daily-activity" id="userDailyActivity">
-      ${userMinActive} min active</h4>`;
+    <p class="user-daily-activity" id="userDailyActivity">
+      ${userMinActive} min active</p>`;
 }
 
 function displayWeeklyActivityStats() {
@@ -194,7 +194,7 @@ function displayWeeklyActivityStats() {
     const userStairsClimbed = userActivity.retrievePropLogByWeek("2019/09/15", "flightsOfStairs");
 
   weeklyActivity.innerHTML = `
-    <h4 class="user-weekly-activity" id="userWeeklyActivity">
+    <p class="user-weekly-activity" id="userWeeklyActivity">
       Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
       Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
       Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
@@ -202,7 +202,7 @@ function displayWeeklyActivityStats() {
       Steps_D5: ${userWeeklySteps[4]} steps, ${userMinActive[4]} min active, ${userStairsClimbed[4]} flights climbed,
       Steps_D6: ${userWeeklySteps[5]} steps, ${userMinActive[5]} min active, ${userStairsClimbed[5]} flights climbed,
       Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
-    </h4> `;
+    </p> `;
 }
 
 function displayDailyStatComparison() {
@@ -219,10 +219,10 @@ function displayDailyStatComparison() {
   const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
 
   compareUsers.innerHTML = `
-    <h4 class="compare-user-activity" id="compareUserActivity">
+    <p class="compare-user-activity" id="compareUserActivity">
       Steps: ${stepComparison}%,
       Min: ${minComparison}%,
-      Stairs: ${stairComparison}%</h4>`;
+      Stairs: ${stairComparison}%</p>`;
 }
 
 // HTML TOGGLING

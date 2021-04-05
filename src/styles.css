@@ -1,4 +1,5 @@
-/* Element Selectors */
+/* ELEMENT SELECTORS */
+
 html,
 main {
   display: flex;
@@ -53,7 +54,6 @@ nav {
   justify-content: center;
   padding-left: 10vw;
   color: #FFED3B;
-
 }
 
 section {
@@ -70,7 +70,8 @@ section {
   align-items: center;
 }
 
-/*Home Page Styling*/
+/* HOME PAGE */
+
 .home-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -100,7 +101,8 @@ section {
   border-radius: 20px;
 }
 
-/*Hydration Page*/
+/* HYDRATION PAGE */
+
 .hydration-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -122,7 +124,8 @@ section {
   border-radius: 20px;
 }
 
-/*Sleep Page*/
+/* SLEEP PAGE */
+
 .sleep-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -144,14 +147,14 @@ section {
   border-radius: 20px;
 }
 
-
 .avg-sleep {
   grid-area: 4 / 4 / 7 / 7;
   background-color: #FFED3B;
   border-radius: 20px;
 }
 
-/*Activity Page*/
+/* ACTIVITY PAGE */
+
 .activity-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -186,7 +189,8 @@ section {
   border-radius: 20px;
 }
 
-/*Nav Bar*/
+/* NAV BAR */
+
 .nav-bar {
   color: #E0E0E0;
   outline: none;
@@ -213,7 +217,8 @@ section {
   outline: none;
 }
 
-/*Hidden*/
+/* HIDDEN */
+
 .hidden {
   display: none!important;
 }

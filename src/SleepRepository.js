@@ -37,7 +37,7 @@ class SleepRepository {
     const userKeys = Object.keys(userAvgs);
     const bestSleeperIDs = userKeys.filter(key => userAvgs[key] > minAmt);
     const bestSleepers = [];
-    
+
     bestSleeperIDs.forEach(id => {
       let userID = parseInt(id);
       let avg = parseFloat(userAvgs[id].toFixed(1));
