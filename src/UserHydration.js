@@ -30,6 +30,14 @@ class UserHydration {
 
     return avgOunces;
   }
+
+  retrieveNumOzByWeek(startDate) {
+    const index = this.data.findIndex(entry => entry.date === startDate);
+    const weekLog = this.data.slice(index, index + 7);
+    const ozLog = weekLog.map(entry => entry.numOunces);
+
+    return ozLog;
+  }
 }
 
 if (typeof module !== 'undefined') {

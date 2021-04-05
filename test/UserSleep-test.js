@@ -96,6 +96,4 @@ describe('UserSleep', function() {
     expect(sleepQualityWeek2).to.eql([ 4.7, 3.8, 3, 3.2, 2.5, 4.8, 3.3 ]);
     expect(sleepQualityWeek3).to.eql([ 3.4, 4.9, 2.6, 3.4, 3.7, 2.1, 3.9 ]);
   });
-
-
 });
