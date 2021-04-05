@@ -71,4 +71,14 @@ describe('UserHydration', function() {
     expect(avgWeeklyWater2).to.equal(70);
     expect(avgWeeklyWater3).to.equal(51);
   });
+
+  it("should be able to retrieve the daily water intake for a user over the course of a week", function() {
+    const numOuncesWeek1 = userHydration1.retrieveNumOzByWeek("2019/06/15");
+    const numOuncesWeek2 = userHydration2.retrieveNumOzByWeek("2019/06/16");
+    const numOuncesWeek3 = userHydration3.retrieveNumOzByWeek("2019/06/17");
+
+    expect(numOuncesWeek1).to.eql([ 37, 69, 96, 61, 91, 50, 50 ]);
+    expect(numOuncesWeek2).to.eql([ 91, 96, 70, 76, 71, 27, 58 ]);
+    expect(numOuncesWeek3).to.eql([ 28, 40, 85, 51, 41, 78, 35 ]);
+  });
 });
