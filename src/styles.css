@@ -14,8 +14,6 @@ main {
 
 article {
   display: flex;
-  justify-content: center;
-  padding-left: 30px;
 }
 
 body {
@@ -63,6 +61,11 @@ section {
   justify-content: center;
 }
 
+p {
+  margin: 10px;
+}
+
+
 .grid-wrapper {
   display: flex;
   justify-content: center;
@@ -71,9 +74,8 @@ section {
 }
 
 .widget {
-  /* display: grid; */
-  /* align-items: center;
-  justify-content: center; */
+  display: grid;
+  /* justify-content: center; */
 }
 
 .widget-long {
@@ -92,6 +94,29 @@ section {
 
 .data-title {
   font-weight: bold;
+  align-content: flex-start;
+  padding-left: 25px;
+}
+
+.data-label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+
+.data-set {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 15px;
+
+}
+
+.div {
+  display: flex;
 }
 
 /* HOME PAGE */
@@ -102,28 +127,33 @@ section {
   grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
-  width: 80vw;
+  width: 800px;
   height: 65vh;
 }
 
-.user-info {
-  grid-area: 1 / 1 / 7 / 4;
-  background-color: #383838;
-  border-radius: 20px;
-  flex-direction: column;
-  color: #E0E0E0;
-}
 
-.picture {
-  grid-area: 1 / 4 / 4 / 7;
+.user-weekly-step {
+  grid-area: 1 / 1 / 4 / 7;
   background-color: #383838;
-  border-radius: 20px;
+  border-radius: 5px;
+  color: #E0E0E0;
+  font-size: 30px;
 }
 
 .step-goal {
-  grid-area: 4 / 4 / 7 / 7;
+  grid-area: 4 / 1 / 7 / 4;
   background-color: #FFED3B;
-  border-radius: 20px;
+  border-radius: 5px;
+  padding-top: 15px;
+}
+
+
+.user-info {
+  grid-area: 4 / 4 / 7 / 7;
+  background-color: #383838;
+  border-radius: 5px;
+  flex-direction: column;
+  color: #E0E0E0;
 }
 
 /* HYDRATION PAGE */
