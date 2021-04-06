@@ -25,11 +25,13 @@ const stepGoal = document.getElementById('stepGoal');
 const hydrationGrid = document.getElementById('hydrationGrid');
 const dailyWater = document.getElementById('dailyWater');
 const weeklyWater = document.getElementById('weeklyWater');
+const userWeeklyWaterGraph = document.getElementById('userWeeklyWaterGraph');
 
 const sleepGrid = document.getElementById('sleepGrid');
 const dailySleep = document.getElementById('dailySleep');
 const weeklySleep = document.getElementById('weeklySleep');
 const avgSleep = document.getElementById('avgSleep');
+const userWeeklySleepGraph = document.getElementById('userWeeklySleepGraph');
 
 const activityGrid  = document.getElementById('activityGrid');
 const dailySteps = document.getElementById('dailySteps');
@@ -92,9 +94,9 @@ function displayUserHomeData() {
     <p class='avg-step-goal' id='avgStepGoal'>
       The average user's goal is ${avgStepGoal}</p>`;
 
-  // picture.innerHTML = `
-  //   <p>Today's Date: ${currentDate}</p> 
-  // `;
+  picture.innerHTML = `
+    <p>Today's Date: ${currentDate}</p> 
+  `;
 }
 
 // hydration
@@ -109,8 +111,22 @@ function displayUserHydrationData() {
     `You've had ${dailyOz} oz of water today!\n
     You've averaged ${weeklyOz} oz of water during the week of ${weekStartDate}`;
 
-  console.log(userHydration.retrieveNumOzByWeek(weekStartDate));
-
+  const userWeeklyWater = new Chart(userWeeklyWaterGraph, {
+    type: 'bar',
+    data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+          datasets: [{
+              label: 'Ounces of Water',
+              backgroundColor: 'lightblue',
+              data: userHydration.retrieveNumOzByWeek(weekStartDate),
+          }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+    }
+  });
 }
 
 // sleep
@@ -138,16 +154,23 @@ function displayLastWeekSleepData() {
   const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
   const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality');
 
-//   weeklySleep.innerHTML = `
-//     <p class='user-weekly-sleep'>
-//     Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
-//     Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
-//     Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
-//     Steps_D4: ${userHoursSlept[3]} hours slept, ${userAvgSleepQuality[3]} sleep quality rating;
-//     Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
-//     Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
-//     Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
-//     </p>`;
+  const userWeeklySleep = new Chart(userWeeklySleepGraph, {
+    type: 'line',
+      data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+          datasets: [{
+              label: 'Hours of Sleep',
+              backgroundColor: 'lightblue',
+              data: [6.5, 4.7, 8.2, 7.0, 5.9, 6.9, 8.5],
+              // data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
+          }]
+    },
+    options: {
+      legend: {
+        display: true
+      },
+    }
+  });
 }
 
 function displayAvgSleepData() {
