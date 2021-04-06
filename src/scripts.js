@@ -1,5 +1,5 @@
-const currentDate = "2019/09/22";
-const weekStartDate = "2019/09/15";
+const currentDate = '2019/09/22';
+const weekStartDate = '2019/09/15';
 
 // CLASS INSTANTIATIONS
 
@@ -81,35 +81,36 @@ function displayUserHomeData() {
   headerMessage.innerText = `Welcome ${currentUser.firstName}`;
 
   userInfo.innerHTML = `
-    <p class="name" id="name">${currentUser.name}</p>
-    <p class="address" id="address">${currentUser.address}</p>
-    <p class="email" id="email">${currentUser.email}</p>
-    <p class="stride" id="stride">stride length: ${currentUser.stride}</p>`;
+    <p class='name' id='name'>${currentUser.name}</p>
+    <p class='address' id='address'>${currentUser.address}</p>
+    <p class='email' id='email'>${currentUser.email}</p>
+    <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
 
   stepGoal.innerHTML = `
-    <p class="user-step-goal" id="userStepGoal">
+    <p class='user-step-goal' id='userStepGoal'>
       Your goal is ${currentUser.dailyStepGoal} steps</p>
-    <p class="avg-step-goal" id="avgStepGoal">
+    <p class='avg-step-goal' id='avgStepGoal'>
       The average user's goal is ${avgStepGoal}</p>`;
 
-  picture.innerHTML = `
-    <p>Today's Date: ${currentDate}</p> 
-  `;
+  // picture.innerHTML = `
+  //   <p>Today's Date: ${currentDate}</p> 
+  // `;
 }
 
 // hydration
 
 function displayUserHydrationData() {
-  // will need input for user to choose startDate
-  const startDate = "2019/06/15";
-
   headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;
 
   const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
-  const weeklyOz = userHydration.calculateAvgWeeklyWater(startDate);
+  const weeklyOz = userHydration.calculateAvgWeeklyWater(weekStartDate);
 
-  dailyWater.innerText = `You've had ${dailyOz} ounces of water today!`;
-  weeklyWater.innerText = `You've had ${weeklyOz} ounces of water on average during the week of ${startDate}`;
+  dailyWater.innerText = 
+    `You've had ${dailyOz} oz of water today!\n
+    You've averaged ${weeklyOz} oz of water during the week of ${weekStartDate}`;
+
+  console.log(userHydration.retrieveNumOzByWeek(weekStartDate));
+
 }
 
 // sleep
@@ -127,26 +128,26 @@ function displayLastDaySleepData() {
   const sleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
 
   dailySleep.innerHTML = `
-    <p class="user-daily-sleep-time" id="userDailySleepTime">
+    <p class='user-daily-sleep-time' id='userDailySleepTime'>
       You last slept for ${hoursSlept} hours</p>
-    <p class="user-daily-sleep-quality" class="userDailySleepQuality">
+    <p class='user-daily-sleep-quality' class='userDailySleepQuality'>
       Your sleep quality was ${sleepQuality}/5<p>`;
 }
 
 function displayLastWeekSleepData() {
-  const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, "hoursSlept");
-  const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, "sleepQuality");
+  const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
+  const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality');
 
-  weeklySleep.innerHTML = `
-    <p class="user-weekly-sleep">
-    Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
-    Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
-    Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
-    Steps_D4: ${userHoursSlept[3]} hours slept, ${userAvgSleepQuality[3]} sleep quality rating;
-    Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
-    Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
-    Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
-    </p>`;
+//   weeklySleep.innerHTML = `
+//     <p class='user-weekly-sleep'>
+//     Steps_D1: ${userHoursSlept[0]} hours slept, ${userAvgSleepQuality[0]} sleep quality rating;
+//     Steps_D2: ${userHoursSlept[1]} hours slept, ${userAvgSleepQuality[1]} sleep quality rating;
+//     Steps_D3: ${userHoursSlept[2]} hours slept, ${userAvgSleepQuality[2]} sleep quality rating;
+//     Steps_D4: ${userHoursSlept[3]} hours slept, ${userAvgSleepQuality[3]} sleep quality rating;
+//     Steps_D5: ${userHoursSlept[4]} hours slept, ${userAvgSleepQuality[4]} sleep quality rating;
+//     Steps_D6: ${userHoursSlept[5]} hours slept, ${userAvgSleepQuality[5]} sleep quality rating;
+//     Steps_D7: ${userHoursSlept[6]} hours slept, ${userAvgSleepQuality[6]} sleep quality rating;
+//     </p>`;
 }
 
 function displayAvgSleepData() {
@@ -154,9 +155,9 @@ function displayAvgSleepData() {
   const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
 
   avgSleep.innerHTML = `
-    <p class="user-avg-sleep-hours" id="userAvgSleepHours">
+    <p class='user-avg-sleep-hours' id='userAvgSleepHours'>
       AVERAGE HOURS SLEPT: ${avgHoursSlept}</p>
-    <p class="user-avg-sleep-quality" id="userAvgSleepQuality">
+    <p class='user-avg-sleep-quality' id='userAvgSleepQuality'>
       AVERAGE SLEEP QUALITY: ${avgSleepQuality}</p>`;
 }
 
@@ -172,29 +173,29 @@ function displayUserActivityData() {
 }
 
 function displayDailySteps() {
-  const userDailySteps = userActivity.retrievePropByDate(currentDate, "numSteps");
+  const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
   dailySteps.innerHTML = `
-    <p class="user-daily-steps" id="userDailySteps">
+    <p class='user-daily-steps' id='userDailySteps'>
       ${userDailySteps} avg daily steps</p>
-    <p class="user-daily-distance" id="userDailyDistance">
+    <p class='user-daily-distance' id='userDailyDistance'>
       ${userDistance} avg daily miles walked</p>`;
 }
 
 function displayMinutesActive() {
-  const userMinActive = userActivity.retrievePropByDate(currentDate, "minutesActive");
+  const userMinActive = userActivity.retrievePropByDate(currentDate, 'minutesActive');
   dailyActivity.innerHTML = `
-    <p class="user-daily-activity" id="userDailyActivity">
+    <p class='user-daily-activity' id='userDailyActivity'>
       ${userMinActive} min active</p>`;
 }
 
 function displayWeeklyActivityStats() {
-    const userWeeklySteps = userActivity.retrievePropLogByWeek("2019/09/15", "numSteps" )
-    const userMinActive = userActivity.retrievePropLogByWeek("2019/09/15", "minutesActive");
-    const userStairsClimbed = userActivity.retrievePropLogByWeek("2019/09/15", "flightsOfStairs");
+    const userWeeklySteps = userActivity.retrievePropLogByWeek('2019/09/15', 'numSteps' )
+    const userMinActive = userActivity.retrievePropLogByWeek('2019/09/15', 'minutesActive');
+    const userStairsClimbed = userActivity.retrievePropLogByWeek('2019/09/15', 'flightsOfStairs');
 
   weeklyActivity.innerHTML = `
-    <p class="user-weekly-activity" id="userWeeklyActivity">
+    <p class='user-weekly-activity' id='userWeeklyActivity'>
       Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
       Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
       Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
@@ -206,20 +207,20 @@ function displayWeeklyActivityStats() {
 }
 
 function displayDailyStatComparison() {
-  const userDailySteps = userActivity.retrievePropByDate(currentDate, "numSteps");
-  const userDailyMinActive = userActivity.retrievePropByDate(currentDate, "minutesActive");
-  const userDailyStairs = userActivity.retrievePropByDate(currentDate, "flightsOfStairs");
+  const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
+  const userDailyMinActive = userActivity.retrievePropByDate(currentDate, 'minutesActive');
+  const userDailyStairs = userActivity.retrievePropByDate(currentDate, 'flightsOfStairs');
 
-  const allUserDailySteps = activityRepo.calculatePropAvgByDate(currentDate, "numSteps");
-  const allUserDailyMinActive = activityRepo.calculatePropAvgByDate(currentDate, "minutesActive");
-  const allUserDailyStairs = activityRepo.calculatePropAvgByDate(currentDate, "flightsOfStairs");
+  const allUserDailySteps = activityRepo.calculatePropAvgByDate(currentDate, 'numSteps');
+  const allUserDailyMinActive = activityRepo.calculatePropAvgByDate(currentDate, 'minutesActive');
+  const allUserDailyStairs = activityRepo.calculatePropAvgByDate(currentDate, 'flightsOfStairs');
 
   const stepComparison = Math.round((userDailySteps / allUserDailySteps) * 100);
   const minComparison = Math.round((userDailyMinActive / allUserDailyMinActive) * 100);
   const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
 
   compareUsers.innerHTML = `
-    <p class="compare-user-activity" id="compareUserActivity">
+    <p class='compare-user-activity' id='compareUserActivity'>
       Steps: ${stepComparison}%,
       Min: ${minComparison}%,
       Stairs: ${stairComparison}%</p>`;

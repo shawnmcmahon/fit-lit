@@ -7,7 +7,7 @@ main {
   width: 100vw;
   flex-direction: column;
   justify-content: center;
-  background-image: url("images/fitlit-background3.png");
+  background-image: url('images/fitlit-background3.png');
   background-size: cover;
   font-family: sans-serif;
 }
@@ -70,6 +70,27 @@ section {
   align-items: center;
 }
 
+.widget {
+  /* display: grid; */
+  /* align-items: center;
+  justify-content: center; */
+}
+
+.widget-long {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-long {
+  max-width: 40em;
+  max-height: 15em;
+}
+
+.data-title {
+  font-weight: bold;
+}
+
 /* HOME PAGE */
 
 .home-grid {
@@ -87,6 +108,7 @@ section {
   background-color: #383838;
   border-radius: 20px;
   flex-direction: column;
+  color: #E0E0E0;
 }
 
 .picture {
@@ -116,6 +138,8 @@ section {
   grid-area: 1 / 1 / 4 / 7;
   background-color: #383838;
   border-radius: 20px;
+  color: #E0E0E0;;
+  font-size: 1.5rem;
 }
 
 .weekly-water {
@@ -137,7 +161,7 @@ section {
 
 .weekly-sleep {
   grid-area: 1 / 1 / 4 / 7;
-  background-color: #383838;
+  background-color: #FFED3B;
   border-radius: 20px;
 }
 
@@ -149,7 +173,7 @@ section {
 
 .avg-sleep {
   grid-area: 4 / 4 / 7 / 7;
-  background-color: #FFED3B;
+  background-color: #383838;
   border-radius: 20px;
 }
 
