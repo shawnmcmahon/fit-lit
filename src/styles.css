@@ -33,7 +33,7 @@ button {
   outline: none;
 }
 
-h1 {
+header {
   color: #E0E0E0;
 }
 
@@ -41,7 +41,7 @@ header {
   display: flex;
   height: 5vh;
   width: 80vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-left: 10vw;
   padding-bottom: 5vh;
 }
@@ -80,6 +80,9 @@ section {
   display: grid;
   align-items: center;
   justify-content: center;
+  grid-area: 4 / 1 / 7 / 7;
+  background-color: #FFED3B;
+  border-radius: 20px;
 }
 
 .chart-long {
@@ -140,12 +143,6 @@ section {
   border-radius: 20px;
   color: #E0E0E0;;
   font-size: 1.5rem;
-}
-
-.weekly-water {
-  grid-area: 4 / 1 / 7 / 7;
-  background-color: #FFED3B;
-  border-radius: 20px;
 }
 
 /* SLEEP PAGE */
