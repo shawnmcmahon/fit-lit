@@ -15,7 +15,9 @@ let activityRepo;
 
 const mainPage = document.getElementById('mainPage');
 const headerBanner = document.getElementById('headerBanner');
-const headerMessage = document.getElementById('headerMessage');
+
+
+const headerRight = document.getElementById('headerRight');
 
 const homeGrid = document.getElementById('homeGrid');
 const userInfo = document.getElementById('userInfo');
@@ -67,11 +69,6 @@ function loadPage() {
   viewHome();
 }
 
-function getRandomIndex(array) {
-  const index = Math.floor(Math.random() * array.length);
-  return index;
-}
-
 // DOM MANIPULATION
 
 // home
@@ -79,8 +76,10 @@ function getRandomIndex(array) {
 function displayUserHomeData() {
   currentUser.firstName = currentUser.returnFirstName();
   const avgStepGoal = userRepo.retrieveAvgStepGoal();
+  const fullDate = dateDisplay(currentDate);
 
-  headerMessage.innerText = `Welcome ${currentUser.firstName}`;
+  headerLeft.innerText = `${fullDate}`;
+  headerRight.innerText = `Welcome, ${currentUser.firstName}!`;
 
   userInfo.innerHTML = `
     <p class='name' id='name'>${currentUser.name}</p>
@@ -93,10 +92,6 @@ function displayUserHomeData() {
       Your goal is ${currentUser.dailyStepGoal} steps</p>
     <p class='avg-step-goal' id='avgStepGoal'>
       The average user's goal is ${avgStepGoal}</p>`;
-
-  picture.innerHTML = `
-    <p>Today's Date: ${currentDate}</p> 
-  `;
 }
 
 // hydration
@@ -160,8 +155,7 @@ function displayLastWeekSleepData() {
           datasets: [{
               label: 'Hours of Sleep',
               backgroundColor: 'lightblue',
-              data: [6.5, 4.7, 8.2, 7.0, 5.9, 6.9, 8.5],
-              // data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
+              data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
           }]
     },
     options: {
@@ -281,3 +275,65 @@ function viewActivity() {
   sleepGrid.classList.add('hidden');
   activityGrid.classList.remove('hidden');
 };
+
+// HELPER FUNCTIONS
+
+function getRandomIndex(array) {
+  const index = Math.floor(Math.random() * array.length);
+  return index;
+}
+
+function dateDisplay(date) {
+  let splitDate = date.split('/');
+  let year = splitDate[0];
+  let month = splitDate[1];
+  let day = splitDate[2];
+  let fullDate = `${getMonth(month)} ${day}, ${year}`;
+
+  return fullDate;
+}
+
+function getMonth(month) {
+  const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
+  let monthName;
+  switch(month) {
+    case '01':
+      monthName = names[0];
+      break;
+    case '02':
+      monthName = names[1];
+      break;
+    case '03':
+      monthName = names[2];
+      break;
+    case '04':
+      monthName = names[3];
+      break;
+    case '05':
+      monthName = names[4];
+      break;
+    case '06':
+      monthName = names[5];
+      break;
+    case '07':
+      monthName = names[6];
+      break;
+    case '08':
+      monthName = names[7];
+      break;
+    case '09':
+      monthName = names[8];
+      break;
+    case '10':
+      monthName = names[9];
+      break;
+    case '11':
+      monthName = names[10];
+      break;
+    case '12':
+      monthName = names[11];
+      break;
+  }
+  return monthName;
+}

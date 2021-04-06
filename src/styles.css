@@ -33,7 +33,7 @@ button {
   outline: none;
 }
 
-h1 {
+header {
   color: #E0E0E0;
 }
 
@@ -41,7 +41,7 @@ header {
   display: flex;
   height: 5vh;
   width: 80vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-left: 10vw;
   padding-bottom: 5vh;
 }
