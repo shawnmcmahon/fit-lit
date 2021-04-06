@@ -107,9 +107,8 @@ function displayUserHydrationData() {
   const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
   const weeklyOz = userHydration.calculateAvgWeeklyWater(weekStartDate);
 
-  dailyWater.innerText = 
-    `You've had ${dailyOz} oz of water today!\n
-    You've averaged ${weeklyOz} oz of water during the week of ${weekStartDate}`;
+  dailyWater.innerText = `You've had ${dailyOz} oz of water today!`;
+  weeklyWater.innerText = `You've averaged ${weeklyOz} oz of water during the week of ${weekStartDate}`;
 
   const userWeeklyWater = new Chart(userWeeklyWaterGraph, {
     type: 'bar',

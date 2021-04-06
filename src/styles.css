@@ -80,6 +80,9 @@ section {
   display: grid;
   align-items: center;
   justify-content: center;
+  grid-area: 4 / 1 / 7 / 7;
+  background-color: #FFED3B;
+  border-radius: 20px;
 }
 
 .chart-long {
@@ -140,12 +143,6 @@ section {
   border-radius: 20px;
   color: #E0E0E0;;
   font-size: 1.5rem;
-}
-
-.weekly-water {
-  grid-area: 4 / 1 / 7 / 7;
-  background-color: #FFED3B;
-  border-radius: 20px;
 }
 
 /* SLEEP PAGE */
