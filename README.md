@@ -1,6 +1,6 @@
 # FitLit Starter Kit
 
-** [Deployed Project Page](https://pcmueller.github.io/fit-lit/)
+[Deployed Project Page](https://pcmueller.github.io/fit-lit/)
 
 The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
 
