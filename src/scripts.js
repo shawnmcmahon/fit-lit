@@ -157,14 +157,15 @@ function displayUserHomeData() {
 // hydration
 
 function displayUserHydrationData() {
-  headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;
-
   const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
   const weeklyOz = userHydration.calculateAvgWeeklyWater(weekStartDate);
-
+  displayHydrationChart();
+  headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;
   weeklyWater.innerText = `You've averaged ${weeklyOz} oz of water during the week of ${dateDisplay(weekStartDate)}`;
   dailyWater.innerText = `${dailyOz} oz`;
+}
 
+function displayHydrationChart() {
   const userWeeklyWater = new Chart(userWeeklyWaterGraph, {
     type: 'bar',
     data: {
@@ -305,15 +306,18 @@ function displayDailyStatComparison() {
 // HTML TOGGLING
 
 function viewHome() {
-  displayUserHomeData()
+  displayUserHomeData();
+  activateHomeButton();
   homeGrid.classList.remove('hidden');
   hydrationGrid.classList.add('hidden');
   sleepGrid.classList.add('hidden');
   activityGrid.classList.add('hidden');
+  hydrationButton.classList.remove('hydration-button-active');
 };
 
 function viewHydration() {
   displayUserHydrationData();
+  activateHydrationButton();
   homeGrid.classList.add('hidden');
   hydrationGrid.classList.remove('hidden');
   sleepGrid.classList.add('hidden');
@@ -322,16 +326,64 @@ function viewHydration() {
 
 function viewSleep() {
   displayUserSleepData()
+  activateSleepButton();
   homeGrid.classList.add('hidden');
   hydrationGrid.classList.add('hidden');
   sleepGrid.classList.remove('hidden');
   activityGrid.classList.add('hidden');
+  hydrationButton.classList.remove('hydration-button-active');
 };
 
 function viewActivity() {
   displayUserActivityData()
+  activateActivityButton();
   homeGrid.classList.add('hidden');
   hydrationGrid.classList.add('hidden');
   sleepGrid.classList.add('hidden');
   activityGrid.classList.remove('hidden');
+  hydrationButton.classList.remove('hydration-button-active');
 };
+
+function activateHomeButton() {
+  homeButton.classList.add('active');
+  hydrationButton.classList.remove('active');
+  sleepButton.classList.remove('active');
+  activityButton.classList.remove('active');
+  homeButton.innerHTML = '<i class="fas fa-house-user"></i>';
+  hydrationButton.innerText = 'Hydration';
+  sleepButton.innerText = 'Sleep';
+  activityButton.innerText = 'Activity';
+}
+
+function activateHydrationButton() {
+  homeButton.classList.remove('active');
+  hydrationButton.classList.add('active');
+  sleepButton.classList.remove('active');
+  activityButton.classList.remove('active');
+  homeButton.innerText = 'Home';
+  hydrationButton.innerHTML = '<i class="fas fa-tint"></i>';
+  sleepButton.innerText = 'Sleep';
+  activityButton.innerText = 'Activity';
+}
+
+function activateSleepButton() {
+  homeButton.classList.remove('active');
+  hydrationButton.classList.remove('active');
+  sleepButton.classList.add('active');
+  activityButton.classList.remove('active');
+  homeButton.innerText = 'Home';
+  hydrationButton.innerText = 'Hydration';
+  sleepButton.innerHTML = '<i class="fas fa-bed"></i>';
+  activityButton.innerText = 'Activity';
+}
+
+function activateActivityButton() {
+  homeButton.classList.remove('active');
+  hydrationButton.classList.remove('active');
+  sleepButton.classList.remove('active');
+  activityButton.classList.add('active');
+  homeButton.innerText = 'Home';
+  hydrationButton.innerText = 'Hydration';
+  sleepButton.innerText = 'Sleep';
+  activityButton.innerHTML = '<i class="fas fa-hiking"></i>';
+}
