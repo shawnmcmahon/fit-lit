@@ -115,9 +115,9 @@ section {
 }
 
 .chart-long {
-  max-width: 80%;
-  max-height: 90%;
-  /* margin: 2%; */
+  max-width: 70%;
+  max-height: 60%;
+  margin: 2%;
 }
 
 .chart-short {
@@ -155,7 +155,6 @@ section {
 .user-datum-small {
   font-weight: bold;
   font-size: 1rem;
-  margin: 3%;
   align-self: center;
   max-width: 40vw;
 }
@@ -219,8 +218,8 @@ section {
   grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
-  width: 80vw;
-  height: 50vh;
+  width: 800px;
+  height: 60vh;
 }
 
 .user-info {
@@ -265,7 +264,7 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
-  height: 50vh;
+  height: 60vh;
   margin-left: 3vw;
 }
 

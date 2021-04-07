@@ -196,7 +196,7 @@ function displayHydrationChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
