@@ -46,6 +46,9 @@ const weeklyActivity = document.getElementById('weeklyActivity');
 const weeklySteps = document.getElementById('weeklySteps');
 const compareUsers = document.getElementById('compareUsers');
 const weeklyActivityGraph = document.getElementById('userWeeklyActivityGraph');
+const userDailyStepCount = document.getElementById('userDailyStepCount');
+const userDailyDistance = document.getElementById('userDailyDistance');
+
 
 const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
@@ -281,11 +284,17 @@ function displayUserActivityData() {
 function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
-  dailySteps.innerHTML = `
-    <p class='user-daily-steps' id='userDailySteps'>
-      ${userDailySteps} avg daily steps</p>
-    <p class='user-daily-distance' id='userDailyDistance'>
-      ${userDistance} avg daily miles walked</p>`;
+
+
+  userDailyStepCount.innerText = `${userDailySteps}`;
+  userDailyDistance.innerText = `${userDistance}`;
+
+
+  // dailySteps.innerHTML = `
+  //   <p class='user-daily-steps' id='userDailySteps'>
+  //     ${userDailySteps} avg daily steps</p>
+  //   <p class='user-daily-distance' id='userDailyDistance'>
+  //     ${userDistance} avg daily miles walked</p>`;
 }
 
 function displayMinutesActive() {

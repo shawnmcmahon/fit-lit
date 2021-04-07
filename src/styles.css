@@ -19,6 +19,8 @@ article {
   display: flex;
   justify-content: center;
   padding-left: 30px;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {
@@ -280,6 +282,7 @@ section {
   padding-right: 7%;
 }
 
+/* MOBILE VIEW: HYDRATION PAGE */
 @media screen and (max-width: 40em) {
 
   .hydration-grid {
@@ -418,6 +421,20 @@ section {
   background-color: #383838;
   border-radius: 20px;
 }
+
+/* MOBILE VIEW: ACTIVITY PAGE */
+@media screen and (max-width: 40em) {
+
+.user-daily-steps,
+.user-daily-distance {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+}
+
 
 /* NAV BAR */
 
