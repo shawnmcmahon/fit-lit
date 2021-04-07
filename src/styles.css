@@ -473,6 +473,51 @@ header {
   padding-bottom: 10px;
 }
 
+/* Mobile View: Activity Page */
+
+.activity-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.daily-steps {
+  background-color: #5541AB;
+  color: #E0E0E0;
+  border-radius: 5px;
+  flex-direction: column;
+  height: 100px;
+  align-items: center;
+}
+
+.daily-activity {
+  background-color: #FA516B;
+  color: #03012A;
+  border-radius: 5px;
+  height: 100px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.weekly-activity {
+  border-radius: 5px;
+  height: 150px;
+  background-color: #00C5FF;
+  color: #E0E0E0;
+}
+
+.compare-users {
+  background-color: #5541AB;
+  color: #E0E0E0;
+  border-radius: 5px;
+  flex-direction: column;
+  height: 100px;
+  align-items: center;
+}
+
 
 .div {
   align-items: center;
