@@ -224,21 +224,21 @@ section {
 }
 
 .user-info {
-  grid-area: 1 / 1 / 7 / 4;
+  grid-area: 4 / 1 / 7 / 7;
   background-color: #383838;
   border-radius: 20px;
   flex-direction: column;
   color: #E0E0E0;
 }
 
-.picture {
+/* .picture {
   grid-area: 1 / 4 / 4 / 7;
   background-color: #383838;
   border-radius: 20px;
-}
+} */
 
 .step-goal {
-  grid-area: 4 / 4 / 7 / 7;
+  grid-area: 1 / 1 / 4 / 7;
   background-color: #FFED3B;
   border-radius: 20px;
 }
