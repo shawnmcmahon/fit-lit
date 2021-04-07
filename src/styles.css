@@ -269,7 +269,7 @@ p {
   border-radius: 20px;
 }
 
-.weekly-activity {
+.weekly-activity{
   grid-area: 5 / 1 / 7 / 4;
   background-color: #383838;
   border-radius: 20px;
