@@ -33,7 +33,7 @@
           <article class='weekly-water'>
             <p class="box-title">WEEKLY WATER</p>
             <div class='user-datum-small' id='userWeeklyWater'>user weekly water</div>
-            <canvas class='chart-long' id='userWeeklyWaterGraph' aria-label="bar graph displaying user's weekly water intake"></canvas>
+            <canvas class='chart-long' id='userWeeklyHydrationGraph' aria-label="bar graph displaying user's weekly water intake"></canvas>
           </article>
           <article class='daily-water'>
             <p class="box-title">DAILY WATER</p>
@@ -41,17 +41,22 @@
           </article>
         </section>
         <section class='sleep-grid hidden' id='sleepGrid'>
+          <article class='daily-sleep' id='dailySleep'>
+            <p class="box-title-small">DAILY HOURS SLEPT</p>
+            <div class='user-datum-medium' id='userHoursSlept'></div>
+            <p class="box-title-small">DAILY SLEEP QUALITY</p>
+            <div class='user-datum-medium' id='userSleepQuality'></div>
+          </article>
+          <article class='avg-sleep' id='avgSleep'>
+            <p class="box-title-small">AVERAGE HOURS SLEPT</p>
+            <p class='user-datum-medium' id='avgHoursSlept'></p>
+            <p class="box-title-small">AVERAGE SLEEP QUALITY</p>
+            <p class='user-datum-medium' id='avgSleepQuality'></p>
+          </article>
           <article class='weekly-sleep widget-long' id='weeklySleep'>
-            <p class='data-title'>WEEKLY SLEEP</p>
-            <canvas class='chart-long' id='userWeeklySleepGraph' aria-label="bar graph displaying user's weekly sleep data"></canvas>
-          </article>
-          <article class='daily-sleep widget' id='dailySleep'>
-            <p class='user-daily-sleep-time' id='userDailySleepTime'>user hours slept today</p>
-            <p class='user-daily-sleep-quality' class='userDailySleepQuality'>user sleep quality today<p>
-          </article>
-          <article class='avg-sleep widget' id='avgSleep'>
-            <p class='user-avg-sleep-hours' id='userAvgSleepHours'>user avg hours slept</p>
-            <p class='user-avg-sleep-quality' id='userAvgSleepQuality'>user avg sleep quality</p>
+            <p class='box-title'>WEEKLY SLEEP</p>
+            <canvas class='chart-short' id='userHoursSleptGraph' aria-label="line graph displaying user's weekly hours slept data"></canvas>
+            <canvas class='chart-short' id='userSleepQualityGraph' aria-label="line graph displaying user's weekly sleep quality data"></canvas>
           </article>
         </section>
         <section class='activity-grid hidden' id='activityGrid'>
@@ -59,11 +64,13 @@
             <p class='user-daily-steps' id='userDailySteps'>user daily steps</p>
             <p class='user-daily-distance' id='userDailyDistance'>user daily distance</p>
           </article>
-          <article class='daily-activity widget' id='dailyActivity'>
+          <article class='daily-activity' id='dailyActivity'>
             <p class='user-daily-activity' id='userDailyActivity'>user daily activity</p>
           </article>
-          <article class='weekly-activity widget' id='weeklyActivity'>
-            <p class='user-weekly-activity' id='userWeeklyActivity'>user weekly activity</p>
+          <article class='weekly-activity' id='weeklyActivity'>
+            <p class="box-title">WEEKLY ACTIVITY</p>
+            <div class='user-weekly-activity' id='userWeeklyActivity'></div>
+            <canvas class='chart-long' id='userWeeklyActivityGraph' aria-label="bar graph displaying user's weekly minutes active"></canvas>
           </article>
           <article class='compare-users widget' id='compareUsers'>
             <p class='compare-user-activity' id='compareUserActivity'>compare user activity</p>

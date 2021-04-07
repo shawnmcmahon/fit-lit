@@ -27,19 +27,23 @@ const stepGoal = document.getElementById('stepGoal');
 const hydrationGrid = document.getElementById('hydrationGrid');
 const dailyWater = document.getElementById('userDailyWater');
 const weeklyWater = document.getElementById('userWeeklyWater');
-const userWeeklyWaterGraph = document.getElementById('userWeeklyWaterGraph');
+const weeklyHydrationGraph = document.getElementById('userWeeklyHydrationGraph');
 
 const sleepGrid = document.getElementById('sleepGrid');
-const dailySleep = document.getElementById('dailySleep');
+const userHoursSlept = document.getElementById('userHoursSlept');
+const userSleepQuality = document.getElementById('userSleepQuality');
+const userAvgHoursSlept = document.getElementById('avgHoursSlept');
+const userAvgSleepQuality = document.getElementById('avgSleepQuality');
 const weeklySleep = document.getElementById('weeklySleep');
-const avgSleep = document.getElementById('avgSleep');
-const userWeeklySleepGraph = document.getElementById('userWeeklySleepGraph');
+const weeklyHoursSleptGraph = document.getElementById('userHoursSleptGraph');
+const weeklySleepQualityGraph = document.getElementById('userSleepQualityGraph');
 
 const activityGrid  = document.getElementById('activityGrid');
 const dailySteps = document.getElementById('dailySteps');
 const weeklyActivity = document.getElementById('weeklyActivity');
 const weeklySteps = document.getElementById('weeklySteps');
 const compareUsers = document.getElementById('compareUsers');
+const weeklyActivityGraph = document.getElementById('userWeeklyActivityGraph');
 
 const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
@@ -166,10 +170,10 @@ function displayUserHydrationData() {
 }
 
 function displayHydrationChart() {
-  const userWeeklyWater = new Chart(userWeeklyWaterGraph, {
+  const userWeeklyWater = new Chart(weeklyHydrationGraph, {
     type: 'bar',
     data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
           datasets: [{
               label: 'Ounces of Water',
               backgroundColor: 'lightblue',
@@ -195,29 +199,36 @@ function displayUserSleepData() {
 }
 
 function displayLastDaySleepData() {
-  const hoursSlept = userSleep.retrievePropByDate(currentDate, 'hoursSlept');
-  const sleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
+  const dailyHoursSlept = userSleep.retrievePropByDate(currentDate, 'hoursSlept');
+  const dailySleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
+  userHoursSlept.innerText = `${dailyHoursSlept}`;
+  userSleepQuality.innerText = `${dailySleepQuality}`;
+}
 
-  dailySleep.innerHTML = `
-    <p class='user-daily-sleep-time' id='userDailySleepTime'>
-      You last slept for ${hoursSlept} hours</p>
-    <p class='user-daily-sleep-quality' class='userDailySleepQuality'>
-      Your sleep quality was ${sleepQuality}/5<p>`;
+function displayAvgSleepData() {
+  const avgHoursSlept = userSleep.calculatePropAvg('hoursSlept');
+  const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
+  userAvgHoursSlept.innerText = `${avgHoursSlept}`;
+  userAvgSleepQuality.innerText = `${avgSleepQuality}`;
 }
 
 function displayLastWeekSleepData() {
   const userHoursSlept = userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept');
   const userAvgSleepQuality = userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality');
+  displaySleepHoursChart();
+  displaySleepQualityChart();
+}
 
-  const userWeeklySleep = new Chart(userWeeklySleepGraph, {
+function displaySleepHoursChart() {
+  const hoursSleptGraph = new Chart(weeklyHoursSleptGraph, {
     type: 'line',
       data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
           datasets: [{
               label: 'Hours of Sleep',
               backgroundColor: 'lightblue',
               data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept'),
-          }]
+          }],
     },
     options: {
       legend: {
@@ -227,16 +238,25 @@ function displayLastWeekSleepData() {
   });
 }
 
-function displayAvgSleepData() {
-  const avgHoursSlept = userSleep.calculatePropAvg('hoursSlept');
-  const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
-
-  avgSleep.innerHTML = `
-    <p class='user-avg-sleep-hours' id='userAvgSleepHours'>
-      AVERAGE HOURS SLEPT: ${avgHoursSlept}</p>
-    <p class='user-avg-sleep-quality' id='userAvgSleepQuality'>
-      AVERAGE SLEEP QUALITY: ${avgSleepQuality}</p>`;
+function displaySleepQualityChart() {
+  const sleepQualityGraph = new Chart(weeklySleepQualityGraph, {
+    type: 'line',
+      data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+          datasets: [{
+              label: 'Sleep Quality',
+              backgroundColor: 'lightblue',
+              data: userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality'),
+          }],
+    },
+    options: {
+      legend: {
+        display: true
+      },
+    }
+  });
 }
+
 
 // activity
 
@@ -267,20 +287,29 @@ function displayMinutesActive() {
 }
 
 function displayWeeklyActivityStats() {
-    const userWeeklySteps = userActivity.retrievePropLogByWeek('2019/09/15', 'numSteps' )
-    const userMinActive = userActivity.retrievePropLogByWeek('2019/09/15', 'minutesActive');
-    const userStairsClimbed = userActivity.retrievePropLogByWeek('2019/09/15', 'flightsOfStairs');
+  const userWeeklySteps = userActivity.retrievePropLogByWeek('2019/09/15', 'numSteps' )
+  const userMinActive = userActivity.retrievePropLogByWeek('2019/09/15', 'minutesActive');
+  const userStairsClimbed = userActivity.retrievePropLogByWeek('2019/09/15', 'flightsOfStairs');
+  displayActivityChart();
+}
 
-  weeklyActivity.innerHTML = `
-    <p class='user-weekly-activity' id='userWeeklyActivity'>
-      Steps_D1: ${userWeeklySteps[0]} steps, ${userMinActive[0]} min active, ${userStairsClimbed[0]} flights climbed,
-      Steps_D2: ${userWeeklySteps[1]} steps, ${userMinActive[1]} min active, ${userStairsClimbed[1]} flights climbed,
-      Steps_D3: ${userWeeklySteps[2]} steps, ${userMinActive[2]} min active, ${userStairsClimbed[2]} flights climbed,
-      Steps_D4: ${userWeeklySteps[3]} steps, ${userMinActive[3]} min active, ${userStairsClimbed[3]} flights climbed,
-      Steps_D5: ${userWeeklySteps[4]} steps, ${userMinActive[4]} min active, ${userStairsClimbed[4]} flights climbed,
-      Steps_D6: ${userWeeklySteps[5]} steps, ${userMinActive[5]} min active, ${userStairsClimbed[5]} flights climbed,
-      Steps_D7: ${userWeeklySteps[6]} steps, ${userMinActive[6]} min active, ${userStairsClimbed[6]} flights climbed,
-    </p> `;
+function displayActivityChart() {
+  const weeklyActivity = new Chart(weeklyActivityGraph, {
+    type: 'bar',
+    data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+          datasets: [{
+              label: 'Minutes Active',
+              backgroundColor: 'lightblue',
+              data: userActivity.retrievePropLogByWeek(weekStartDate, 'minutesActive'),
+          }],
+    },
+    options: {
+      legend: {
+        display: true
+      },
+    }
+  });
 }
 
 function displayDailyStatComparison() {

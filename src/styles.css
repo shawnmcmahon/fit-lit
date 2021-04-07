@@ -118,11 +118,23 @@ section {
   margin: 2%;
 }
 
+.chart-short {
+  max-width: 30%;
+  max-height: 80%;
+  margin: 2%;
+}
+
 @media screen and (max-width: 40em) {
   .chart-long {
     max-width: 80%;
     max-height: 90%;
     margin: auto 7% 7% 3%;
+  }
+
+  .chart-short {
+    max-width: 80%;
+    max-height: 50%;
+    margin: 1%;
   }
 }
 
@@ -132,12 +144,24 @@ section {
   align-self: center;
 }
 
+.box-title-small {
+  font-weight: bold;
+  font-size: 1vw;
+  align-self: center;
+}
+
 .user-datum-small {
   font-weight: bold;
   font-size: 1rem;
   margin: 3%;
   align-self: center;
   max-width: 40vw;
+}
+
+.user-datum-medium {
+  font-weight: bold;
+  font-size: 2vw;
+  color: 'lightblue';
 }
 
 .user-datum-large {
@@ -154,10 +178,21 @@ section {
     margin: 5% auto 1% auto;
   }
 
+  .box-title-small {
+    font-size: 3vw;
+    margin: 5% auto 1% auto;
+  }
+
   .user-datum-small {
     flex-wrap: wrap;
     align-self: center;
     font-size: 2vw;
+  }
+
+  .user-datum-medium {
+    flex-wrap: wrap;
+    align-self: center;
+    font-size: 6vw;
   }
 
   .user-datum-large {
@@ -266,24 +301,69 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
-}
-
-.weekly-sleep {
-  grid-area: 1 / 1 / 4 / 7;
-  background-color: #FFED3B;
-  border-radius: 20px;
+  height: 50vh;
+  margin-left: 3vw;
 }
 
 .daily-sleep {
-  grid-area: 4 / 1 / 7 / 4;
+  grid-area: 1 / 1 / 4 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #E0E0E0;
   background-color: #383838;
   border-radius: 20px;
 }
 
 .avg-sleep {
-  grid-area: 4 / 4 / 7 / 7;
+  grid-area: 1 / 4 / 4 / 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #E0E0E0;
   background-color: #383838;
   border-radius: 20px;
+}
+
+.weekly-sleep {
+  grid-area: 4 / 1 / 7 / 7;
+  background-color: #FFED3B;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 40em) {
+
+  .sleep-grid {
+    padding-bottom: 1vh;
+    height: 60vh;
+    margin-top: 3vh;
+    margin-left: 2vh;
+  }
+
+  .daily-sleep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 15vh;
+  }
+
+  .avg-sleep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 15vh;
+  }
+
+  .weekly-sleep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* ACTIVITY PAGE */
@@ -295,13 +375,15 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
+  height: 50vh;
+  margin-left: 3vw;
 }
 
 .daily-steps {
   grid-area: 1 / 1 / 5 / 4;
+  color: #E0E0E0;
   background-color: #383838;
   border-radius: 20px;
-
 }
 
 .daily-activity {
@@ -312,12 +394,14 @@ section {
 
 .weekly-activity {
   grid-area: 5 / 1 / 7 / 4;
+  color: #E0E0E0;
   background-color: #383838;
   border-radius: 20px;
 }
 
 .compare-users {
   grid-area: 3 / 4 / 7 / 7;
+  color: #E0E0E0;
   background-color: #383838;
   border-radius: 20px;
 }
