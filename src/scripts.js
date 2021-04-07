@@ -16,8 +16,8 @@ let activityRepo;
 const mainPage = document.getElementById('mainPage');
 const headerBanner = document.getElementById('headerBanner');
 
-
-const headerRight = document.getElementById('headerRight');
+const headerDate = document.getElementById('headerDate');
+const headerMessage = document.getElementById('headerMessage');
 
 const homeGrid = document.getElementById('homeGrid');
 const userInfo = document.getElementById('userInfo');
@@ -25,8 +25,8 @@ const picture = document.getElementById('picture');
 const stepGoal = document.getElementById('stepGoal');
 
 const hydrationGrid = document.getElementById('hydrationGrid');
-const dailyWater = document.getElementById('dailyWater');
-const weeklyWater = document.getElementById('weeklyWater');
+const dailyWater = document.getElementById('userDailyWater');
+const weeklyWater = document.getElementById('userWeeklyWater');
 const userWeeklyWaterGraph = document.getElementById('userWeeklyWaterGraph');
 
 const sleepGrid = document.getElementById('sleepGrid');
@@ -138,8 +138,8 @@ function displayUserHomeData() {
   const avgStepGoal = userRepo.retrieveAvgStepGoal();
   const fullDate = dateDisplay(currentDate);
 
-  headerLeft.innerText = `${fullDate}`;
-  headerRight.innerText = `Welcome, ${currentUser.firstName}!`;
+  headerDate.innerText = `${fullDate}`;
+  headerMessage.innerText = `Welcome, ${currentUser.firstName}!`;
 
   userInfo.innerHTML = `
     <p class='name' id='name'>${currentUser.name}</p>
@@ -157,13 +157,13 @@ function displayUserHomeData() {
 // hydration
 
 function displayUserHydrationData() {
-  headerRight.innerText = `${currentUser.firstName}'s Hydration Data`;
+  headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;
 
   const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
   const weeklyOz = userHydration.calculateAvgWeeklyWater(weekStartDate);
 
-  dailyWater.innerText = `You've had ${dailyOz} oz of water today!`;
-  weeklyWater.innerText = `You've averaged ${weeklyOz} oz of water during the week of ${weekStartDate}`;
+  weeklyWater.innerText = `You've averaged ${weeklyOz} oz of water during the week of ${dateDisplay(weekStartDate)}`;
+  dailyWater.innerText = `${dailyOz} oz`;
 
   const userWeeklyWater = new Chart(userWeeklyWaterGraph, {
     type: 'bar',
@@ -173,11 +173,11 @@ function displayUserHydrationData() {
               label: 'Ounces of Water',
               backgroundColor: 'lightblue',
               data: userHydration.retrieveNumOzByWeek(weekStartDate),
-          }]
+          }],
     },
     options: {
       legend: {
-        display: false
+        display: true
       },
     }
   });
@@ -186,7 +186,7 @@ function displayUserHydrationData() {
 // sleep
 
 function displayUserSleepData() {
-  headerRight.innerText = `${currentUser.firstName}'s Sleep Data`;
+  headerMessage.innerText = `${currentUser.firstName}'s Sleep Data`;
 
   displayLastDaySleepData();
   displayLastWeekSleepData();
@@ -240,7 +240,7 @@ function displayAvgSleepData() {
 // activity
 
 function displayUserActivityData() {
-  headerRight.innerText = `${currentUser.firstName}'s Activity Data`;
+  headerMessage.innerText = `${currentUser.firstName}'s Activity Data`;
 
   displayDailySteps();
   displayMinutesActive();
