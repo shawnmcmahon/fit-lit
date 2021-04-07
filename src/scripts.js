@@ -25,6 +25,11 @@ const picture = document.getElementById('picture');
 const stepGoal = document.getElementById('stepGoal');
 const averageStepGoal = document.getElementById('avgStepGoal');
 
+const userName = document.getElementById('name');
+const userAddress = document.getElementById('address');
+const userEmail = document.getElementById('email');
+const userStride = document.getElementById('stride');
+
 const hydrationGrid = document.getElementById('hydrationGrid');
 const dailyWater = document.getElementById('dailyWater');
 const weeklyWater = document.getElementById('weeklyWater');
@@ -142,14 +147,13 @@ function displayUserHomeData() {
   headerLeft.innerText = `${fullDate}`;
   headerRight.innerText = `Welcome, ${currentUser.firstName}!`;
 
-  userInfo.innerHTML = `
-    <p class='name' id='name'>${currentUser.name}</p>
-    <p class='address' id='address'>${currentUser.address}</p>
-    <p class='email' id='email'>${currentUser.email}</p>
-    <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
+  userName.innerText = `${currentUser.name}`;
+  userAddress.innerText = `${currentUser.address}`;
+  userEmail.innerText = `${currentUser.email}`;
+  userStride.innerText = `${currentUser.stride}`;
 
-  userStepGoal.innerText = `${currentUser.dailyStepGoal}`;
-  averageStepGoal.innerText = ` ${avgStepGoal} `;
+  userStepGoal.innerText = `${currentUser.dailyStepGoal} Steps`;
+  averageStepGoal.innerText = `${avgStepGoal} Avg User Goal`;
 }
 
 // hydration
