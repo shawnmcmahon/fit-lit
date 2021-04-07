@@ -23,6 +23,8 @@ const homeGrid = document.getElementById('homeGrid');
 const userInfo = document.getElementById('userInfo');
 const picture = document.getElementById('picture');
 const stepGoal = document.getElementById('stepGoal');
+const userStepGoal = document.getElementById('userStepGoal');
+const userAvgStepGoal = document.getElementById('avgStepGoal');
 
 const hydrationGrid = document.getElementById('hydrationGrid');
 const dailyWater = document.getElementById('userDailyWater');
@@ -69,7 +71,7 @@ function loadPage() {
   userActivity = new UserActivity(currentUser, activityData, userData);
   sleepRepo = new SleepRepository(sleepData, userData);
   activityRepo = new ActivityRepository(activityData);
-  
+
   viewHome();
 }
 
@@ -151,11 +153,18 @@ function displayUserHomeData() {
     <p class='email' id='email'>${currentUser.email}</p>
     <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
 
-  stepGoal.innerHTML = `
-    <p class='user-step-goal' id='userStepGoal'>
-      Your goal is ${currentUser.dailyStepGoal} steps</p>
-    <p class='avg-step-goal' id='avgStepGoal'>
-      The average user's goal is ${avgStepGoal}</p>`;
+
+
+
+    userStepGoal.innerText = `${currentUser.dailyStepGoal}` ;
+    userAvgStepGoal.innerText = `${avgStepGoal}`;
+
+
+  // stepGoal.innerHTML = `
+  //   <p class='user-step-goal' id='userStepGoal'>
+  //     Your goal is ${currentUser.dailyStepGoal} steps</p>
+  //   <p class='avg-step-goal' id='avgStepGoal'>
+  //     The average user's goal is ${avgStepGoal}</p>`;
 }
 
 // hydration

@@ -199,6 +199,8 @@ section {
     font-size: 11vw;
     margin-right: 4%;
   }
+
+
 }
 
 /* HOME PAGE */
@@ -231,6 +233,17 @@ section {
   grid-area: 4 / 4 / 7 / 7;
   background-color: #FFED3B;
   border-radius: 20px;
+}
+
+/* MOBILE HOME */
+@media screen and (max-width: 40em) {
+
+.step-goal {
+  flex-direction: column;
+}
+
+
+
 }
 
 /* HYDRATION PAGE */
