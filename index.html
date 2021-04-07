@@ -4,13 +4,15 @@
   <link rel='stylesheet' href='./src/styles.css'>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link re<link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
   <title>Activity Tracker</title>
 </head>
   <body>
     <main class='main-page' id='mainPage'>
-      <header class= 'header-banner' id='headerBanner'>
-        <h2 class='header-message' id='headerLeft'>today's date</h1>
-        <h1 class='header-message' id='headerRight'>welcome message</h1>
+      <header class='header-banner' id='headerBanner'>
+        <p class='header-date' id='headerDate'>today's date</p>
+        <h1 class='header-message' id='headerMessage'>welcome message</h1>
       </header>
       <section class='grid-wrapper'>
         <section class='home-grid' id='homeGrid'>
@@ -27,13 +29,14 @@
           </article>
         </section>
         <section class='hydration-grid hidden' id='hydrationGrid'>
-          <article class='daily-water widget-long' id='dailyWater'>
-            <p class='user-daily-water'>user daily water</p>
-          </article>
-          <article class='widget-long'>
-            <div id='weeklyWater'>user weekly water</div>
-            <p class='data-title'>WEEKLY WATER</p>
+          <article class='weekly-water'>
+            <p class="box-title">WEEKLY WATER</p>
+            <div class='user-datum-small' id='userWeeklyWater'>user weekly water</div>
             <canvas class='chart-long' id='userWeeklyWaterGraph' aria-label="bar graph displaying user's weekly water intake"></canvas>
+          </article>
+          <article class='daily-water'>
+            <p class="box-title">DAILY WATER</p>
+            <div class='user-datum-large' id='userDailyWater'>user daily water</div>
           </article>
         </section>
         <section class='sleep-grid hidden' id='sleepGrid'>
