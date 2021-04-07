@@ -426,7 +426,8 @@ section {
 @media screen and (max-width: 40em) {
 
 .user-daily-steps,
-.user-daily-distance {
+.user-daily-distance,
+ {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

@@ -49,6 +49,8 @@ const weeklyActivityGraph = document.getElementById('userWeeklyActivityGraph');
 const userDailyStepCount = document.getElementById('userDailyStepCount');
 const userDailyDistance = document.getElementById('userDailyDistance');
 const userDailyActivity = document.getElementById('userDailyActivity');
+const compareUserActivity = document.getElementById('compareUserActivity');
+
 
 const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
@@ -337,11 +339,10 @@ function displayDailyStatComparison() {
   const minComparison = Math.round((userDailyMinActive / allUserDailyMinActive) * 100);
   const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
 
-  compareUsers.innerHTML = `
-    <p class='compare-user-activity' id='compareUserActivity'>
+  compareUserActivity.innerText = `
       Steps: ${stepComparison}%,
       Min: ${minComparison}%,
-      Stairs: ${stairComparison}%</p>`;
+      Stairs: ${stairComparison}%`;
 }
 
 // HTML TOGGLING
