@@ -20,9 +20,11 @@ describe('User', function() {
 
   it('should be an instance of User', function() {
     expect(user1).to.be.an.instanceof(User);
+    expect(user2).to.be.an.instanceof(User);
+    expect(user3).to.be.an.instanceof(User);
   });
 
-  it('should store a User id', function() {
+  it('should store a User\'s id', function() {
     expect(user1.id).to.equal(1);
     expect(user2.id).to.equal(2);
     expect(user3.id).to.equal(3);
@@ -66,7 +68,7 @@ describe('User', function() {
 
   it('should be able to return a User\'s first name', function() {
     expect(user1.returnFirstName()).to.equal('Luisa');
+    expect(user2.returnFirstName()).to.equal('Jarvis');
+    expect(user3.returnFirstName()).to.equal('Herminia');
   });
 });
-
-// NEW CODE
