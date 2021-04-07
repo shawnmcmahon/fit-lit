@@ -222,7 +222,7 @@ function displayLastWeekSleepData() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });

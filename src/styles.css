@@ -397,3 +397,40 @@ header {
   justify-content: center;
   margin: 0px;
 }
+
+/*Mobile View Sleep*/
+
+.sleep-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.weekly-sleep {
+  border-radius: 5px;
+  height: 150px;
+  background-color: #00C5FF
+}
+
+.daily-sleep {
+  background-color: #FA516B;
+  color: #03012A;
+  border-radius: 5px;
+  height: 100px;
+}
+
+.avg-sleep {
+  background-color: #5541AB;
+  color: #E0E0E0;
+  border-radius: 5px;
+  flex-direction: column;
+  height: 200px;
+}
+
+chart-long {
+  max-width: 400px;
+  max-height: 50px;
+}
