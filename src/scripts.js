@@ -40,6 +40,10 @@ const dailySleep = document.getElementById('dailySleep');
 const weeklySleep = document.getElementById('weeklySleep');
 const avgSleep = document.getElementById('avgSleep');
 const userWeeklySleepGraph = document.getElementById('userWeeklySleepGraph');
+const userDailySleepTime = document.getElementById('userDailySleepTime');
+const userDailySleepQuality = document.getElementById('userDailySleepQuality');
+const userAvgSleepHours = document.getElementById('userAvgSleepHours');
+const userAvgSleepQuality = document.getElementById('userAvgSleepQuality');
 
 const activityGrid  = document.getElementById('activityGrid');
 const dailySteps = document.getElementById('dailySteps');
@@ -199,11 +203,9 @@ function displayLastDaySleepData() {
   const hoursSlept = userSleep.retrievePropByDate(currentDate, 'hoursSlept');
   const sleepQuality = userSleep.retrievePropByDate(currentDate, 'sleepQuality');
 
-  dailySleep.innerHTML = `
-    <p class='user-daily-sleep-time' id='userDailySleepTime'>
-      You last slept for ${hoursSlept} hours</p>
-    <p class='user-daily-sleep-quality' class='userDailySleepQuality'>
-      Your sleep quality was ${sleepQuality}/5<p>`;
+  userDailySleepTime.innerText = `${hoursSlept} Hours Slept`
+  userDailySleepQuality.innerText = `${sleepQuality} Sleep Quality`
+
 }
 
 function displayLastWeekSleepData() {
@@ -232,11 +234,11 @@ function displayAvgSleepData() {
   const avgHoursSlept = userSleep.calculatePropAvg('hoursSlept');
   const avgSleepQuality = userSleep.calculatePropAvg('sleepQuality');
 
-  avgSleep.innerHTML = `
-    <p class='user-avg-sleep-hours' id='userAvgSleepHours'>
-      AVERAGE HOURS SLEPT: ${avgHoursSlept}</p>
-    <p class='user-avg-sleep-quality' id='userAvgSleepQuality'>
-      AVERAGE SLEEP QUALITY: ${avgSleepQuality}</p>`;
+  userAvgSleepHours.innerText = `${avgHoursSlept} Hours Slept`;
+  userAvgSleepQuality.innerText = `${avgSleepQuality} Sleep Quality`;
+
+
+
 }
 
 // activity

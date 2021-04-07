@@ -420,6 +420,7 @@ header {
   color: #03012A;
   border-radius: 5px;
   height: 100px;
+  align-items: center;
 }
 
 .avg-sleep {
@@ -428,9 +429,31 @@ header {
   border-radius: 5px;
   flex-direction: column;
   height: 200px;
+  align-items: center;
 }
 
-chart-long {
-  max-width: 400px;
-  max-height: 50px;
+
+.sleep-chart-long {
+  max-width: 25em;
+  max-height: 125px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.user-daily-sleep-time,
+.user-daily-sleep-quality,
+.user-avg-sleep-hours,
+.user-avg-sleep-quality {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.div {
+  align-items: center;
+
 }
