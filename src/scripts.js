@@ -246,7 +246,7 @@ function displaySleepHoursChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -265,7 +265,7 @@ function displaySleepQualityChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -320,7 +320,7 @@ function displayActivityChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
