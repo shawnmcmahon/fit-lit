@@ -9,7 +9,10 @@ main {
   justify-content: center;
   background-image: url('images/fitlit-background3.png');
   background-size: cover;
-  font-family: sans-serif;
+  font-family: 'Dela Gothic One',
+  cursive;
+  font-family: 'Lato',
+  sans-serif;
 }
 
 article {
@@ -33,65 +36,127 @@ button {
   outline: none;
 }
 
-header {
-  color: #E0E0E0;
-}
-
-header {
-  display: flex;
-  height: 5vh;
-  width: 80vw;
-  justify-content: space-between;
-  padding-left: 10vw;
-  padding-bottom: 5vh;
-}
-
 nav {
   display: flex;
-  height: 15vh;
+  height: 10vh;
   width: 80vw;
   align-items: flex-end;
+  justify-self: flex-end;
   justify-content: center;
   padding-left: 10vw;
+  /* margin-top: 1%; */
   color: #FFED3B;
 }
 
 section {
   display: flex;
-  height: 70vh;
+  height: 80vh;
   width: 80vw;
   justify-content: center;
+  margin-left: 4%;
+}
+
+.header-banner {
+  display: flex;
+  height: 3%;
+  justify-content: space-between;
+  padding: 5% 10% 8% 10%;
+}
+
+.header-date {
+  font-size: 2vw;
+  margin-top: 7%;
+  margin-left: 3%;
+  color: #E0E0E0;
+}
+
+.header-message {
+  font-size: 4vw;
+  max-width: 50vw;
+  margin: 5% 2% 2% 1%;
+  color: #E0E0E0;
+}
+
+@media screen and (max-width: 40em) {
+
+  .header-banner {
+    display: flex;
+    height: 7%;
+    padding: 1% 2% 5% 10%;
+  }
+
+  .header-date {
+    font-size: 3vw;
+    margin-top: 15%;
+    margin-left: 4%;
+  }
+
+  .header-message {
+    font-size: 6vw;
+    max-width: 35vw;
+    margin: 12% 5% 2% 7%;
+    color: #E0E0E0;
+  }
 }
 
 .grid-wrapper {
   display: flex;
   justify-content: center;
-  margin-left: 10vw;
+  margin-left: 8vw;
   align-items: center;
-}
-
-.widget {
-  /* display: grid; */
-  /* align-items: center;
-  justify-content: center; */
-}
-
-.widget-long {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  grid-area: 4 / 1 / 7 / 7;
-  background-color: #FFED3B;
-  border-radius: 20px;
 }
 
 .chart-long {
-  max-width: 40em;
-  max-height: 15em;
+  max-width: 40%;
+  max-height: 90%;
+  margin: 2%;
 }
 
-.data-title {
+@media screen and (max-width: 40em) {
+  .chart-long {
+    max-width: 80%;
+    max-height: 90%;
+    margin: auto 7% 7% 3%;
+  }
+}
+
+.box-title {
   font-weight: bold;
+  font-size: 2vw;
+  align-self: center;
+}
+
+.user-datum-small {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 3%;
+  align-self: center;
+  max-width: 40vw;
+}
+
+.user-datum-large {
+  font-weight: bold;
+  font-size: 8vw;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+@media screen and (max-width: 40em) {
+  .box-title {
+    font-size: 4vw;
+    margin: 5% auto 1% auto;
+  }
+
+  .user-datum-small {
+    flex-wrap: wrap;
+    align-self: center;
+    font-size: 2vw;
+  }
+
+  .user-datum-large {
+    font-size: 11vw;
+    margin-right: 4%;
+  }
 }
 
 /* HOME PAGE */
@@ -103,7 +168,7 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   width: 80vw;
-  height: 65vh;
+  height: 50vh;
 }
 
 .user-info {
@@ -135,14 +200,54 @@ section {
   grid-column-gap: 3vh;
   grid-row-gap: 3vh;
   padding-bottom: 3vh;
+  height: 50vh;
+  margin-left: 3vh;
+}
+
+.weekly-water {
+  align-items: center;
+  justify-content: center;
+  grid-area: 1 / 1 / 4 / 7;
+  border-radius: 25px;
+  background-color: #FFED3B;
+  padding-right: 7%;
 }
 
 .daily-water {
-  grid-area: 1 / 1 / 4 / 7;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  grid-area: 4 / 1 / 7 / 7;
+  border-radius: 25px;
+  color: #E0E0E0;
   background-color: #383838;
-  border-radius: 20px;
-  color: #E0E0E0;;
-  font-size: 1.5rem;
+  padding-right: 7%;
+}
+
+@media screen and (max-width: 40em) {
+
+  .hydration-grid {
+    padding-bottom: 1vh;
+    height: 60vh;
+    margin-top: 3vh;
+    margin-left: 2vh;
+  }
+
+  .weekly-water {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vh;
+  }
+
+  .daily-water {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* SLEEP PAGE */
@@ -225,7 +330,6 @@ section {
 .hydration-button {
   color: #E0E0E0;
   outline: none;
-
 }
 
 .sleep-button {
