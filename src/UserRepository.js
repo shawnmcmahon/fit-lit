@@ -9,13 +9,11 @@ class UserRepository {
   }
 
   retrieveAvgStepGoal() {
-    const stepGoalLog= this.data.map(user => user.dailyStepGoal);
+    const stepGoalLog = this.data.map(user => user.dailyStepGoal);
     const stepGoalSum = stepGoalLog.reduce((sum, goal) => {
       return sum + goal;
     });
-
     this.avgStepGoal = Math.round(stepGoalSum / stepGoalLog.length);
-
     return this.avgStepGoal;
   }
 }

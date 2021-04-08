@@ -30,7 +30,7 @@ describe('UserHydration', function() {
     expect(userHydration3).to.be.an.instanceof(UserHydration);
   });
 
-  it('should store a user's id', function() {
+  it('should store a user\'s id', function() {
     expect(userHydration1.id).to.equal(1);
     expect(userHydration2.id).to.equal(2);
     expect(userHydration3.id).to.equal(3);
