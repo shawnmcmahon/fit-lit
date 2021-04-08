@@ -51,7 +51,6 @@ const userDailyDistance = document.getElementById('userDailyDistance');
 const userDailyActivity = document.getElementById('userDailyActivity');
 const compareUserActivity = document.getElementById('compareUserActivity');
 
-
 const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
 const hydrationButton = document.getElementById('hydrationButton');
@@ -76,7 +75,6 @@ function loadPage() {
   userActivity = new UserActivity(currentUser, activityData, userData);
   sleepRepo = new SleepRepository(sleepData, userData);
   activityRepo = new ActivityRepository(activityData);
-
   viewHome();
 }
 
@@ -98,7 +96,6 @@ function dateDisplay(date) {
 function getMonth(month) {
   const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
-  
   let monthName;
   switch(month) {
     case '01':
@@ -157,20 +154,11 @@ function displayUserHomeData() {
     <p class='name' id='name'>${currentUser.name}</p>
     <p class='address' id='address'>${currentUser.address}</p>
     <p class='email' id='email'>${currentUser.email}</p>
-    <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
-
-
-
+    <p class='stride' id='stride'>stride length: ${currentUser.stride}
+    </p>`;
 
     userStepGoal.innerText = `${currentUser.dailyStepGoal}` ;
     userAvgStepGoal.innerText = `${avgStepGoal}`;
-
-
-  // stepGoal.innerHTML = `
-  //   <p class='user-step-goal' id='userStepGoal'>
-  //     Your goal is ${currentUser.dailyStepGoal} steps</p>
-  //   <p class='avg-step-goal' id='avgStepGoal'>
-  //     The average user's goal is ${avgStepGoal}</p>`;
 }
 
 // hydration
@@ -287,7 +275,6 @@ function displayUserActivityData() {
 function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
-
   userDailyStepCount.innerText = `${userDailySteps}`;
   userDailyDistance.innerText = `${userDistance}`;
 }
