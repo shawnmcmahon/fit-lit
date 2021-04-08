@@ -9,14 +9,8 @@ class UserHydration {
     const totalOunces = dailyOunces.reduce((sumOz, numOz) => {
       return sumOz + numOz;
     });
-    const avgOunces = Math.round(totalOunces / this.data.length);
-
-    return avgOunces;
-  }
-
-  retrieveNumOuncesByDate(date) {
-    const entry = this.data.find(entry => entry.date === date)
-    return entry.numOunces;
+  
+    return Math.round(totalOunces / this.data.length);
   }
 
   calculateAvgWeeklyWater(startDate) {
@@ -26,17 +20,21 @@ class UserHydration {
     const totalOunces = waterLog.reduce((sumOz, numOz) => {
       return sumOz + numOz;
     });
-    const avgOunces = Math.round(totalOunces / 7);
 
-    return avgOunces;
+    return Math.round(totalOunces / 7);
+  }
+
+  retrieveNumOzByDate(date) {
+    const entry = this.data.find(entry => entry.date === date)
+    
+    return entry.numOunces;
   }
 
   retrieveNumOzByWeek(startDate) {
     const index = this.data.findIndex(entry => entry.date === startDate);
     const weekLog = this.data.slice(index, index + 7);
-    const ozLog = weekLog.map(entry => entry.numOunces);
 
-    return ozLog;
+    return weekLog.map(entry => entry.numOunces);
   }
 }
 

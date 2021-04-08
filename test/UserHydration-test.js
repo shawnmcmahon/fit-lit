@@ -30,7 +30,7 @@ describe('UserHydration', function() {
     expect(userHydration3).to.be.an.instanceof(UserHydration);
   });
 
-  it('should store a user's id', function() {
+  it('should store a user\'s id', function() {
     expect(userHydration1.id).to.equal(1);
     expect(userHydration2.id).to.equal(2);
     expect(userHydration3.id).to.equal(3);
@@ -40,6 +40,12 @@ describe('UserHydration', function() {
     expect(userHydration1.data).to.be.an('array');
     expect(userHydration2.data).to.be.an('array');
     expect(userHydration3.data).to.be.an('array');
+  });
+
+  it('should store individual hydration data entries', function() {
+    expect(userHydration1.data[0]).to.deep.equal({ userID: 1, date: '2019/06/15', numOunces: 37 });
+    expect(userHydration1.data[1]).to.deep.equal({ userID: 1, date: '2019/06/16', numOunces: 69 });
+    expect(userHydration1.data[2]).to.deep.equal({ userID: 1, date: '2019/06/17', numOunces: 96 });
   });
 
   it('should calculate the average daily water intake for a user', function() {
@@ -52,16 +58,6 @@ describe('UserHydration', function() {
     expect(avgDailyWater3).to.equal(56);
   });
 
-  it('should be able to retrieve the ounces drank by a user on a specific date', function() {
-    const numOunces1 = userHydration1.retrieveNumOuncesByDate('2019/06/18');
-    const numOunces2 = userHydration2.retrieveNumOuncesByDate('2019/06/16');
-    const numOunces3 = userHydration3.retrieveNumOuncesByDate('2019/06/20');
-
-    expect(numOunces1).to.equal(61);
-    expect(numOunces2).to.equal(91);
-    expect(numOunces3).to.equal(51);
-  });
-
   it('should calculate the average daily water intake for a user over the course of a week', function() {
     const avgWeeklyWater1 = userHydration1.calculateAvgWeeklyWater('2019/06/15');
     const avgWeeklyWater2 = userHydration2.calculateAvgWeeklyWater('2019/06/16');
@@ -70,6 +66,16 @@ describe('UserHydration', function() {
     expect(avgWeeklyWater1).to.equal(65);
     expect(avgWeeklyWater2).to.equal(70);
     expect(avgWeeklyWater3).to.equal(51);
+  });
+
+  it('should be able to retrieve the ounces consumed by a user on a specific date', function() {
+    const numOunces1 = userHydration1.retrieveNumOzByDate('2019/06/18');
+    const numOunces2 = userHydration2.retrieveNumOzByDate('2019/06/16');
+    const numOunces3 = userHydration3.retrieveNumOzByDate('2019/06/20');
+
+    expect(numOunces1).to.equal(61);
+    expect(numOunces2).to.equal(91);
+    expect(numOunces3).to.equal(51);
   });
 
   it('should be able to retrieve the daily water intake for a user over the course of a week', function() {

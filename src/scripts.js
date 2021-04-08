@@ -91,6 +91,7 @@ function dateDisplay(date) {
 function getMonth(month) {
   const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
+  
   let monthName;
   switch(month) {
     case '01':
@@ -161,7 +162,7 @@ function displayUserHomeData() {
 // hydration
 
 function displayUserHydrationData() {
-  const dailyOz = userHydration.retrieveNumOuncesByDate(currentDate);
+  const dailyOz = userHydration.retrieveNumOzByDate(currentDate);
   const weeklyOz = userHydration.calculateAvgWeeklyWater(weekStartDate);
   displayHydrationChart();
   headerMessage.innerText = `${currentUser.firstName}'s Hydration Data`;

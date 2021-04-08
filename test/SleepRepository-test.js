@@ -30,6 +30,8 @@ describe('SleepRepository', function() {
 
   it('should be able to store a sleep data entry', function() {
     expect(sleepRepo.data[0]).to.deep.equal({ userID: 1, date: '2019/06/15', hoursSlept: 6.1, sleepQuality: 2.2 });
+    expect(sleepRepo.data[1]).to.deep.equal({ userID: 2, date: '2019/06/15', hoursSlept: 7, sleepQuality: 4.7 });
+    expect(sleepRepo.data[2]).to.deep.equal({ userID: 3, date: '2019/06/15', hoursSlept: 10.8, sleepQuality: 4.7 });
   });
 
   it('should calculate the average sleep quality among all users', function() {

@@ -1,23 +1,21 @@
 class UserActivity {
-  constructor(user, activityData, userData) {
+  constructor(user, activityData, usersData) {
     this.id = user.id;
     this.data = activityData.filter(entry => entry.userID === this.id);
-    this.userData = userData;
+    this.userData = usersData;
   }
 
   retrievePropByDate(date, property) {
     const dateRequested = this.data.find(entry => entry.date === date);
-    const userStat = dateRequested[property];
 
-    return userStat;
+    return dateRequested[property];
   }
 
   retrievePropLogByWeek(startDate, property) {
     const index = this.data.findIndex(entry => entry.date === startDate);
     const weekLog = this.data.slice(index, index + 7);
-    const propertyLog = weekLog.map(entry => entry[property]);
 
-    return propertyLog;
+    return weekLog.map(entry => entry[property]);
   }
 
   calculatePropAvg(property) {
@@ -36,9 +34,8 @@ class UserActivity {
     const total = weeklyStats.reduce((sum, num) => {
       return sum + num;
     });
-    const propAvg = Math.round(total / 7);
 
-    return propAvg;
+    return Math.round(total / 7);
   }
 
   calculateDailyMilesWalked(date) {
@@ -60,17 +57,17 @@ class UserActivity {
   identifyDatesExceedingStepGoal() {
     const dailyStepGoal = this.userData[this.id - 1].dailyStepGoal;
     const stepGoalExceededDays = this.data.filter(entry => entry.numSteps > dailyStepGoal);
-    const days = stepGoalExceededDays.map(entry => entry.date) ;
 
-    return days;
+    return stepGoalExceededDays.map(entry => entry.date);
   }
 
   retrieveMaxFlightsClimbed() {
-    let maxFlights;
-    const flightEntries = this.data.map(entry => entry.flightsOfStairs);
-    maxFlights = Math.max(...flightEntries);
+    const sortedEntries = this.data.sort((a, b) => {
+      return b.flightsOfStairs - a.flightsOfStairs;
+    })
+    const [ maxFlights ] = sortedEntries;
 
-    return maxFlights;
+    return Math.max(maxFlights.flightsOfStairs);
   }
 }
 
