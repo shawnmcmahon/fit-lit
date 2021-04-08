@@ -23,16 +23,16 @@ On the next page, three different sleep-related widgets appear, each displaying 
 With the last button on the nav bar, the user is able to jump over to the activity display, where they're presented with four different widgets, containing: minutes active today, daily steps and miles walked, weekly minutes active (in the form of a 7-day bar graph), and a comparison of these three activity categories to those of all other users, on average.
 
 ## Installation
-- Clone down project repository by opening up your console and entering the following command: `git clone [remote-address] [what you want to name the repo]`.
-- Once you have cloned the repo, change into the root directory and install the project dependencies using `npm install` or `npm i`.
+- Clone down the project repository by opening up your console and entering the following command: `git clone git@github.com:pcmueller/fit-lit.git`.
+- Once you've cloned the repo, change into the root directory and install the project dependencies using `npm install` or `npm i`.
 - Run `open src/index.html` to see the HTML page!
 
 ## Technologies & Design
-- Clean, semantic HTML and CSS applied with a "mobile-first" approach using responsive design.
-- Accessibility-minded, with HTML passing the WAVE audit tool.
-- ES6 Javascript, arrow functions, classes, and array prototype methods.
+- Clean, semantic HTML and CSS implemented with a "mobile-first" approach using responsive design.
+- ES6 Javascript using arrow functions, classes, and array prototype methods.
+- Accessibility-friendly with HTML passing the WAVE audit tool.
 - Test-Driven Development using Mocha and Chai.
-- Charts.js
+- Charts.js for attractive visual data display.
 
 ## Contributors
 - [Peter Muellerleile](https://github.com/pcmueller)
