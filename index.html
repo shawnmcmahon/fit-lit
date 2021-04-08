@@ -17,16 +17,18 @@
       </header>
       <section class='grid-wrapper'>
         <section class='home-grid' id='homeGrid'>
-          <article class='step-goal widget' id='stepGoal'>
-            <p class='user-step-goal' id='userStepGoal'>User Step Goal</p>
-            <p class='avg-step-goal' id='avgStepGoal'>Step Goal Comparison</p>
+          <article class='step-goal widget padding-right' id='stepGoal'>
+            <p class="box-title">STEP GOAL</p>
+              <p class="box-title-small">YOUR GOAL</p>
+              <div class='user-datum-medium' id='userStepGoal'>User Step Goal</div>
+              <p class="box-title-small">AVG USER GOAL</p>
+              <div class='user-datum-medium' id='avgStepGoal'>Step Goal Comparison</div>
           </article>
-          <article class='picture' id='picture'></article>
-          <article class='user-info' id='userInfo'>
-            <p class='name' id='name'>name</p>
-            <p class='address' id='address'>address</p>
-            <p class='email' id='email'>email</p>
-            <p class='stride' id='stride'>stride</p>
+          <article class='user-info padding-right' id='userInfo'>
+            <p class='user-datum-small' id='name'>name</p>
+            <p class='user-datum-small' id='address'>address</p>
+            <p class='user-datum-ex-small email-font' id='email'>email</p>
+            <p class='user-datum-small' id='stride'>stride</p>
           </article>
         </section>
         <section class='hydration-grid hidden' id='hydrationGrid'>
@@ -41,17 +43,17 @@
           </article>
         </section>
         <section class='sleep-grid hidden' id='sleepGrid'>
-          <article class='daily-sleep' id='dailySleep'>
+          <article class='daily-sleep padding-right' id='dailySleep'>
             <p class="box-title-small">DAILY HOURS SLEPT</p>
             <div class='user-datum-medium' id='userHoursSlept'></div>
             <p class="box-title-small">DAILY SLEEP QUALITY</p>
             <div class='user-datum-medium' id='userSleepQuality'></div>
           </article>
-          <article class='avg-sleep' id='avgSleep'>
-            <p class="box-title-small">AVERAGE HOURS SLEPT</p>
-            <p class='user-datum-medium' id='avgHoursSlept'></p>
-            <p class="box-title-small">AVERAGE SLEEP QUALITY</p>
-            <p class='user-datum-medium' id='avgSleepQuality'></p>
+          <article class='avg-sleep padding-right' id='avgSleep'>
+            <p class="box-title-small">AVG HOURS SLEPT</p>
+            <div class='user-datum-medium' id='avgHoursSlept'></div>
+            <p class="box-title-small">AVG SLEEP QUALITY</p>
+            <div class='user-datum-medium' id='avgSleepQuality'></div>
           </article>
           <article class='weekly-sleep widget-long' id='weeklySleep'>
             <p class='box-title'>WEEKLY SLEEP</p>
@@ -60,20 +62,24 @@
           </article>
         </section>
         <section class='activity-grid hidden' id='activityGrid'>
-          <article class='daily-steps' id='dailySteps'>
-            <p class='user-daily-steps' id='userDailySteps'>user daily steps</p>
-            <p class='user-daily-distance' id='userDailyDistance'>user daily distance</p>
+          <article class='daily-steps padding-right' id='dailySteps'>
+            <p class='box-title'>DAILY STEPS</p>
+            <div class='user-datum-medium' id='userDailyStepCount'>user daily steps</div>
+            <p class='box-title'>MILES WALKED</p>
+            <div class='user-datum-medium' id='userDailyDistance'>user daily distance</div>
           </article>
-          <article class='daily-activity' id='dailyActivity'>
-            <p class='user-daily-activity' id='userDailyActivity'>user daily activity</p>
+          <article class='daily-activity padding-right' id='dailyActivity'>
+            <p class='box-title'>MIN ACTIVE</p>
+            <div class='user-datum-medium' id='userDailyActivity'>user daily activity</div>
           </article>
           <article class='weekly-activity' id='weeklyActivity'>
-            <p class="box-title">WEEKLY ACTIVITY</p>
+            <p class="box-title">WEEKLY MIN</p>
             <div class='user-weekly-activity' id='userWeeklyActivity'></div>
             <canvas class='chart-long' id='userWeeklyActivityGraph' aria-label="bar graph displaying user's weekly minutes active"></canvas>
           </article>
-          <article class='compare-users widget' id='compareUsers'>
-            <p class='compare-user-activity' id='compareUserActivity'>compare user activity</p>
+          <article class='compare-users widget padding-right' id='compareUsers'>
+            <p class="box-title">COMPARED TO OTHER USERS TODAY</p>
+            <div class='user-datum-small' id='compareUserActivity'>compare user activity</div>
           </article>
         </section>
       </section>
@@ -95,7 +101,7 @@
     <script type='text/javascript' src='./src/UserHydration.js'></script>
     <script type='text/javascript' src='./src/UserSleep.js'></script>
     <script type='text/javascript' src='./src/UserActivity.js'></script>
-    
+
     <script type='text/javascript' src='./src/UserRepository.js'></script>
     <script type='text/javascript' src='./src/SleepRepository.js'></script>
     <script type='text/javascript' src='./src/ActivityRepository.js'></script>
