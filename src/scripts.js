@@ -8,7 +8,6 @@ let userRepo;
 let userHydration;
 let userSleep;
 let userActivity;
-
 let activityRepo;
 
 // QUERY SELECTORS
@@ -83,47 +82,14 @@ function dateDisplay(date) {
 
 function getMonth(month) {
   const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+  const nums = [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
   let monthName;
-
-  switch (month) {
-  case '01':
-    monthName = names[0];
-    break;
-  case '02':
-    monthName = names[1];
-    break;
-  case '03':
-    monthName = names[2];
-    break;
-  case '04':
-    monthName = names[3];
-    break;
-  case '05':
-    monthName = names[4];
-    break;
-  case '06':
-    monthName = names[5];
-    break;
-  case '07':
-    monthName = names[6];
-    break;
-  case '08':
-    monthName = names[7];
-    break;
-  case '09':
-    monthName = names[8];
-    break;
-  case '10':
-    monthName = names[9];
-    break;
-  case '11':
-    monthName = names[10];
-    break;
-  case '12':
-    monthName = names[11];
-    break;
-  }
-
+  nums.forEach(monthNum => {
+    if (month === monthNum) {
+      monthName = names[nums.indexOf(monthNum)];
+    }
+  });
+  
   return monthName;
 }
 
@@ -137,7 +103,9 @@ function displayUserHomeData() {
     <p class='name' id='name'>${currentUser.name}</p>
     <p class='address' id='address'>${currentUser.address}</p>
     <p class='email' id='email'>${currentUser.email}</p>
-    <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
+    <p class='stride' id='stride'>stride length: ${currentUser.stride}
+    </p>`;
+
   userStepGoal.innerText = `${currentUser.dailyStepGoal}`;
   userAvgStepGoal.innerText = `${avgStepGoal}`;
 }
