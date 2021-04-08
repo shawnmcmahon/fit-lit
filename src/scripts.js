@@ -340,8 +340,8 @@ function displayDailyStatComparison() {
   const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
 
   compareUserActivity.innerText = `
-      Steps: ${stepComparison}%,
-      Min: ${minComparison}%,
+      Steps: ${stepComparison}%
+      Min: ${minComparison}%
       Stairs: ${stairComparison}%`;
 }
 
