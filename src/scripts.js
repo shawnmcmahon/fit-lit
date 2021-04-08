@@ -8,21 +8,15 @@ let userRepo;
 let userHydration;
 let userSleep;
 let userActivity;
-let sleepRepo;
+
 let activityRepo;
 
 // QUERY SELECTORS
-
-const mainPage = document.getElementById('mainPage');
-const headerBanner = document.getElementById('headerBanner');
-
 const headerDate = document.getElementById('headerDate');
 const headerMessage = document.getElementById('headerMessage');
 
 const homeGrid = document.getElementById('homeGrid');
 const userInfo = document.getElementById('userInfo');
-const picture = document.getElementById('picture');
-const stepGoal = document.getElementById('stepGoal');
 const userStepGoal = document.getElementById('userStepGoal');
 const userAvgStepGoal = document.getElementById('avgStepGoal');
 
@@ -36,23 +30,16 @@ const userHoursSlept = document.getElementById('userHoursSlept');
 const userSleepQuality = document.getElementById('userSleepQuality');
 const userAvgHoursSlept = document.getElementById('avgHoursSlept');
 const userAvgSleepQuality = document.getElementById('avgSleepQuality');
-const weeklySleep = document.getElementById('weeklySleep');
 const weeklyHoursSleptGraph = document.getElementById('userHoursSleptGraph');
 const weeklySleepQualityGraph = document.getElementById('userSleepQualityGraph');
 
 const activityGrid  = document.getElementById('activityGrid');
-const dailySteps = document.getElementById('dailySteps');
-const weeklyActivity = document.getElementById('weeklyActivity');
-const weeklySteps = document.getElementById('weeklySteps');
-const compareUsers = document.getElementById('compareUsers');
 const weeklyActivityGraph = document.getElementById('userWeeklyActivityGraph');
 const userDailyStepCount = document.getElementById('userDailyStepCount');
 const userDailyDistance = document.getElementById('userDailyDistance');
 const userDailyActivity = document.getElementById('userDailyActivity');
 const compareUserActivity = document.getElementById('compareUserActivity');
 
-
-const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
 const hydrationButton = document.getElementById('hydrationButton');
 const sleepButton = document.getElementById('sleepButton');
@@ -74,9 +61,8 @@ function loadPage() {
   userHydration = new UserHydration(currentUser, hydrationData);
   userSleep = new UserSleep(currentUser, sleepData);
   userActivity = new UserActivity(currentUser, activityData, userData);
-  sleepRepo = new SleepRepository(sleepData, userData);
+  sleepRepo = new SleepRepository(sleepData);
   activityRepo = new ActivityRepository(activityData);
-
   viewHome();
 }
 
@@ -97,83 +83,64 @@ function dateDisplay(date) {
 
 function getMonth(month) {
   const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
-
-  
   let monthName;
-  switch(month) {
-    case '01':
-      monthName = names[0];
-      break;
-    case '02':
-      monthName = names[1];
-      break;
-    case '03':
-      monthName = names[2];
-      break;
-    case '04':
-      monthName = names[3];
-      break;
-    case '05':
-      monthName = names[4];
-      break;
-    case '06':
-      monthName = names[5];
-      break;
-    case '07':
-      monthName = names[6];
-      break;
-    case '08':
-      monthName = names[7];
-      break;
-    case '09':
-      monthName = names[8];
-      break;
-    case '10':
-      monthName = names[9];
-      break;
-    case '11':
-      monthName = names[10];
-      break;
-    case '12':
-      monthName = names[11];
-      break;
+
+  switch (month) {
+  case '01':
+    monthName = names[0];
+    break;
+  case '02':
+    monthName = names[1];
+    break;
+  case '03':
+    monthName = names[2];
+    break;
+  case '04':
+    monthName = names[3];
+    break;
+  case '05':
+    monthName = names[4];
+    break;
+  case '06':
+    monthName = names[5];
+    break;
+  case '07':
+    monthName = names[6];
+    break;
+  case '08':
+    monthName = names[7];
+    break;
+  case '09':
+    monthName = names[8];
+    break;
+  case '10':
+    monthName = names[9];
+    break;
+  case '11':
+    monthName = names[10];
+    break;
+  case '12':
+    monthName = names[11];
+    break;
   }
+
   return monthName;
 }
-
-// DOM MANIPULATION
-
-// home
 
 function displayUserHomeData() {
   currentUser.firstName = currentUser.returnFirstName();
   const avgStepGoal = userRepo.retrieveAvgStepGoal();
   const fullDate = dateDisplay(currentDate);
-
   headerDate.innerText = `${fullDate}`;
   headerMessage.innerText = `Welcome, ${currentUser.firstName}!`;
-
   userInfo.innerHTML = `
     <p class='name' id='name'>${currentUser.name}</p>
     <p class='address' id='address'>${currentUser.address}</p>
     <p class='email' id='email'>${currentUser.email}</p>
     <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
-
-
-
-
-    userStepGoal.innerText = `${currentUser.dailyStepGoal}` ;
-    userAvgStepGoal.innerText = `${avgStepGoal}`;
-
-
-  // stepGoal.innerHTML = `
-  //   <p class='user-step-goal' id='userStepGoal'>
-  //     Your goal is ${currentUser.dailyStepGoal} steps</p>
-  //   <p class='avg-step-goal' id='avgStepGoal'>
-  //     The average user's goal is ${avgStepGoal}</p>`;
+  userStepGoal.innerText = `${currentUser.dailyStepGoal}`;
+  userAvgStepGoal.innerText = `${avgStepGoal}`;
 }
-
-// hydration
 
 function displayUserHydrationData() {
   const dailyOz = userHydration.retrieveNumOzByDate(currentDate);
@@ -188,12 +155,12 @@ function displayHydrationChart() {
   const userWeeklyWater = new Chart(weeklyHydrationGraph, {
     type: 'bar',
     data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
-          datasets: [{
-              label: 'Ounces of Water',
-              backgroundColor: 'lightblue',
-              data: userHydration.retrieveNumOzByWeek(weekStartDate),
-          }],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+      datasets: [{
+        label: 'Ounces of Water',
+        backgroundColor: 'lightblue',
+        data: userHydration.retrieveNumOzByWeek(weekStartDate),
+      }],
     },
     options: {
       legend: {
@@ -237,13 +204,13 @@ function displayLastWeekSleepData() {
 function displaySleepHoursChart() {
   const hoursSleptGraph = new Chart(weeklyHoursSleptGraph, {
     type: 'line',
-      data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
-          datasets: [{
-              label: 'Hours of Sleep',
-              backgroundColor: 'lightblue',
-              data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept'),
-          }],
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+      datasets: [{
+        label: 'Hours of Sleep',
+        backgroundColor: 'lightblue',
+        data: userSleep.retrievePropByWeek(weekStartDate, 'hoursSlept'),
+      }],
     },
     options: {
       legend: {
@@ -256,13 +223,13 @@ function displaySleepHoursChart() {
 function displaySleepQualityChart() {
   const sleepQualityGraph = new Chart(weeklySleepQualityGraph, {
     type: 'line',
-      data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
-          datasets: [{
-              label: 'Sleep Quality',
-              backgroundColor: 'lightblue',
-              data: userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality'),
-          }],
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+      datasets: [{
+        label: 'Sleep Quality',
+        backgroundColor: 'lightblue',
+        data: userSleep.retrievePropByWeek(weekStartDate, 'sleepQuality'),
+      }],
     },
     options: {
       legend: {
@@ -277,7 +244,6 @@ function displaySleepQualityChart() {
 
 function displayUserActivityData() {
   headerMessage.innerText = `${currentUser.firstName}'s Activity Data`;
-
   displayDailySteps();
   displayMinutesActive();
   displayWeeklyActivityStats();
@@ -287,13 +253,8 @@ function displayUserActivityData() {
 function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
-
-
   userDailyStepCount.innerText = `${userDailySteps}`;
   userDailyDistance.innerText = `${userDistance}`;
-
-
-
 }
 
 function displayMinutesActive() {
@@ -312,12 +273,12 @@ function displayActivityChart() {
   const weeklyActivity = new Chart(weeklyActivityGraph, {
     type: 'bar',
     data: {
-          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
-          datasets: [{
-              label: 'Minutes Active',
-              backgroundColor: 'lightblue',
-              data: userActivity.retrievePropLogByWeek(weekStartDate, 'minutesActive'),
-          }],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'TODAY'],
+      datasets: [{
+        label: 'Minutes Active',
+        backgroundColor: 'lightblue',
+        data: userActivity.retrievePropLogByWeek(weekStartDate, 'minutesActive'),
+      }],
     },
     options: {
       legend: {
@@ -356,7 +317,7 @@ function viewHome() {
   sleepGrid.classList.add('hidden');
   activityGrid.classList.add('hidden');
   hydrationButton.classList.remove('hydration-button-active');
-};
+}
 
 function viewHydration() {
   displayUserHydrationData();
@@ -365,7 +326,7 @@ function viewHydration() {
   hydrationGrid.classList.remove('hidden');
   sleepGrid.classList.add('hidden');
   activityGrid.classList.add('hidden');
-};
+}
 
 function viewSleep() {
   displayUserSleepData()
@@ -375,7 +336,7 @@ function viewSleep() {
   sleepGrid.classList.remove('hidden');
   activityGrid.classList.add('hidden');
   hydrationButton.classList.remove('hydration-button-active');
-};
+}
 
 function viewActivity() {
   displayUserActivityData()
@@ -385,7 +346,7 @@ function viewActivity() {
   sleepGrid.classList.add('hidden');
   activityGrid.classList.remove('hidden');
   hydrationButton.classList.remove('hydration-button-active');
-};
+}
 
 function activateHomeButton() {
   homeButton.classList.add('active');

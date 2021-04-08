@@ -36,7 +36,7 @@ describe('UserHydration', function() {
     expect(userHydration3.id).to.equal(3);
   });
 
-   it('should store a hydration data array', function() {
+  it('should store a hydration data array', function() {
     expect(userHydration1.data).to.be.an('array');
     expect(userHydration2.data).to.be.an('array');
     expect(userHydration3.data).to.be.an('array');
