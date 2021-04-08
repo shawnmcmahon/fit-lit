@@ -1,3 +1,5 @@
+// GLOBAL DATES
+
 const currentDate = '2019/09/22';
 const weekStartDate = '2019/09/15';
 
@@ -11,6 +13,7 @@ let userActivity;
 let activityRepo;
 
 // QUERY SELECTORS
+
 const headerDate = document.getElementById('headerDate');
 const headerMessage = document.getElementById('headerMessage');
 
@@ -71,27 +74,21 @@ function getRandomIndex(array) {
 }
 
 function dateDisplay(date) {
-  let splitDate = date.split('/');
-  let year = splitDate[0];
-  let month = splitDate[1];
-  let day = splitDate[2];
-  let fullDate = `${getMonth(month)} ${day}, ${year}`;
-
-  return fullDate;
-}
-
-function getMonth(month) {
   const names = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
   const nums = [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
+  let [ year, month, day ] = date.split('/');
   let monthName;
   nums.forEach(monthNum => {
     if (month === monthNum) {
       monthName = names[nums.indexOf(monthNum)];
     }
   });
-  
-  return monthName;
+  let dateLong = `${monthName} ${day}, ${year}`;
+
+  return dateLong;
 }
+
+// home
 
 function displayUserHomeData() {
   currentUser.firstName = currentUser.returnFirstName();
@@ -109,6 +106,8 @@ function displayUserHomeData() {
   userStepGoal.innerText = `${currentUser.dailyStepGoal}`;
   userAvgStepGoal.innerText = `${avgStepGoal}`;
 }
+
+// hydration
 
 function displayUserHydrationData() {
   const dailyOz = userHydration.retrieveNumOzByDate(currentDate);
@@ -315,6 +314,8 @@ function viewActivity() {
   activityGrid.classList.remove('hidden');
   hydrationButton.classList.remove('hydration-button-active');
 }
+
+// BUTTON TOGGLING
 
 function activateHomeButton() {
   homeButton.classList.add('active');
