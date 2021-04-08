@@ -67,7 +67,7 @@ class UserActivity {
     })
     const [ maxFlights ] = sortedEntries;
 
-    return Math.max(maxFlights.flightsOfStairs);
+    return maxFlights.flightsOfStairs;
   }
 }
 
