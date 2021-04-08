@@ -23,6 +23,8 @@ const homeGrid = document.getElementById('homeGrid');
 const userInfo = document.getElementById('userInfo');
 const picture = document.getElementById('picture');
 const stepGoal = document.getElementById('stepGoal');
+const userStepGoal = document.getElementById('userStepGoal');
+const userAvgStepGoal = document.getElementById('avgStepGoal');
 
 const hydrationGrid = document.getElementById('hydrationGrid');
 const dailyWater = document.getElementById('userDailyWater');
@@ -44,6 +46,11 @@ const weeklyActivity = document.getElementById('weeklyActivity');
 const weeklySteps = document.getElementById('weeklySteps');
 const compareUsers = document.getElementById('compareUsers');
 const weeklyActivityGraph = document.getElementById('userWeeklyActivityGraph');
+const userDailyStepCount = document.getElementById('userDailyStepCount');
+const userDailyDistance = document.getElementById('userDailyDistance');
+const userDailyActivity = document.getElementById('userDailyActivity');
+const compareUserActivity = document.getElementById('compareUserActivity');
+
 
 const navBar = document.getElementById('navBar');
 const homeButton = document.getElementById('homeButton');
@@ -69,7 +76,7 @@ function loadPage() {
   userActivity = new UserActivity(currentUser, activityData, userData);
   sleepRepo = new SleepRepository(sleepData, userData);
   activityRepo = new ActivityRepository(activityData);
-  
+
   viewHome();
 }
 
@@ -152,11 +159,18 @@ function displayUserHomeData() {
     <p class='email' id='email'>${currentUser.email}</p>
     <p class='stride' id='stride'>stride length: ${currentUser.stride}</p>`;
 
-  stepGoal.innerHTML = `
-    <p class='user-step-goal' id='userStepGoal'>
-      Your goal is ${currentUser.dailyStepGoal} steps</p>
-    <p class='avg-step-goal' id='avgStepGoal'>
-      The average user's goal is ${avgStepGoal}</p>`;
+
+
+
+    userStepGoal.innerText = `${currentUser.dailyStepGoal}` ;
+    userAvgStepGoal.innerText = `${avgStepGoal}`;
+
+
+  // stepGoal.innerHTML = `
+  //   <p class='user-step-goal' id='userStepGoal'>
+  //     Your goal is ${currentUser.dailyStepGoal} steps</p>
+  //   <p class='avg-step-goal' id='avgStepGoal'>
+  //     The average user's goal is ${avgStepGoal}</p>`;
 }
 
 // hydration
@@ -183,7 +197,7 @@ function displayHydrationChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -233,7 +247,7 @@ function displaySleepHoursChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -252,7 +266,7 @@ function displaySleepQualityChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -273,18 +287,18 @@ function displayUserActivityData() {
 function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
-  dailySteps.innerHTML = `
-    <p class='user-daily-steps' id='userDailySteps'>
-      ${userDailySteps} avg daily steps</p>
-    <p class='user-daily-distance' id='userDailyDistance'>
-      ${userDistance} avg daily miles walked</p>`;
+
+
+  userDailyStepCount.innerText = `${userDailySteps}`;
+  userDailyDistance.innerText = `${userDistance}`;
+
+
+
 }
 
 function displayMinutesActive() {
   const userMinActive = userActivity.retrievePropByDate(currentDate, 'minutesActive');
-  dailyActivity.innerHTML = `
-    <p class='user-daily-activity' id='userDailyActivity'>
-      ${userMinActive} min active</p>`;
+  userDailyActivity.innerText = `${userMinActive}`;
 }
 
 function displayWeeklyActivityStats() {
@@ -307,7 +321,7 @@ function displayActivityChart() {
     },
     options: {
       legend: {
-        display: true
+        display: false
       },
     }
   });
@@ -326,11 +340,10 @@ function displayDailyStatComparison() {
   const minComparison = Math.round((userDailyMinActive / allUserDailyMinActive) * 100);
   const stairComparison = Math.round((userDailyStairs / allUserDailyStairs) * 100);
 
-  compareUsers.innerHTML = `
-    <p class='compare-user-activity' id='compareUserActivity'>
-      Steps: ${stepComparison}%,
-      Min: ${minComparison}%,
-      Stairs: ${stairComparison}%</p>`;
+  compareUserActivity.innerText = `
+      Steps: ${stepComparison}%
+      Min: ${minComparison}%
+      Stairs: ${stairComparison}%`;
 }
 
 // HTML TOGGLING
