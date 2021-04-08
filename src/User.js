@@ -10,7 +10,7 @@ class User {
   }
 
   returnFirstName() {
-    const [ firstName, ...nameRemainder] = this.name.split(' ');
+    const [ firstName ] = this.name.split(' ');
     return firstName;
   }
 }
