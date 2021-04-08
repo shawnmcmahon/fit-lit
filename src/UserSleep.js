@@ -16,15 +16,15 @@ class UserSleep {
 
   retrievePropByDate(date, property) {
     const entry = this.data.find(entry => entry.date === date)
+    
     return entry[property];
   }
 
   retrievePropByWeek(startDate, property) {
     const index = this.data.findIndex(entry => entry.date === startDate);
     const weekLog = this.data.slice(index, index + 7);
-    const propertyLog = weekLog.map(entry => entry[property]);
 
-    return propertyLog;
+    return weekLog.map(entry => entry[property]);
   }
 }
 

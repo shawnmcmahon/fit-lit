@@ -25,6 +25,8 @@ describe('ActivityRepository', function() {
 
   it('should be able to store an activity data entry', function() {
     expect(activityRepo.data[0]).to.deep.equal({ userID: 1, date: '2019/06/15', numSteps: 3577, minutesActive: 140, flightsOfStairs: 16 });
+    expect(activityRepo.data[1]).to.deep.equal({userID: 2, date: '2019/06/15', numSteps: 4294, minutesActive: 138, flightsOfStairs: 10 });
+    expect(activityRepo.data[2]).to.deep.equal({userID: 3, date: '2019/06/15', numSteps: 7402, minutesActive: 116, flightsOfStairs: 33 });
   });
 
   it('should retrieve the average steps taken by all users on a given date', function () {

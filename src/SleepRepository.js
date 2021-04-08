@@ -16,7 +16,10 @@ class SleepRepository {
 
   calculatePropAvgByWeek(startDate, property) {
     const userIDs = this.data.map(user => user.userID);
-    const numUsers = Math.max(...userIDs);
+    const sortedIDs = userIDs.sort((a, b) => {
+      return b - a;
+    });
+    const [ numUsers ] = sortedIDs;
     const index = this.data.findIndex(entry => entry.date === startDate);
     const weekLog = this.data.slice(index, index + (7 * numUsers));
 
@@ -60,8 +63,7 @@ class SleepRepository {
       }
     });
 
-    const bestSleepers = this.data.filter(entry =>
-      entry.hoursSlept === sleeper.hoursSlept);
+    const bestSleepers = this.data.filter(entry => entry.hoursSlept === sleeper.hoursSlept);
     
     bestSleepers.forEach(entry => {
       let id = entry.userID;
