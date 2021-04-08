@@ -288,12 +288,8 @@ function displayDailySteps() {
   const userDailySteps = userActivity.retrievePropByDate(currentDate, 'numSteps');
   const userDistance = userActivity.calculateDailyMilesWalked(currentDate);
 
-
   userDailyStepCount.innerText = `${userDailySteps}`;
   userDailyDistance.innerText = `${userDistance}`;
-
-
-
 }
 
 function displayMinutesActive() {
