@@ -7,7 +7,7 @@ class ActivityRepository {
     const dataLog = this.data.filter(entry => entry.date === date);
     const propertyLog = dataLog.map(entry => entry[property]);
     const total = propertyLog.reduce((sum, num) => {
-        return sum + num;
+      return sum + num;
     });
 
     return Math.round(total / dataLog.length);

@@ -124,7 +124,7 @@ describe('ActivityEntry', function() {
     expect(avgFlights1).to.equal(17);
     expect(avgFlights2).to.equal(21);
     expect(avgFlights3).to.equal(19);
-  });  
+  });
 
   it('should calculate the average steps taken by a user during a given week', function() {
     const avgSteps1 = userActivity1.calculatePropAvgByWeek('2019/06/16', 'numSteps');
@@ -136,17 +136,17 @@ describe('ActivityEntry', function() {
     expect(avgSteps3).to.equal(7795);
   });
 
-  
+
   it('should calculate the average minutes active for a user during a given week', function() {
     const avgMinutes1 = userActivity1.calculatePropAvgByWeek('2019/06/15', 'minutesActive');
     const avgMinutes2 = userActivity2.calculatePropAvgByWeek('2019/06/16', 'minutesActive');
     const avgMinutes3 = userActivity3.calculatePropAvgByWeek('2019/06/15', 'minutesActive');
-    
+
     expect(avgMinutes1).to.equal(171);
     expect(avgMinutes2).to.equal(154);
     expect(avgMinutes3).to.equal(165);
   });
-  
+
   it('should calculate the average flights climbed by a user during a given week', function() {
     const avgFlights1 = userActivity1.calculatePropAvgByWeek('2019/06/15', 'flightsOfStairs');
     const avgFlights2 = userActivity2.calculatePropAvgByWeek('2019/06/16', 'flightsOfStairs');
@@ -184,7 +184,7 @@ describe('ActivityEntry', function() {
 
     expect(userStepGoalDays1).to.eql(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23']);
     expect(userStepGoalDays2).to.eql(['2019/06/17', '2019/06/19', '2019/06/20', '2019/06/21']);
-    expect(userStepGoalDays3).to.eql(['2019/06/15','2019/06/16', '2019/06/19', '2019/06/20', '2019/06/21', '2019/06/22']);
+    expect(userStepGoalDays3).to.eql(['2019/06/15', '2019/06/16', '2019/06/19', '2019/06/20', '2019/06/21', '2019/06/22']);
   });
 
   it('should retrieve the most flights climbed record for a user', function () {
