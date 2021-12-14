@@ -1,6 +1,6 @@
 # FitLit!
 
-FitLit is an mobile-friendly fitness app that stores and displays a user's hydration, sleep and activity data.  Each of these fitness categories is displayed on its own page, which the user can toggle between using buttons fixed to the bottom of the screen in a convenient navigation bar.
+FitLit is a mobile-friendly fitness app that stores and displays a user's hydration, sleep and activity data.  Each of these fitness categories is displayed on its own page, which the user can toggle between using buttons fixed to the bottom of the screen in a convenient navigation bar.
 
 - [Project Page](https://pcmueller.github.io/fit-lit/)
 - [Project Repository](https://github.com/pcmueller/fit-lit)
